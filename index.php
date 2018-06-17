@@ -21,7 +21,7 @@
                 <div class="profile">
                     <div class="icons">
                         <i class="fa fa-volume-down"></i>
-                        <i class="fa fa-gear"></i>
+                        <i class="fa fa-cog"></i>
                     </div>
                     <img src="img/user.png" alt="user">
                     <h1>Caroline Van Gossum</h1>
