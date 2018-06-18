@@ -1,3 +1,11 @@
+<?php
+if (!empty($_POST)){
+    // get values
+    $username = $_POST['user'];
+    $password = $_POST['password'];
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +28,7 @@
                 <i class="fas fa-file-alt"></i>
             </div>
             <div class="form-group">
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="text" name="user" placeholder="Username">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
