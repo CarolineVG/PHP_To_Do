@@ -1,3 +1,11 @@
+<?php
+/** INCLUDES */
+include_once("classes/Database.php"); 
+
+// check connection
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
