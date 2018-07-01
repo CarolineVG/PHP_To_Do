@@ -3,7 +3,8 @@
 include_once("classes/Database.php"); 
 
 // check connection
-
+$db = new Database(); 
+$db->connection(); 
 
 ?>
 <!DOCTYPE html>

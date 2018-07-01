@@ -8,6 +8,7 @@ class Database {
         } catch (PDOException $e){
             print_r($e->getMessage); 
         }
+        echo "connection ok"; 
     }
 }
 
