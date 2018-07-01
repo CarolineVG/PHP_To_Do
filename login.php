@@ -4,6 +4,9 @@ if (!empty($_POST)){
     $username = $_POST['user'];
     $password = $_POST['password'];
 
+    // check if values are correct
+    
+
 }
 ?>
 <!DOCTYPE html>
