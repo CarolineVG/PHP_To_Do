@@ -9,14 +9,7 @@ if (!empty($_POST)){
 
     // open connnection with database
     $db = new Database(); 
-    $db->connection(); 
-
-    // check if user exists 
-    $query = $db->prepare("SELECT * FROM user WHERE username = :username");
-    $query->bindParam(":username", $this->$username); 
-    $res = $query->execute();
-    $user = $stm->fetch(PDO::FETCH_ASSOC);
-    echo $user; 
+    $db->connection();
 
 }
 ?>
