@@ -2,6 +2,9 @@
 
 A To Do Application made in PHP where students can manage their tasks and deadlines.
 
+## Design
+Based on [Dmitriy Kharaberyush's design](https://dribbble.com/shots/2187618-Todo-Task-Manager)
+
 ## Built With
 
 * [Visual Studio Code](https://code.visualstudio.com/) - The code editor used
