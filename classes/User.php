@@ -3,17 +3,7 @@
 class User extends Database {
 
     /** variables */
-    private $database; 
-
-    function show() {
-        $query = $this->connection()->query("SELECT * FROM user"); 
-
-        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-            echo $result['firstname'];
-        }
-
-    }
-
+    
     function login() {
         echo "logging in"; 
     }
@@ -41,11 +31,16 @@ class User extends Database {
     }
 
 
-    function checkPasswords(){
-
+    function checkPasswords($p1, $p2){
+        if ($p1 == $p2 ) {
+            return true; 
+        } else {
+            echo "password not correct ";
+            return false; 
+        }
     }
 
-    function checkRegister($username, $education, $email, $pass){
+    function register($username, $education, $email, $pass){
         try {
             $query = $this->connection()->prepare("INSERT INTO user(username, education, pass, email) VALUES (:username, :education, :pass, :email )");
             $query->bindParam(':username', $username);
@@ -59,7 +54,12 @@ class User extends Database {
         }
     }
 
-    function register(){
+    function hashPassword($password){
+        $hash = password_hash($password, PASSWORD_BCRYPT); 
+        echo $hash; 
+    }
+
+    function checkRegister(){
 
     }
    

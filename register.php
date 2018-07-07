@@ -12,7 +12,10 @@ if (!empty($_POST)){
     $education = "IMD"; 
     
     $user = new User;
-    $user->checkRegister($username, $education, $email, $password); 
+    if ($user->checkPasswords($password, $password2)){
+        $user->hashPassword($password); 
+        /*$user->register($username, $education, $email, $password); */
+    }
 
 }
 ?>
