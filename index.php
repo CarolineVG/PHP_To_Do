@@ -3,14 +3,15 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
-$user = new User;
-$user->checkLogin("Caroline"); 
+
 
 if (!empty($_POST)){
     // get values
     $username = $_POST['user'];
     $password = $_POST['password'];
     
+    $user = new User;
+    $user->checkLogin($username, $password); 
 
 }
 ?>

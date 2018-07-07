@@ -19,15 +19,22 @@ class User extends Database {
 
     }
 
-    function checklogin($user){
+    function checklogin($user, $pass){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM user WHERE username = :username"); 
+            $query = $this->connection()->prepare("SELECT * FROM user WHERE username = :username and pass = :pass"); 
             $query->bindParam(':username', $user);
+            $query->bindParam(':pass', $pass);
             $query->execute(); 
-            
+
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo $result['username'];
+                echo $result['username'] . ' ' . $result['pass'];
+
+                // if user is found -> return false if null 
+                if (!isset($result['username'])) {
+                    echo "empty"; 
+                }
             }
+
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
