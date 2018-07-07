@@ -1,15 +1,16 @@
 <?php
 /** INCLUDES */
 include_once("classes/Database.php"); 
+include_once("classes/User.php"); 
+
+$db = new Database(); 
+$db->connection(); 
 
 if (!empty($_POST)){
     // get values
     $username = $_POST['user'];
     $password = $_POST['password'];
-
-    // open connnection with database
-    $db = new Database(); 
-    $db->connection();
+    
 
 }
 ?>

@@ -1,40 +1,29 @@
 <?php
 
 class Database {
+
+    private $conn; 
+    private $host;
+    private $user;
+    private $password;
+    private $databaseName;
+
     // connection
-    public function connection(){
+    public function connection(){   
+        /*$this->host = "localhost"; 
+        $this->user = "root";
+        $this->password = "";
+        $this->databaseName = "todo"; */
+
         try {
-            $conn = new PDO('mysql:host=localhost; dbname=todo', 'root', ''); 
-        } catch (PDOException $e){
+            //$conn = new PDO("'mysql:host=" . $this->host . "; dbname=" . $this->databaseName . "', " . $this->user . ", ". $this->password); 
+            $conn = new PDO('mysql:host=localhost;dbname=todo', 'root', '');
+
+            echo "connection ok";
+            return $conn;
+        } catch (PDOException $e) {
             print_r($e->getMessage); 
-        }
-        echo "connection ok"; 
-
-        return $conn; 
-
-        // check if user exists 
-
-        /*$username = "Caroline"; 
-        $query = $conn->prepare("SELECT * FROM user WHERE username = :username");
-        $query->bindParam(":username", $username); 
-        $res = $query->execute();
-        while ($res = $query->fetch(PDO::FETCH_ASSOC)){
-            print_r($res); 
-        }*/
-    }
-
-    // select query
-    public function select($name, $value){
-        $query = $conn->prepare("SELECT * FROM user WHERE :name = :value");
-        $query->bindParam(":name", $name); 
-        $query->bindParam(":value", $value); 
-        $result = $query->execute();
-
-        // show in array
-        while ($res = $query->fetch(PDO::FETCH_ASSOC)){
-            print_r($res); 
         }
     }
 }
-
 ?>
