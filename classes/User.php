@@ -57,6 +57,7 @@ class User extends Database {
     function hashPassword($password){
         $hash = password_hash($password, PASSWORD_BCRYPT); 
         echo $hash; 
+        return $hash;
     }
 
     function checkRegister(){

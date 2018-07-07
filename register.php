@@ -13,8 +13,8 @@ if (!empty($_POST)){
     
     $user = new User;
     if ($user->checkPasswords($password, $password2)){
-        $user->hashPassword($password); 
-        /*$user->register($username, $education, $email, $password); */
+        $safePassword = $user->hashPassword($password); 
+        $user->register($username, $education, $email, $safePassword);
     }
 
 }
