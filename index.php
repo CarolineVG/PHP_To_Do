@@ -3,15 +3,13 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
-
-
 if (!empty($_POST)){
     // get values
-    $username = $_POST['user'];
+    $mail = $_POST['email'];
     $password = $_POST['password'];
     
     $user = new User;
-    if ($user->checkLogin($username, $password)){
+    if ($user->checkLogin($mail, $password)){
         $user->login(); 
     }
 
@@ -39,7 +37,7 @@ if (!empty($_POST)){
                 <i class="fas fa-file-alt"></i>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="user" placeholder="Username">
+                <input class="form-control" type="text" name="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
@@ -47,7 +45,7 @@ if (!empty($_POST)){
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
-            <a href="#" class="registerlink">Register here</a>
+            <a href="register.php" class="registerlink">Register here</a>
         </form>
     </div>
 </body>

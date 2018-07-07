@@ -1,3 +1,22 @@
+<?php
+/** INCLUDES */
+include_once("classes/Database.php"); 
+include_once("classes/User.php"); 
+
+if (!empty($_POST)){
+    // get values
+    $username = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
+    $education = "IMD"; 
+    
+    $user = new User;
+    $user->checkRegister($username, $education, $email, $password); 
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,13 +39,16 @@
                 <i class="fas fa-file-alt"></i>
             </div>
             <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Name">
+            </div>
+            <div class="form-group">
                 <input class="form-control" type="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Repeat Password">
+                <input class="form-control" type="password" name="password2" placeholder="Repeat Password">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
