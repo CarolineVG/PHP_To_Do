@@ -4,7 +4,7 @@ include_once("classes/Database.php");
 include_once("classes/User.php"); 
 
 $user = new User;
-$user->show(); 
+$user->checkLogin("Caroline"); 
 
 if (!empty($_POST)){
     // get values
