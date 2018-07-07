@@ -1,12 +1,17 @@
 <?php
 
-class User {
+class User extends Database {
 
     /** variables */
     private $database; 
 
-    public function __construct($database) {
-        $this->database = $database; 
+    function show() {
+        $query = $this->connection()->query("SELECT * FROM user"); 
+
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+            echo $result['firstname'];
+        }
+
     }
      
 
@@ -15,14 +20,6 @@ class User {
     }
 
     function checklogin(){
-         // check if user exists 
-        $query = $database->prepare("SELECT * FROM user WHERE username = :username");
-        $query->bindParam(":username", $this->$username); 
-        $res = $query->execute();
-        while ($res = $query->fetch(PDO::FETCH_ASSOC)){
-            print_r($res); 
-        }
-
     }
    
 }

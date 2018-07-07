@@ -19,7 +19,7 @@ class Database {
             //$conn = new PDO("'mysql:host=" . $this->host . "; dbname=" . $this->databaseName . "', " . $this->user . ", ". $this->password); 
             $conn = new PDO('mysql:host=localhost;dbname=todo', 'root', '');
 
-            echo "connection ok";
+            //echo "connection ok";
             return $conn;
         } catch (PDOException $e) {
             print_r($e->getMessage); 

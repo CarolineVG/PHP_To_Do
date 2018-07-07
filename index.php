@@ -3,8 +3,8 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
-$db = new Database(); 
-$db->connection(); 
+$user = new User;
+$user->show(); 
 
 if (!empty($_POST)){
     // get values
