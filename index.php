@@ -11,7 +11,9 @@ if (!empty($_POST)){
     $password = $_POST['password'];
     
     $user = new User;
-    $user->checkLogin($username, $password); 
+    if ($user->checkLogin($username, $password)){
+        $user->login(); 
+    }
 
 }
 ?>

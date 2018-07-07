@@ -16,7 +16,7 @@ class User extends Database {
      
 
     function login() {
-
+        echo "logging in"; 
     }
 
     function checklogin($user, $pass){
@@ -27,12 +27,15 @@ class User extends Database {
             $query->execute(); 
 
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo $result['username'] . ' ' . $result['pass'];
-
-                // if user is found -> return false if null 
-                if (!isset($result['username'])) {
-                    echo "empty"; 
+                // if query gives result 
+                if (isset($result['username'])) {
+                    echo $result['username'];
+                    return true; 
+                } else {
+                    echo "nope"; 
+                    return false; 
                 }
+
             }
 
         } catch (PDOException $e) {
