@@ -6,17 +6,24 @@ include_once("classes/User.php");
 if (!empty($_POST)){
     // get values
     $username = $_POST['name'];
-    $email = $_POST['email'];
+    $mail = $_POST['email'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     $education = "IMD"; 
-    
-    $user = new User;
-    if ($user->checkPasswords($password, $password2)){
-        $safePassword = $user->hashPassword($password); 
-        $user->register($username, $education, $email, $safePassword);
-    }
 
+    // make new user 
+    $user = new User;
+
+    // check password
+        if ($user->checkPasswords($password, $password2)){
+            echo "password ok"; 
+
+            $safePassword = $user->hashPassword($password);
+
+            // check if email or username exists 
+            $user->checkRegister($username, $mail); 
+           // $user->register($username, $education, $mail, $safePassword);
+        }
 }
 ?>
 

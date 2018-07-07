@@ -56,12 +56,26 @@ class User extends Database {
 
     function hashPassword($password){
         $hash = password_hash($password, PASSWORD_BCRYPT); 
-        echo $hash; 
+        //echo $hash; 
         return $hash;
     }
 
-    function checkRegister(){
+    function checkRegister($username, $mail){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
+            $query->bindParam(':email', $mail);
+            $query->execute(); 
 
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                if ($username == $result['username']){
+                    echo "username already taken"; 
+                } else if ($mail == $result['email']){
+                    echo "email already taken"; 
+                }
+            }
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
     }
    
 }
