@@ -5,17 +5,35 @@ include_once("classes/User.php");
 
 if (!empty($_POST)){
 
-    // check if input isnt empty
+    // if input is not empty -> assign value to variable 
     if (empty($_POST['name'])){
-        $error = "Please enter a username"; 
+        $error = "Please enter a username. \r\n"; 
+    } else {
+        $username = $_POST['name'];
     }
 
-    // get values
-    $username = $_POST['name'];
-    $mail = $_POST['email'];
-    $password = $_POST['password'];
-    $password2 = $_POST['password2'];
-    $education = "IMD"; 
+    if (empty($_POST['email'])){
+        $error .= "Please enter an email. \r\n"; 
+    } else {
+        $mail = $_POST['email'];
+    }
+
+    if (empty($_POST['education'])){
+        $error .= "Please enter an education. \r\n"; 
+    } else {
+        $education = $_POST['education'];
+    }
+
+    if (empty($_POST['password'])){
+        $error .= "Please enter a password. \r\n"; 
+    } else {
+        $password = $_POST['password'];
+    }
+    if (empty($_POST['password2'])){
+        $error .= "Please repeat your password. \r\n"; 
+    } else {
+        $password2 = $_POST['password2'];
+    }
 
     // make new user 
     $user = new User;
@@ -67,6 +85,9 @@ if (!empty($_POST)){
             </div>
             <div class="form-group">
                 <input class="form-control" type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="education" placeholder="Education">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
