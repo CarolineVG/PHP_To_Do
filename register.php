@@ -43,12 +43,16 @@ if (!empty($_POST)){
 
             $safePassword = $user->hashPassword($password);
 
+
+            $show = $user->checkRegister($username, $mail); 
+            echo $show; 
+
             // check if email or username exists 
-            if ($user->checkRegister($username, $mail)==true) {
+            /*if ($user->checkRegister($username, $mail)==true) {*/
                 // register
-                echo "register"; 
-                //$user->register($username, //$education, $mail, $safePassword);
-            }
+                /*echo "register"; 
+                $user->register($username, $education, $mail, $safePassword);*/
+            //}
         } else {
             
         }

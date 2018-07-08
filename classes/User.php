@@ -68,15 +68,14 @@ class User extends Database {
             $query->execute(); 
 
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo "ok"; 
                 if ($username == $result['username']){
-                    echo "Username already exists, please choose another one.";
+                    //echo "Username already exists, please choose another one.";
                     return false; 
                 } else if ($mail == $result['email']){
-                    echo "Email already exists, please choose another one.";
+                    //echo "Email already exists, please choose another one.";
                     return false;
                 } else {
-                    echo "you're unique ;) "; 
+                    //echo "you're unique ;) "; 
                     return true; 
                 }
             }
