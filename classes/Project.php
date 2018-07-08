@@ -41,9 +41,9 @@ class Project extends Database {
     public function saveToDatabase(){
         echo "saving...";
         try {
-            $query = $this->connection()->prepare("INSERT INTO project (title, adminId) VALUES (:title, :adminId)"); 
-            $query->bindParam(':title', $title);
-            $query->bindParam(':adminId', $adminId);
+            $query = $this->connection()->prepare("INSERT INTO project (title, adminId) VALUES (:title, :adminId);"); 
+            $query->bindParam(':title', $this->getTitle());
+            $query->bindParam(':adminId', $this->getAdminId());
             $query->execute(); 
 
         } catch (PDOException $e) {

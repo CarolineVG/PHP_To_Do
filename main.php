@@ -5,7 +5,7 @@ include_once("classes/Project.php");
 
 // make new project
 $project = new Project(); 
-$project->setTitle("Webtech"); 
+$project->setTitle("PHP"); 
 $project->setAdminId(1); 
 $project->saveToDatabase(); 
 
