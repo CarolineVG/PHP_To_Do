@@ -3,9 +3,6 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
-$a = new User;
-$a->show(); 
-
 if (!empty($_POST)){
     // get values
     $mail = $_POST['email'];

@@ -4,6 +4,12 @@ include_once("classes/Database.php");
 include_once("classes/User.php"); 
 
 if (!empty($_POST)){
+
+    // check if input isnt empty
+    if (empty($_POST['name'])){
+        $error = "Please enter a username"; 
+    }
+
     // get values
     $username = $_POST['name'];
     $mail = $_POST['email'];
@@ -16,13 +22,17 @@ if (!empty($_POST)){
 
     // check password
         if ($user->checkPasswords($password, $password2)){
-            echo "password ok"; 
 
             $safePassword = $user->hashPassword($password);
 
             // check if email or username exists 
-            $user->checkRegister($username, $mail); 
-           // $user->register($username, $education, $mail, $safePassword);
+            if ($user->checkRegister($username, $mail)==true) {
+                // register
+                echo "register"; 
+                //$user->register($username, //$education, $mail, $safePassword);
+            }
+        } else {
+            
         }
 }
 ?>
@@ -48,6 +58,10 @@ if (!empty($_POST)){
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
             </div>
+            <?php if (isset($error)): ?>
+            <div class="alert alert-danger" role="alert"> <?php echo $error ?>
+            </div>
+            <?php endif ?>
             <div class="form-group">
                 <input class="form-control" type="text" name="name" placeholder="Name">
             </div>

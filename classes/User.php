@@ -35,7 +35,7 @@ class User extends Database {
         if ($p1 == $p2 ) {
             return true; 
         } else {
-            echo "password not correct ";
+            echo "The passwords are not matching, please try again.";
             return false; 
         }
     }
@@ -62,15 +62,22 @@ class User extends Database {
 
     function checkRegister($username, $mail){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
+            $query = $this->connection()->prepare("SELECT * FROM user WHERE username = :username and email = :email"); 
+            $query->bindParam(':username', $username);
             $query->bindParam(':email', $mail);
             $query->execute(); 
 
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                echo "ok"; 
                 if ($username == $result['username']){
-                    echo "username already taken"; 
+                    echo "Username already exists, please choose another one.";
+                    return false; 
                 } else if ($mail == $result['email']){
-                    echo "email already taken"; 
+                    echo "Email already exists, please choose another one.";
+                    return false;
+                } else {
+                    echo "you're unique ;) "; 
+                    return true; 
                 }
             }
         } catch (PDOException $e) {
