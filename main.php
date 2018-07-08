@@ -1,6 +1,13 @@
 <?php
 /** INCLUDES */
 include_once("classes/Database.php"); 
+include_once("classes/Project.php"); 
+
+// make new project
+$project = new Project(); 
+$project->setTitle("Webtech"); 
+$project->setAdminId(1); 
+$project->saveToDatabase(); 
 
 ?>
 <!DOCTYPE html>
