@@ -4,58 +4,64 @@ include_once("classes/Database.php");
 include_once("classes/User.php"); 
 
 if (!empty($_POST)){
-
-    // if input is not empty -> assign value to variable 
-    if (empty($_POST['name'])){
-        $error = "Please enter a username. \r\n"; 
-    } else {
-        $username = $_POST['name'];
-    }
-
-    if (empty($_POST['email'])){
-        $error .= "Please enter an email. \r\n"; 
-    } else {
-        $mail = $_POST['email'];
-    }
-
-    if (empty($_POST['education'])){
-        $error .= "Please enter an education. \r\n"; 
-    } else {
-        $education = $_POST['education'];
-    }
-
-    if (empty($_POST['password'])){
-        $error .= "Please enter a password. \r\n"; 
-    } else {
-        $password = $_POST['password'];
-    }
-    if (empty($_POST['password2'])){
-        $error .= "Please repeat your password. \r\n"; 
-    } else {
-        $password2 = $_POST['password2'];
-    }
-
     // make new user 
     $user = new User;
 
-    // check password
-        if ($user->checkPasswords($password, $password2)){
-
-            $safePassword = $user->hashPassword($password);
-
-
-            $show = $user->checkRegister($username, $mail); 
-            echo $show; 
-
-            // check if email or username exists 
-            /*if ($user->checkRegister($username, $mail)==true) {*/
-                // register
-                /*echo "register"; 
-                $user->register($username, $education, $mail, $safePassword);*/
-            //}
+    try {
+        // if input is not empty -> assign value to variable 
+        if (empty($_POST['name'])){
+            $error = "Please enter a username. \r\n"; 
         } else {
-            
+            $username = $_POST['name'];
         }
+
+        if (empty($_POST['email'])){
+            $error .= "Please enter an email. \r\n"; 
+        } else {
+            $mail = $_POST['email'];
+        }
+
+        if (empty($_POST['education'])){
+            $error .= "Please enter an education. \r\n"; 
+        } else {
+            $education = $_POST['education'];
+        }
+
+        if (empty($_POST['password'])){
+            $error .= "Please enter a password. \r\n"; 
+        } else {
+            $password = $_POST['password'];
+        }
+        if (empty($_POST['password2'])){
+            $error .= "Please repeat your password. \r\n"; 
+        } else {
+            $password2 = $_POST['password2'];
+        }
+        
+    } catch (Exception $e) {
+        // show error
+        $error = $e->getMessage();
+    }
+
+    // check passwords 
+    try {
+        $user->checkPasswords($password, $password2);
+    } catch (Exception $e){
+        // show error
+        $error = $e->getMessage();
+    }
+
+    // check register
+    try {
+        $user->checkRegister($username, $mail);
+    } catch (Exception $e){
+        // show error
+        $error = $e->getMessage();
+    }
+    
+    // register
+    echo "register"; 
+    $user->register($username, $education, $mail, $safePassword);
 }
 ?>
 

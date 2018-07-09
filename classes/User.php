@@ -35,8 +35,7 @@ class User extends Database {
         if ($p1 == $p2 ) {
             return true; 
         } else {
-            echo "The passwords are not matching, please try again.";
-            return false; 
+            throw new Exception("The passwords are not matching, please try again.");
         }
     }
 
@@ -69,14 +68,9 @@ class User extends Database {
 
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
                 if ($username == $result['username']){
-                    //echo "Username already exists, please choose another one.";
-                    return false; 
+                    throw new Exception("Username already exists, please choose another one.");
                 } else if ($mail == $result['email']){
-                    //echo "Email already exists, please choose another one.";
-                    return false;
-                } else {
-                    //echo "you're unique ;) "; 
-                    return true; 
+                    throw new Exception("Email already exists, please choose another one.");
                 }
             }
         } catch (PDOException $e) {
