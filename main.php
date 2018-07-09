@@ -4,7 +4,7 @@
 include_once("classes/Database.php"); 
 include_once("classes/Project.php"); 
 include_once("classes/User.php"); 
-
+include_once("classes/Task.php"); 
 /** user */
 // only show this page when user is logged in
 session_start(); 
@@ -68,10 +68,9 @@ if(isset ($_SESSION['username'])){
                 <div role="tablist" id="accordion-1">
 
                 <?php
-                /** show projects */
-                // show * from project where adminId = userId
-                $project = new Project();
-                $project->showProjects($user->getUserId());
+                    /** show projects */
+                    $project = new Project();
+                    $project->showProjects($user->getUserId());
                 ?>
 
                     <!-- project webtech -->
@@ -119,22 +118,6 @@ if(isset ($_SESSION['username'])){
                         </div>
                     </div>
 
-                    <!-- project Communicatie -->
-                    <div class="card">
-
-                        <div class="card-header" role="tab">
-                            <h5 class="mb-0">
-                                <i class="fas fa-book"></i>
-                                <a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Webtech</a>
-                            </h5>
-                        </div>
-                        <div class="collapse item-3" role="tabpanel" data-parent="#accordion-1">
-                            <div class="card-body">
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                                    in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -145,6 +128,13 @@ if(isset ($_SESSION['username'])){
                     <h3>Wednesday, 15th October, 2015</h3>
                 </div>
                 <ul class="list-group">
+
+                <?php 
+                    /** show tasks from project */
+                    $task = new Task(); 
+                    $task->setProjectId(1); 
+                    $task->showTasksFromProject(); 
+                ?>
                     <!-- item -->
                     <li class="list-group-item">
                         <div class="media">
@@ -162,79 +152,6 @@ if(isset ($_SESSION['username'])){
                         </div>
                         <hr>
                     </li>
-
-                    <!-- item -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Landing Page&nbsp;
-                                        <span>EXPIRING</span>
-                                    </h5>
-                                    <p>by Daniel Cifferton</p>
-                                </div>
-                                <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                                <label for="mycheckbox1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
-                    <!-- item -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Landing Page&nbsp;
-                                        <span>EXPIRING</span>
-                                    </h5>
-                                    <p>by Daniel Cifferton</p>
-                                </div>
-                                <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                                <label for="mycheckbox1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
-                    <!-- item -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Landing Page&nbsp;
-                                        <span>EXPIRING</span>
-                                    </h5>
-                                    <p>by Daniel Cifferton</p>
-                                </div>
-                                <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                                <label for="mycheckbox1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
-                    <!-- item -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Landing Page&nbsp;
-                                        <span>EXPIRING</span>
-                                    </h5>
-                                    <p>by Daniel Cifferton</p>
-                                </div>
-                                <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                                <label for="mycheckbox1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
                 </ul>
             </div>
 
