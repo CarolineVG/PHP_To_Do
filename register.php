@@ -33,40 +33,35 @@ if (!empty($_POST)){
             $user->setPassword($password);
             $user->setPassword2($password2); 
 
-            // check passwords 
             try {
+                // check passwords
                 $user->checkPasswords();
 
-            } catch (Exception $e){
-                // show error
-                $error = $e->getMessage();
-            }
-
-            // check register
-            try {
+                // check register
                 $user->checkRegister();
+
+                // hash password
+                $hashed = $user->hashPassword();
+                $user->setHash($hashed); 
+                            
+                // register
+                $user->register();
+
             } catch (Exception $e){
                 // show error
                 $error = $e->getMessage();
             }
-
-            // hash password
-            $safePassword = $user->hashPassword();
-            
-            // register
-            $user->register($safePassword);
 
         } catch (Exception $e){
-                        
+            // show error
+            $error = $e->getMessage();        
         }     
     }
 }
-    
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -107,7 +102,7 @@ if (!empty($_POST)){
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
             </div>
-            <a href="#" class="loginlink">Login</a>
+            <a href="index.php" class="loginlink">Login</a>
         </form>
     </div>
 </body>
