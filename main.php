@@ -135,23 +135,7 @@ if(isset ($_SESSION['username'])){
                     $task->setProjectId(1); 
                     $task->showTasksFromProject(); 
                 ?>
-                    <!-- item -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Landing Page&nbsp;
-                                        <span>EXPIRING</span>
-                                    </h5>
-                                    <p>by Daniel Cifferton</p>
-                                </div>
-                                <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                                <label for="mycheckbox1"></label>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
+                
                 </ul>
             </div>
 
