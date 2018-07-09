@@ -60,30 +60,38 @@ class User extends Database {
         echo "logging in"; 
     }
 
-    function checklogin(){
+    function checklogin($input_mail, $input_password){
         try {
             $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email and pass = :pass"); 
-            $query->bindParam(':email', $mail);
-            $query->bindParam(':pass', $password);
+            $query->bindParam(':email', $input_mail);
+            $query->bindParam(':pass', $input_password);
             $query->execute(); 
 
-            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                // if query gives result 
-                if (isset($result['email'])) {
-                    //echo $result['username'];
-                    return true; 
-                } else {
-                    return false; 
-                }
-            }
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            // check email
+            if ($result['email'] == $input_mail) {
+                throw new Exception("The passwords are not matching, please try again.");
+                // check password -> hash!
+                
+            } 
 
+            if (password_verify($input_password, $result['password'])){
+                echo "password ok"; 
+            } else {
+                echo "not ok"; 
+            }
+            
+            /*else if ($result['password'] == $this->pass){
+                throw new Exception("The passwords are not matching, please try again.");
+            }*/
+            
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
     }
 
     function checkPasswords(){
-        if ($password == $password2 ) {
+        if ($this->password == $this->password2 ) {
             return true; 
         } else {
             throw new Exception("The passwords are not matching, please try again.");
@@ -92,10 +100,11 @@ class User extends Database {
 
     function register($pass){
         try {
-            $query = $this->connection()->prepare("INSERT INTO user(username, education, pass, email) VALUES (:username, :education, :pass, :email )");
-            $query->bindParam(':username', $username);
-            $query->bindParam(':education', $education);
-            $query->bindParam(':email', $email);
+            echo "register"; 
+            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass) VALUES (:username, :education, :email, :pass)");
+            $query->bindParam(':username', $this->username);
+            $query->bindParam(':education', $this->education);
+            $query->bindParam(':email', $this->mail);
             $query->bindParam(':pass', $pass);
             $query->execute(); 
 
@@ -105,7 +114,7 @@ class User extends Database {
     }
 
     function hashPassword(){
-        $hash = password_hash($password, PASSWORD_BCRYPT); 
+        $hash = password_hash($this->password, PASSWORD_DEFAULT); 
         //echo $hash; 
         return $hash;
     }

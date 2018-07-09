@@ -46,13 +46,11 @@ class Project extends Database {
             $query->bindParam(':title', $title);
             $query->bindParam(':adminId', $adminId);
             $query->execute(); 
-
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
     }
-
-
+    
     public function showTasks(){
         // select * from tasks where project id = this projectid
     }

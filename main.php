@@ -1,4 +1,8 @@
 <?php
+
+// only show this page when user is logged in
+
+
 /** INCLUDES */
 include_once("classes/Database.php"); 
 include_once("classes/Project.php"); 

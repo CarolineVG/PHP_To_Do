@@ -9,8 +9,12 @@ if (!empty($_POST)){
     $password = $_POST['password'];
     
     $user = new User;
-    if ($user->checkLogin($mail, $password)){
-        $user->login(); 
+
+    try {
+        $user->checkLogin($mail, $password);
+        //$user->login(); 
+    } catch (Exception $e) {
+        $error = $e->getMessage(); 
     }
 
 }
@@ -36,6 +40,10 @@ if (!empty($_POST)){
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
             </div>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger" role="alert"> <?php echo $error ?>
+                </div>
+            <?php endif ?>
             <div class="form-group">
                 <input class="form-control" type="text" name="email" placeholder="Email">
             </div>
