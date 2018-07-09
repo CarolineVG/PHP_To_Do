@@ -1,24 +1,32 @@
 <?php
 
+/** INCLUDES */
+include_once("classes/Database.php"); 
+include_once("classes/Project.php"); 
+include_once("classes/User.php"); 
+
+/** user */
 // only show this page when user is logged in
 session_start(); 
 
 // check is session username exists
 if(isset ($_SESSION['username'])){
     //echo $_SESSION['username'];
+    $user = new User();
+    $user->setUsername($_SESSION['username']);
+
 } else {
     header('Location: index.php');
 }
 
-/** INCLUDES */
-include_once("classes/Database.php"); 
-include_once("classes/Project.php"); 
 
-// make new project
+
+/** NEW PROJECT */
 $project = new Project(); 
 $project->setTitle("PHP"); 
+$userLoggedIn = $user->getUsername(); 
 $project->setAdminId(1); 
-$project->saveToDatabase(); 
+$project->saveToDatabase();
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +55,7 @@ $project->saveToDatabase();
                         <i class="fa fa-cog"></i>
                     </div>
                     <img src="img/user.png" alt="user">
-                    <h1>Caroline Van Gossum</h1>
+                    <?php echo '<h1>' . $user->getUsername() . '</h1>' ?>
                     <h2>Student IMD</h2>
 
                     <div class="searchbox">

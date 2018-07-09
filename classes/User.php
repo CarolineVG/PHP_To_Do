@@ -9,6 +9,7 @@ class User extends Database {
     private $password;
     private $password2;
     private $hash; 
+    private $userId; 
 
     /** getters */
     public function getUsername(){
@@ -33,6 +34,14 @@ class User extends Database {
 
     public function getHash(){
         return $this->hash; 
+    }
+
+    public function getUserId(){
+        $query = $this->connection()->prepare("SELECT id FROM user WHERE username = :username"); 
+        $query->bindParam(':username', $this->username);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        echo $result['id'];
     }
 
     /** setters */
@@ -73,6 +82,7 @@ class User extends Database {
 
         // start session
         session_start(); 
+        // save username and userid
         $_SESSION['username'] = $this->username; 
         header("Location: main.php"); 
 
