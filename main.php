@@ -14,6 +14,8 @@ if(isset ($_SESSION['username'])){
     //echo $_SESSION['username'];
     $user = new User();
     $user->setUsername($_SESSION['username']);
+    $id = $user->getUserId();
+    $user->setUserId($id);
 
 } else {
     header('Location: index.php');
@@ -22,11 +24,11 @@ if(isset ($_SESSION['username'])){
 
 
 /** NEW PROJECT */
-$project = new Project(); 
+/*$project = new Project(); 
 $project->setTitle("PHP"); 
 $userLoggedIn = $user->getUsername(); 
-$project->setAdminId(1); 
-$project->saveToDatabase();
+$project->setAdminId($user->getUserId()); 
+$project->saveToDatabase();*/
 
 ?>
 <!DOCTYPE html>

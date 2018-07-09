@@ -41,7 +41,7 @@ class User extends Database {
         $query->bindParam(':username', $this->username);
         $query->execute(); 
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        echo $result['id'];
+        return $result['id'];
     }
 
     /** setters */
@@ -75,6 +75,11 @@ class User extends Database {
         return $this; 
     }
 
+    public function setUserId($id){
+        $this->userId = $id;
+        return $this; 
+    }
+
     /** functions */
     function login() {
         /*echo "logging in"; 
@@ -82,7 +87,7 @@ class User extends Database {
 
         // start session
         session_start(); 
-        // save username and userid
+        // save username
         $_SESSION['username'] = $this->username; 
         header("Location: main.php"); 
 
