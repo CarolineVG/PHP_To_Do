@@ -23,13 +23,6 @@ if(isset ($_SESSION['username'])){
 
 
 
-/** NEW PROJECT */
-/*$project = new Project(); 
-$project->setTitle("PHP"); 
-$userLoggedIn = $user->getUsername(); 
-$project->setAdminId($user->getUserId()); 
-$project->saveToDatabase();*/
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +66,13 @@ $project->saveToDatabase();*/
 
                 <!-- accordion projecten -->
                 <div role="tablist" id="accordion-1">
+
+                <?php
+                /** show projects */
+                // show * from project where adminId = userId
+                $project = new Project();
+                $project->showProjects($user->getUserId());
+                ?>
 
                     <!-- project webtech -->
                     <div class="card">

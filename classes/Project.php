@@ -50,6 +50,21 @@ class Project extends Database {
             print_r($e->getMessage);
         }
     }
+
+    public function showProjects($id){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM project WHERE adminId = :adminId"); 
+            $query->bindParam(':adminId', $id);
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                echo '<div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">' . $result['title'] . '</a></h5></div></div>'; 
+            }
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
     
     public function showTasks(){
         // select * from tasks where project id = this projectid
