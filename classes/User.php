@@ -68,8 +68,13 @@ class User extends Database {
 
     /** functions */
     function login() {
-        echo "logging in"; 
-        
+        /*echo "logging in"; 
+        echo $this->username; */
+
+        // start session
+        session_start(); 
+        $_SESSION['username'] = $this->username; 
+        header("Location: main.php"); 
 
     }
 
@@ -91,6 +96,16 @@ class User extends Database {
                 throw new Exception("Password is wrong, please try again.");
             }
         }
+    }
+
+    function findUsername(){
+        $query = $this->connection()->prepare("SELECT username FROM user WHERE email = :email"); 
+        $query->bindParam(':email', $this->mail);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        //echo $result['username']; 
+        return $result['username']; 
+
     }
 
     function checkPasswords(){

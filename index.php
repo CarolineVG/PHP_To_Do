@@ -14,6 +14,8 @@ if (!empty($_POST)){
 
     try {
         $user->checkLogin();
+        $username = $user->findUsername(); 
+        $user->setUsername($username); 
         $user->login(); 
     } catch (Exception $e) {
         $error = $e->getMessage(); 
