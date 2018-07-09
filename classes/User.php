@@ -67,41 +67,29 @@ class User extends Database {
     }
 
     /** functions */
-    
     function login() {
         echo "logging in"; 
+        
+
     }
 
-    function checklogin($input_mail, $input_password){
-        try {
-            $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
-            $query->bindParam(':email', $input_mail);
-            $query->execute(); 
-
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-            // check email
-            if ($result['email'] == $input_mail) {
-                //throw new Exception("The passwords are not matching, please try again.");
-                // check password -> hash!
-                
-            } 
-
-            /*echo "a" . $input_password . " \r\n";
-            echo $result['pass']; 
-            echo password_verify($input_password, $result['pass']);*/
-
-            if (password_verify($input_password, $result['pass'])){
-                echo "password ok"; 
+    function checklogin(){
+        $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
+        $query->bindParam(':email', $this->mail);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+            
+        // check email
+        if ($result['email'] != $this->mail) {
+            throw new Exception("Email unknown, please try again.");            
+        } else {
+            // check password 
+            if (password_verify($this->password, $result['pass'])){
+                //echo "password ok"; 
             } else {
-                echo "not ok"; 
+                //echo "not ok"; 
+                throw new Exception("Password is wrong, please try again.");
             }
-            
-            /*else if ($result['password'] == $this->pass){
-                throw new Exception("The passwords are not matching, please try again.");
-            }*/
-            
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
         }
     }
 
