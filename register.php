@@ -43,9 +43,16 @@ if (!empty($_POST)){
         $error = $e->getMessage();
     }
 
+    // assign values to user
+    $user->setUsername($username);
+    $user->setMail($mail); 
+    $user->setEducation($education);
+    $user->setPassword($password);
+    $user->setPassword2($password2); 
+
     // check passwords 
     try {
-        $user->checkPasswords($password, $password2);
+        $user->checkPasswords();
     } catch (Exception $e){
         // show error
         $error = $e->getMessage();
@@ -53,15 +60,18 @@ if (!empty($_POST)){
 
     // check register
     try {
-        $user->checkRegister($username, $mail);
+        $user->checkRegister();
     } catch (Exception $e){
         // show error
         $error = $e->getMessage();
     }
+
+    // hash password
+    $safePassword = $user->hashPassword();
     
     // register
     echo "register"; 
-    $user->register($username, $education, $mail, $safePassword);
+    $user->register($safePassword);
 }
 ?>
 
