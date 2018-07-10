@@ -1,17 +1,17 @@
 <?php
 /** INCLUDES */
-include_once("classes/Database.php"); 
+/*include_once("classes/Database.php"); 
 include_once("classes/Project.php"); 
 
 /** SESSION */
-session_start(); 
+/*session_start(); 
 
 if (!empty($_POST)){
     // get values
     $title = $_POST['projectname'];
 
     /** add project */
-    $project = new Project(); 
+   /* $project = new Project(); 
     $project->setTitle($title);
     
     $user = new User();
@@ -32,7 +32,7 @@ if (!empty($_POST)){
     } catch (Exception $e) {
         $error = $e->getMessage(); 
     }*/
-
-}
+/*
+}*/
 
 ?>

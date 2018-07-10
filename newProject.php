@@ -18,6 +18,7 @@ if (!empty($_POST)){
 
     try {
         $project->saveToDatabase(); 
+        //echo "ok"; 
     } catch (Exception $e) {
         $error = $e->getMessage(); 
     }
@@ -27,9 +28,9 @@ if (!empty($_POST)){
 
 <form method="post">
     <div class="form-group">
-        <input class="form-control" type="text" name="projectname" placeholder="Project Name">
+        <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Project Name">
     </div>
     <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit">Create Project</button>
+        <button class="btn btn-primary btn-block btnSaveNewProject" type="submit">Create Project</button>
     </div>
 </form>

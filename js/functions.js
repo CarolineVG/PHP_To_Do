@@ -14,9 +14,29 @@ $(".fa-trash-alt").on("click", function(e){
     // which project to delete? -> check id
     var idToDelete = this.id; 
     console.log(idToDelete); 
+});
 
-    
-    
+/* new project */
+$(".btnSaveNewProject").on("click", function(e){
+    e.preventDefault(); 
+    console.log("make new project - ajax"); 
+
+    var title = $("#projectname").val(); 
+    console.log(title); 
+
+    $.ajax({
+        type: "POST",
+        url: "./newProject.php",
+        data: {title: title},
+
+    }).done(function(result){
+        console.log("ok"); 
+        //location.reload(); 
+    }).fail(function(error){
+        console.log("nope");
+        console.log(error);  
+    });
+
 });
 
 
