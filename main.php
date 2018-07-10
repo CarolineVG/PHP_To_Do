@@ -64,6 +64,8 @@ if(isset ($_SESSION['username'])){
                     <button class="btn btn-add" type="button">Add Project</button>
                 </div>
 
+                <?php include_once("newProject.php"); ?>
+
                 <!-- accordion projecten -->
                 <div role="tablist" id="accordion-1">
 

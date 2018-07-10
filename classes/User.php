@@ -170,6 +170,14 @@ class User extends Database {
             print_r($e->getMessage);
         }
     }
+
+    function getUserIdByName($username){
+        $query = $this->connection()->prepare("SELECT id FROM user WHERE username = :username"); 
+        $query->bindParam(':username', $username);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC); 
+        return $result['id']; 
+    }
 }
 
 ?>
