@@ -244,53 +244,40 @@ input[type=search] {
     justify-content: space-between;
     align-items: center;
 }
-  .mycheckbox {
-    position: absolute;
-    opacity: 0;
-  }
-  .mycheckbox + label {
+/* checkbox */
+.checkbox {
     position: relative;
+    top: -10px;
+    margin: 0 20px 0 0;
     cursor: pointer;
-    padding: 0;
   }
-  .mycheckbox + label:before {
-    content: '';
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: text-top;
+  
+  .checkbox:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    z-index: 1;
     width: 20px;
     height: 20px;
-    background: white;
-    border: 1px solid var(--font_grey);
+    border: 2px solid #f2f2f2;
   }
-  .mycheckbox:hover + label:before {
-    background: var(--green);
+
+  .checkbox:checked:before {
+    transform: rotate(-45deg);
+    height: .5rem;
+    border-color: #009688;
+    border-top-style: none;
+    border-right-style: none;
   }
-  .mycheckbox:focus + label:before {
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
-  }
-  .mycheckbox:checked + label:before {
-    background: var(--green);
-  }
-  .mycheckbox:disabled + label {
-    color: #b8b8b8;
-    cursor: auto;
-  }
-  .mycheckbox:disabled + label:before {
-    box-shadow: none;
-    background: #ddd;
-  }
-  .mycheckbox:checked + label:after {
-    content: '';
+  .checkbox:after {
+    content: "";
     position: absolute;
-    left: 5px;
-    top: 9px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
-    -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
+    top: -0.125rem;
+    left: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    background: #fff;
+    cursor: pointer;
   }
 
   /* right */

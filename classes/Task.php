@@ -91,8 +91,7 @@ class Task extends Database {
                             <h5>'. $result['title'] . '&nbsp;<span>' . $result['status'] . '</span></h5>
                             <p>' . $result['userId'] . '</p>
                         </div>
-                        <input class="mycheckbox" id="mycheckbox1" type="checkbox" value="value1">
-                        <label for="mycheckbox1"></label>
+                        <input class="checkbox" type="checkbox">
                     </div>
                     </div>
                     <hr>
