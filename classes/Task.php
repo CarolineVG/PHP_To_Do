@@ -120,6 +120,7 @@ class Task extends Database {
                         <form id="mycomment" action="">
                             <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
                             <input type="submit" value="Add Comment">
+                            <button class="close">Close</button>
                         </form>
                     </div>
                 </li>';
