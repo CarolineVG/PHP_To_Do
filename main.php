@@ -75,7 +75,8 @@ if(isset ($_SESSION['username'])){
                     $project->showProjects($user->getUserId());
                 ?>
 
-                <div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Hallo<i class="fas fa-trash-alt"></i></h5></a></h5></div></div>
+                <div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Hallo
+                </h5></a></h5></div></div>
 
                     <!-- project webtech -->
                     <div class="card">

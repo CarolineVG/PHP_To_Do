@@ -8,16 +8,31 @@ click.addEventListener("click", function(){
 });*/
 
 /* delete project */
-$(".fa-trash-alt").on("click", function(e){
+/*$(".fa-trash-alt").on("click", function(e){
     e.preventDefault();
 
     // which project to delete? -> check id
     var idToDelete = this.id; 
     console.log(idToDelete); 
-});
+
+    $.ajax({
+        type: "DELETE",
+        url: "./deleteProject.php",
+        data: {idToDelete: idToDelete},
+
+    }).done(function(result){
+        console.log("ok " + result); 
+        //location.reload(); 
+    }).fail(function(error){
+        console.log("nope");
+        console.log(error);  
+    });
+
+
+});*/
 
 /* new project */
-$(".btnSaveNewProject").on("click", function(e){
+/*$(".btnSaveNewProject").on("click", function(e){
     e.preventDefault(); 
     console.log("make new project - ajax"); 
 
@@ -31,13 +46,13 @@ $(".btnSaveNewProject").on("click", function(e){
 
     }).done(function(result){
         console.log("ok"); 
-        //location.reload(); 
+        location.reload(); 
     }).fail(function(error){
         console.log("nope");
         console.log(error);  
     });
 
-});
+});*/
 
 
 /* show full task */
