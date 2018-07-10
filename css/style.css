@@ -130,6 +130,12 @@ input[type=search] {
     padding: 0rem 1.25rem;
 }
 
+.fa-trash-alt {
+    opacity: 0.4;
+    padding: 0rem 1.25rem;
+    float: right;
+}
+
 .card-header {
     padding-left: 0;
     padding-right: 0;

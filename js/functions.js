@@ -7,7 +7,20 @@ click.addEventListener("click", function(){
 
 });*/
 
+/* delete project */
+$(".fa-trash-alt").on("click", function(e){
+    e.preventDefault();
 
+    // which project to delete? -> check id
+    var idToDelete = this.id; 
+    console.log(idToDelete); 
+
+    
+    
+});
+
+
+/* show full task */
 $(".media").click(function(){
     console.log("hallo"); 
     $(".comment-hidden").css("display", "block"); 

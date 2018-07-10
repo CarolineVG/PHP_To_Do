@@ -58,7 +58,7 @@ class Project extends Database {
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo '<div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">' . $result['title'] . '</a></h5></div></div>'; 
+                echo '<div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">' . $result['title'] . '<i class="fas fa-trash-alt" id=' . $result['id'] . '></i></h5></a></h5></div></div>'; 
             }
 
         } catch (PDOException $e) {
