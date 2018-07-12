@@ -102,7 +102,7 @@ if (!empty($_POST)){
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
             </div>
-            <a href="index.php" class="loginlink">Login</a>
+            <a href="login.php" class="loginlink">Login</a>
         </form>
     </div>
 </body>

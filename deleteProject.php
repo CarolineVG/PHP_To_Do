@@ -18,7 +18,7 @@ session_start();
 
     try {
         $project->deleteProject(); 
-        header("Location: main.php");
+        header("Location: index.php");
     } catch (Exception $e) {
         $error = $e->getMessage(); 
     }
