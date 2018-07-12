@@ -31,10 +31,12 @@ if(isset ($_SESSION['username'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>To Do</title>
+    <title>To Do</title>    
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
 </head>
@@ -45,10 +47,8 @@ if(isset ($_SESSION['username'])){
             <!-- left -->
             <div class="col-md-3">
                 <div class="profile">
-                    <div class="icons">
-                        <i class="fa fa-volume-down"></i>
-                        <i class="fa fa-cog"></i>
-                    </div>
+                    
+
                     <img src="img/user.png" alt="user">
                     <?php echo '<h1>' . $user->getUsername() . '</h1>' ?>
                     <h2>Student IMD</h2>
@@ -147,9 +147,22 @@ if(isset ($_SESSION['username'])){
             <!-- right -->
             <div class="col-md-3">
                 <div class="menu">
-                    <span>5</span>
-                    <i class="fa fa-bell"></i>
                     <button class="btn" type="button">Add Task</button>
+                    <div class="icons">
+                        <i class="fa fa-bell"></i>
+                        <div class="dropleft show">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog"></i>
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">x</a>
+                                <a class="dropdown-item" href="#">x</a>
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="searchbox" id="s2">
