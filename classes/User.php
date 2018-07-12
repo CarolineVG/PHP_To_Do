@@ -89,7 +89,7 @@ class User extends Database {
         session_start(); 
         // save username
         $_SESSION['username'] = $this->username; 
-        header("Location: main.php"); 
+        header("Location: index.php"); 
 
     }
 

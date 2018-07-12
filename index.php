@@ -158,7 +158,7 @@ if(isset ($_SESSION['username'])){
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">x</a>
                                 <a class="dropdown-item" href="#">x</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
                         </div>
                     </div>
