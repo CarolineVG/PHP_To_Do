@@ -105,25 +105,6 @@ if(isset ($_SESSION['username'])){
                             </div>
                         </div>
                     </div>
-
-                    <!-- project Mobile Development -->
-                    <div class="card">
-
-                        <div class="card-header" role="tab">
-                            <h5 class="mb-0">
-                                <i class="fas fa-book"></i>
-                                <a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Webtech</a>
-                            </h5>
-                        </div>
-                        <div class="collapse item-2" role="tabpanel" data-parent="#accordion-1">
-                            <div class="card-body">
-                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis
-                                    in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
             <!-- middle -->
