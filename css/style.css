@@ -105,9 +105,9 @@ input[type=search] {
     list-style-type: square;
 }
 
-.card:first-child .card-header{
+/*.card:first-child .card-header{
     background-color: var(--green); 
-}
+}*/
 
 .card {
     border:none;
@@ -128,6 +128,11 @@ input[type=search] {
 .fa-book {
     opacity: 0.4;
     padding: 0rem 1.25rem;
+}
+
+/* collapse */
+#item1 {
+    min-height: 500px; 
 }
 
 .fa-trash-alt {

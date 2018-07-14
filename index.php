@@ -52,14 +52,15 @@ include_once("header.php");
                 ?>
 
                     <!-- project webtech -->
-                    <div class="card">
+                 <!-- <div class="card">
                         <div class="card-header" role="tab">
                             <h5 class="mb-0">
                                 <i class="fas fa-book"></i>
-                                <a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">not in db</a>
+                                <a data-toggle="collapse" aria-expanded="false" aria-controls=".item-1" href="div#item-1">not in db</a>
                                 <i class="fas fa-trash-alt"></i></h5>
                         </div>
-                        <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
+
+                        <div class="collapse" id="item-1">
                             <div class="card-body">
                                 <ul class="list-group">
                                     <li class="list-item">
@@ -78,6 +79,8 @@ include_once("header.php");
                             </div>
                         </div>
                     </div>
+-->
+
                 </div>
             </div>
             <!-- middle -->

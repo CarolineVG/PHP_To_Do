@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 include_once("classes/Database.php"); 
 include_once("classes/Task.php"); 
 include_once("classes/User.php"); 
+include_once("classes/Comment.php"); 
 
 /** SESSION */
 session_start(); 
@@ -18,31 +19,18 @@ if (!empty($_POST)){
     $text = $_POST['message'];
 
                 // new comment
+                $comment = new Comment(); 
 
                 // new user
                 $user = new User(); 
                 $userId = $user->getUserIdByName($_SESSION['username']);
                 
-                // give userid to task
-                $task->setUserId($userId); 
-
-                // current date
-                // default timezone
-                date_default_timezone_set('Europe/Brussels');
-
-                // today
-                $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-                $today = date("Y-m-d");
-                
-                $task->setDeadline($deadline); 
-                $task->setTaskStatus("not started");
-                $task->setStartDate($today);
-                $task->setProjectId(1); 
-
+                // give userid to comment
+                $comment->setUserId($userId); 
 
                 try {
                     $task->addNewTask(); 
-                    header("Location: index.php"); 
+                    //header("Location: index.php"); 
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
@@ -67,6 +55,12 @@ if (!empty($_POST)){
                     <div class="media">
                         <div class="media-body">
                             <div class="media-text">
+                            <?php 
+                            // show comments
+                            $comment = new comment(); 
+                            $comment->setTaskId(3); 
+                            $comment->showCommentsFromTask(); 
+                            ?>
                                 <h5>Caroline Van Gossum</h5>
                                 <p class="comment">This is my reaction</p>
                             </div>
