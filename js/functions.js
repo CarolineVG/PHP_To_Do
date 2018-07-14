@@ -1,4 +1,3 @@
-
 /* new project */
 $(".btnSaveNewProject").on("click", function(e){
     e.preventDefault(); 
@@ -21,7 +20,6 @@ $(".btnSaveNewProject").on("click", function(e){
     });
 
 });
-
 
 /* show full task */
 $(".media").click(function(){

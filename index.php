@@ -128,7 +128,8 @@ if(isset ($_SESSION['username'])){
             <!-- right -->
             <div class="col-md-3">
                 <div class="menu">
-                    <button class="btn" type="button">Add Task</button>
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Add Task</button>
+                    <?php include_once("newTask.php"); ?>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">
