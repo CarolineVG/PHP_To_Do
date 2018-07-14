@@ -4,8 +4,6 @@ include_once("classes/Database.php");
 include_once("classes/Project.php"); 
 
 if (!empty($_POST)){
-    // get values
-    if (isset($_POST['project'])) {
         $title = $_POST['projectname'];
 
         /** add project */
@@ -23,9 +21,6 @@ if (!empty($_POST)){
         } catch (Exception $e) {
             $error = $e->getMessage(); 
         }
-    }
-
-    
 }
 
 ?>

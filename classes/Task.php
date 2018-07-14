@@ -149,10 +149,12 @@ class Task extends Database {
 
         $user = $this->getUserId(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, taskStatus, workhours) VALUES (:title, :userid, :projectid, :taskStatus, :workhours)"); 
+            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, deadline, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :deadline, :taskStatus, :workhours)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
             $query->bindParam(':projectid', $projectId);
+            $query->bindParam(':startdate', $startDate);
+            $query->bindParam(':deadline', $deadline);
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute(); 

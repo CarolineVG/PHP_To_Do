@@ -42,7 +42,7 @@ class Project extends Database {
         $title = $this->getTitle();
         $adminId = $this->getAdminId(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO project (title, adminId) VALUES (:title, :adminId);"); 
+            $query = $this->connection()->prepare("INSERT INTO project(title, adminId)VALUES(:title, :adminId);"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':adminId', $adminId);
             $query->execute(); 
