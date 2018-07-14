@@ -140,9 +140,6 @@ class Task extends Database {
     }
 
     public function addNewTask(){
-
-        $dbdate = date("Y-m-d");
-
         $title = $this->getTitle(); 
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 

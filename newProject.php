@@ -29,7 +29,7 @@ if (!empty($_POST)){
         //echo $userId; 
         try {
             $project->saveToDatabase(); 
-            echo "ok"; 
+            //echo "ok"; 
             //header("Location: index.php");
         } catch (Exception $e) {
             $error = $e->getMessage(); 

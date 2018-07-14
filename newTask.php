@@ -40,7 +40,7 @@ if (!empty($_POST)){
                 $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
                 $today = date("Y-m-d");
                 
-                $task->setDeadline($today); 
+                $task->setDeadline($deadline); 
                 $task->setTaskStatus("not started");
                 $task->setStartDate($today);
                 $task->setProjectId(1); 
