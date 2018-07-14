@@ -32,11 +32,11 @@ class Task extends Database {
         return $this->startDate;
     }
 
-    public function getEndDate(){
-        return $this->endDate;
+    public function getDeadline(){
+        return $this->deadline;
     }
 
-    public function getStatus(){
+    public function getTaskStatus(){
         return $this->status;
     }
 
@@ -70,12 +70,12 @@ class Task extends Database {
         return $this;
     }
 
-    public function setEndDate($endDate){
-        $this->endDate = $endDate;
+    public function setDeadline($deadline){
+        $this->deadline = $deadline;
         return $this;
     }
 
-    public function setStatus($status){
+    public function setTaskStatus($status){
         $this->status = $status;
         return $this;
     }
@@ -107,7 +107,7 @@ class Task extends Database {
                     <img src="img/user.png" alt="user">
                     <div class="media-body">
                         <div class="media-text">
-                            <h5>'. $result['title'] . '&nbsp;<span>' . $result['status'] . '</span></h5>
+                            <h5>'. $result['title'] . '&nbsp;<span>' . $result['taskStatus'] . '</span></h5>
                             <p>' . $r['username'] . '</p>
                         </div>
                         <input class="checkbox" type="checkbox">
@@ -144,20 +144,20 @@ class Task extends Database {
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 
         $startDate = $this->getStartDate(); 
-        $status = "NOT STARTED"; 
+        $status = $this->getTaskStatus();  
+        $projectId = $this->getProjectId(); 
 
         $user = $this->getUserId(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, deadline, status) VALUES (:title, :userid, :projectid, :startdate, :deadline, :status, :workhours);"); 
+            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, taskStatus, workhours) VALUES (:title, :userid, :projectid, :taskStatus, :workhours)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
             $query->bindParam(':projectid', $projectId);
-            $query->bindParam(':startdate', $startDate);
-            $query->bindParam(':deadline', $deadline);
-            $query->bindParam(':status', $startDate);
+            $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
-            
             $query->execute(); 
+            
+            echo "ok"; 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

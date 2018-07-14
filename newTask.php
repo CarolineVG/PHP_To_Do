@@ -6,14 +6,9 @@ include_once("classes/User.php");
 
 if (!empty($_POST)){
     // get values
-    if (isset($_POST['title'])) {
-        $title = $_POST['taskname'];
-
-        if (isset($_POST['workhours'])) {
-            $workhours = $_POST['workhours'];
-
-            if (isset($_POST['deadline'])) {
-                $deadline = $_POST['deadline'];
+    $title = $_POST['taskname'];
+    $workhours = $_POST['workhours'];
+    $deadline = $_POST['deadline'];
 
                 /** add project */
                 $project = new Task(); 
@@ -30,18 +25,26 @@ if (!empty($_POST)){
                 
                 // give userid to task
                 $task->setUserId($userId); 
-                $task->setStartDate("14/07/2018");
+
+                // current date
+                // default timezone
+                date_default_timezone_set('Europe/Brussels');
+
+                // today
+                $today = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
+                $today = date("d-m-Y");
+                
+                $task->setDeadline($today); 
+                $task->setTaskStatus("not started");
+                $task->setStartDate($today);
+                $task->setProjectId(1); 
+
 
                 try {
                     $task->addNewTask(); 
-                    echo "ok"; 
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-            }
-        }
-    }
-    
 }
 
 
