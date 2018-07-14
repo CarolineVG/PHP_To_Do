@@ -4,7 +4,26 @@ include_once("classes/Database.php");
 include_once("classes/Task.php"); 
 
 if (!empty($_POST)){
+    // get values
+    $title = $_POST['taskname'];
+    $workhours = $_POST['workhours'];
+    $deadline = $_POST['deadline'];
+
+    /** add project */
+    $project = new Task(); 
+    $project->setTitle($title);
     
+    $user = new User();
+    $userId = $user->getUserIdByName($_SESSION['username']);
+    $project->setAdminId($userId); 
+    //echo $userId; 
+
+    try {
+        $project->saveToDatabase(); 
+        //echo "ok"; 
+    } catch (Exception $e) {
+        $error = $e->getMessage(); 
+    }
 }
 
 

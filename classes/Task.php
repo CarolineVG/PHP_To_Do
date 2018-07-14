@@ -9,6 +9,7 @@ class Task extends Database {
     private $startDate;
     private $endDate;
     private $status; 
+    private $workhours; 
 
     /** getters */
     public function getTaskId(){
@@ -37,6 +38,10 @@ class Task extends Database {
 
     public function getStatus(){
         return $this->status;
+    }
+
+    public function getWorkhours(){
+        return $this->workhours;
     }
     
     /** setters  */
@@ -72,6 +77,11 @@ class Task extends Database {
 
     public function setStatus($status){
         $this->status = $status;
+        return $this;
+    }
+
+    public function setWorkhours($workhours){
+        $this->workhours = $workhours;
         return $this;
     }
 
@@ -127,6 +137,10 @@ class Task extends Database {
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
+    }
+
+    public function addNewTask(){
+        
     }
 }
 
