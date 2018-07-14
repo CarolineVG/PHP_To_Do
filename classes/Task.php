@@ -103,6 +103,8 @@ class Task extends Database {
                 $r = $q->fetch(PDO::FETCH_ASSOC); 
 
                 echo '<li class="list-group-item">
+                
+                <a href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">;
                 <div class="media">
                     <img src="img/user.png" alt="user">
                     <div class="media-body">
@@ -114,24 +116,6 @@ class Task extends Database {
                     </div>
                     </div>
                     <hr>
-                    <!-- hidden -->
-                    <div class="comment-hidden">
-                        <div class="media">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>Caroline Van Gossum</h5>
-                                    <p class="comment">This is my reaction</p>
-                                </div>
-                            </div>                    
-                            <img src="img/user.png" alt="user">
-                        </div>
-                        
-                        <hr>
-                        <form id="mycomment" action="">
-                            <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-                            <input type="submit" value="Add Comment">
-                        </form>
-                    </div>
                 </li>';
             }
         } catch (PDOException $e) {

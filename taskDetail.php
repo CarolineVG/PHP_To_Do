@@ -23,18 +23,23 @@ if (!empty($_POST)){
 
                 // new user
                 $user = new User(); 
+                $user->setText($text); 
                 $userId = $user->getUserIdByName($_SESSION['username']);
                 
                 // give userid to comment
                 $comment->setUserId($userId); 
 
                 try {
-                    $task->addNewTask(); 
+                    $task->addNewComment(); 
                     //header("Location: index.php"); 
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
 }
+
+
+/** header */
+include_once("header.php"); 
 ?>
 
 
@@ -50,16 +55,14 @@ if (!empty($_POST)){
                     </div>
                 </div>
                 <hr>
-                <!-- hidden -->
-                <div class="comment-hidden">
                     <div class="media">
                         <div class="media-body">
                             <div class="media-text">
                             <?php 
                             // show comments
-                            $comment = new comment(); 
+                            /*$comment = new comment(); 
                             $comment->setTaskId(3); 
-                            $comment->showCommentsFromTask(); 
+                            $comment->showCommentsFromTask(); */
                             ?>
                                 <h5>Caroline Van Gossum</h5>
                                 <p class="comment">This is my reaction</p>
@@ -73,5 +76,8 @@ if (!empty($_POST)){
                         <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
                         <input type="submit" value="Add Comment">
                     </form>
-                </div>
             </li>
+            <?php 
+/** footer */
+include_once("footer.php"); 
+?>

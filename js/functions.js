@@ -23,9 +23,12 @@ $(".btnSaveNewProject").on("click", function(e){
 
 /* show full task */
 $(".media").click(function(){
-    console.log("hallo"); 
+    /*console.log("hallo"); 
     // source: https://stackoverflow.com/questions/25148939/triggering-click-function-only-on-specific-element 
-    $(this).siblings("div").toggle();
+    $(this).siblings("div").toggle();*/
+
+    
+
 });
 
 /* collapse oroject */
