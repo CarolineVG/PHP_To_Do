@@ -5,23 +5,27 @@ include_once("classes/Project.php");
 
 if (!empty($_POST)){
     // get values
-    $title = $_POST['projectname'];
+    if (isset($_POST['project'])) {
+        $title = $_POST['projectname'];
 
-    /** add project */
-    $project = new Project(); 
-    $project->setTitle($title);
-    
-    $user = new User();
-    $userId = $user->getUserIdByName($_SESSION['username']);
-    $project->setAdminId($userId); 
-    //echo $userId; 
+        /** add project */
+        $project = new Project(); 
+        $project->setTitle($title);
+        
+        $user = new User();
+        $userId = $user->getUserIdByName($_SESSION['username']);
+        $project->setAdminId($userId); 
+        //echo $userId; 
 
-    try {
-        $project->saveToDatabase(); 
-        //echo "ok"; 
-    } catch (Exception $e) {
-        $error = $e->getMessage(); 
+        try {
+            $project->saveToDatabase(); 
+            //echo "ok"; 
+        } catch (Exception $e) {
+            $error = $e->getMessage(); 
+        }
     }
+
+    
 }
 
 ?>

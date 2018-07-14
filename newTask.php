@@ -2,28 +2,46 @@
 /** INCLUDES */
 include_once("classes/Database.php"); 
 include_once("classes/Task.php"); 
+include_once("classes/User.php"); 
 
 if (!empty($_POST)){
     // get values
-    $title = $_POST['taskname'];
-    $workhours = $_POST['workhours'];
-    $deadline = $_POST['deadline'];
+    if (isset($_POST['title'])) {
+        $title = $_POST['taskname'];
 
-    /** add project */
-    $project = new Task(); 
-    $project->setTitle($title);
-    
-    $user = new User();
-    $userId = $user->getUserIdByName($_SESSION['username']);
-    $project->setAdminId($userId); 
-    //echo $userId; 
+        if (isset($_POST['workhours'])) {
+            $workhours = $_POST['workhours'];
 
-    try {
-        $project->saveToDatabase(); 
-        //echo "ok"; 
-    } catch (Exception $e) {
-        $error = $e->getMessage(); 
+            if (isset($_POST['deadline'])) {
+                $deadline = $_POST['deadline'];
+
+                /** add project */
+                $project = new Task(); 
+                $project->setTitle($title);
+                $project->setWorkhours($workhours);
+                $project->setDeadline($deadline);
+
+                // new task
+                $task = new Task(); 
+
+                // new user
+                $user = new User(); 
+                $userId = $user->getUserIdByName($_SESSION['username']);
+                
+                // give userid to task
+                $task->setUserId($userId); 
+                $task->setStartDate("14/07/2018");
+
+                try {
+                    $task->addNewTask(); 
+                    echo "ok"; 
+                } catch (Exception $e) {
+                    $error = $e->getMessage(); 
+                }
+            }
+        }
     }
+    
 }
 
 
@@ -43,7 +61,7 @@ if (!empty($_POST)){
             <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline">
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block btnSaveNewProject" type="submit">Create Task</button>
+            <button class="btn btn-primary btn-block" type="submit">Create Task</button>
         </div>
     </form>
   </ul>
