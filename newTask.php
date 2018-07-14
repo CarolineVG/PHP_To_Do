@@ -4,6 +4,9 @@ include_once("classes/Database.php");
 include_once("classes/Task.php"); 
 include_once("classes/User.php"); 
 
+/** SESSION */
+session_start(); 
+
 if (!empty($_POST)){
     // get values
     $title = $_POST['taskname'];
@@ -47,11 +50,19 @@ if (!empty($_POST)){
                 }
 }
 
-
+/** header */
+include_once("header.php"); 
 ?>
-  <ul class="dropdown-menu dropdown-task">
-    <form method="post">
-
+<div class="login">
+<form method="post">
+<h2>New Task</h2>
+            <div class="illustration">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger" role="alert"> <?php echo $error ?>
+                </div>
+            <?php endif ?>
         <div class="form-group">
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
@@ -67,4 +78,9 @@ if (!empty($_POST)){
             <button class="btn btn-primary btn-block" type="submit">Create Task</button>
         </div>
     </form>
-  </ul>
+</div>
+    
+<?php 
+/** footer */
+include_once("footer.php"); 
+?>

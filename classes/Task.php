@@ -159,7 +159,7 @@ class Task extends Database {
             $query->bindParam(':workhours', $workhours);
             $query->execute(); 
             
-            echo "ok"; 
+            //echo "ok"; 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
