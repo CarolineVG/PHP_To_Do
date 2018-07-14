@@ -46,6 +46,7 @@ class Project extends Database {
             $query->bindParam(':title', $title);
             $query->bindParam(':adminId', $adminId);
             $query->execute(); 
+            echo $query->execute(); 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

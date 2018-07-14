@@ -4,7 +4,7 @@ include_once("classes/Database.php");
 include_once("classes/Project.php"); 
 include_once("classes/User.php"); 
 include_once("classes/Task.php"); 
-/** user */
+
 // only show this page when user is logged in
 session_start(); 
 
@@ -40,11 +40,8 @@ include_once("header.php");
 
                 <div class="addproject">
                     <i class="fas fa-plus"></i>
-                    <button class="btn btn-add" type="button">Add Project</button>
+                    <a href="newProject.php" class="btn btn-add">Add Project</a>
                 </div>
-
-                <?php include_once("newProject.php"); ?>
-
                 <!-- accordion projecten -->
                 <div role="tablist" id="accordion-1">
 
@@ -54,15 +51,12 @@ include_once("header.php");
                     $project->showProjects($user->getUserId());
                 ?>
 
-                <div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Hallo
-                </h5></a></h5></div></div>
-
                     <!-- project webtech -->
                     <div class="card">
                         <div class="card-header" role="tab">
                             <h5 class="mb-0">
                                 <i class="fas fa-book"></i>
-                                <a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">Webtech</a>
+                                <a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="div#accordion-1 .item-1">not in db</a>
                                 <i class="fas fa-trash-alt"></i></h5>
                         </div>
                         <div class="collapse show item-1" role="tabpanel" data-parent="#accordion-1">
@@ -107,8 +101,7 @@ include_once("header.php");
             <!-- right -->
             <div class="col-md-3">
                 <div class="menu">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Add Task</button>
-                    <?php include_once("newTask.php"); ?>
+                    <a class="btn" href="newTask.php">Add Task</a>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">

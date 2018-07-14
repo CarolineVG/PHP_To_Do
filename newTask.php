@@ -1,4 +1,10 @@
 <?php
+
+/** ERRORS */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 /** INCLUDES */
 include_once("classes/Database.php"); 
 include_once("classes/Task.php"); 
@@ -13,14 +19,11 @@ if (!empty($_POST)){
     $workhours = $_POST['workhours'];
     $deadline = $_POST['deadline'];
 
-                /** add project */
-                $project = new Task(); 
-                $project->setTitle($title);
-                $project->setWorkhours($workhours);
-                $project->setDeadline($deadline);
-
                 // new task
                 $task = new Task(); 
+                $task->setTitle($title);
+                $task->setWorkhours($workhours);
+                $task->setDeadline($deadline);
 
                 // new user
                 $user = new User(); 
@@ -34,8 +37,8 @@ if (!empty($_POST)){
                 date_default_timezone_set('Europe/Brussels');
 
                 // today
-                $today = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
-                $today = date("d-m-Y");
+                $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+                $today = date("Y-m-d");
                 
                 $task->setDeadline($today); 
                 $task->setTaskStatus("not started");
@@ -45,6 +48,7 @@ if (!empty($_POST)){
 
                 try {
                     $task->addNewTask(); 
+                    header("Location: index.php"); 
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }

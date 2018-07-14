@@ -70,7 +70,7 @@ class User extends Database {
         return $this;
     }
 
-    public function setHash(){
+    public function setHash($hash){
         $this->hash = $hash;
         return $this; 
     }
@@ -147,9 +147,9 @@ class User extends Database {
     }
 
     function hashPassword(){
-        $this->$hash = password_hash($this->password, PASSWORD_DEFAULT); 
+        $this->hash = password_hash($this->password, PASSWORD_DEFAULT); 
         //echo $hash; 
-        return $hash;
+        return $this->hash;
     }
 
     function checkRegister(){

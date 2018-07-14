@@ -140,15 +140,19 @@ class Task extends Database {
     }
 
     public function addNewTask(){
-        $title = $this->getTitle();
+
+        $dbdate = date("Y-m-d");
+
+        $title = $this->getTitle(); 
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 
         $startDate = $this->getStartDate(); 
-        $status = $this->getTaskStatus();  
-        $projectId = $this->getProjectId(); 
-
+        $status = $this->getTaskStatus(); 
+        $projectId = $this->getProjectId();
         $user = $this->getUserId(); 
-        try {
+        echo $workhours; 
+        
+       try {
             $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, deadline, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :deadline, :taskStatus, :workhours)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
@@ -158,8 +162,7 @@ class Task extends Database {
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute(); 
-            
-            //echo "ok"; 
+
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
