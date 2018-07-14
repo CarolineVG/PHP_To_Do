@@ -334,7 +334,13 @@ input[type=search] {
    }
 
    /* new task */
-   
+   .dropdown-menu.dropdown-task {
+       padding: 20px; 
+   }
+
+   .dropdown-toggle::after {
+        display:none;
+    }
 
 
   /* right */
