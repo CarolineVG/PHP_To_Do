@@ -14,7 +14,9 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
-if (!empty($_POST)){
+
+
+/*if (!empty($_POST)){
     // get values
     $text = $_POST['message'];
 
@@ -35,7 +37,7 @@ if (!empty($_POST)){
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-}
+}*/
 
 
 /** header */
@@ -44,38 +46,16 @@ include_once("header.php");
 
 
 <li class="list-group-item">
-                <div class="media">
-                    <img src="img/user.png" alt="user">
-                    <div class="media-body">
-                        <div class="media-text">
-                            <h5>taak&nbsp;<span>busy</span></h5>
-                            <p>caroline</p>
-                        </div>
-                        <input class="checkbox" type="checkbox">
-                    </div>
-                </div>
-                <hr>
-                    <div class="media">
-                        <div class="media-body">
-                            <div class="media-text">
-                            <?php 
-                            // show comments
-                            /*$comment = new comment(); 
-                            $comment->setTaskId(3); 
-                            $comment->showCommentsFromTask(); */
-                            ?>
-                                <h5>Caroline Van Gossum</h5>
-                                <p class="comment">This is my reaction</p>
-                            </div>
-                        </div>                    
-                        <img src="img/user.png" alt="user">
-                    </div>
-                    
-                    <hr>
-                    <form id="mycomment" action="">
-                        <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-                        <input type="submit" value="Add Comment">
-                    </form>
+<?php 
+/** GET TASK ID */
+$taskId = $_GET['task'];
+echo $taskId;
+
+$task = new Task();
+$task->setTaskId($taskId); 
+$task->showTaskFromId(); 
+?>
+
             </li>
             <?php 
 /** footer */

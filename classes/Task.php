@@ -148,6 +148,50 @@ class Task extends Database {
             print_r($e->getMessage);
         }
     }
+
+    public function showTaskFromId(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->execute(); 
+
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+            $userid = $result['userId'];
+            // select username from user where id = :userId
+            /*$q = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+            $q->bindParam(':userid', $userid);
+            $q->execute(); 
+            $r = $q->fetch(PDO::FETCH_ASSOC);*/
+
+            echo '<div class="media">
+            <img src="img/user.png" alt="user">
+            <div class="media-body">
+                <div class="media-text">
+                    <h5>' . $result["title"] . '&nbsp;<span>'. $result["taskStatus"] . '</span></h5>
+                    <p>' . $result["userId"] . '</p>
+                </div>
+                <input class="checkbox" type="checkbox">
+            </div></div><hr>
+            <div class="media">
+                        <div class="media-body">
+                            <div class="media-text">
+                                <h5>Caroline Van Gossum</h5>
+                                <p class="comment">This is my reaction</p>
+                            </div>
+                        </div>                    
+                        <img src="img/user.png" alt="user">
+                    </div>
+                    <hr>
+                    <form id="mycomment" action="">
+                        <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
+                        <input type="submit" value="Add Comment">
+                    </form>';
+        }
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
 }
 
 ?>
