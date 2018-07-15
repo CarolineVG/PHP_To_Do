@@ -45,7 +45,7 @@ include_once("header.php");
 ?>
 
 
-<li class="list-group-item">
+<li class="list-group-item detail-task">
 <?php 
 /** GET TASK ID */
 $taskId = $_GET['task'];
@@ -55,9 +55,8 @@ $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
 ?>
-
-            </li>
-            <?php 
+</li>
+<?php 
 /** footer */
 include_once("footer.php"); 
 ?>
