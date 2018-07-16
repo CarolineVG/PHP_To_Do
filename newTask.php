@@ -9,9 +9,18 @@ error_reporting(E_ALL);
 include_once("classes/Database.php"); 
 include_once("classes/Task.php"); 
 include_once("classes/User.php"); 
+include_once("classes/Project.php"); 
 
 /** SESSION */
-session_start(); 
+session_start();
+$user = new User(); 
+
+                // show projects
+                $project = new Project();
+                $userId = $user->getUserIdByName($_SESSION['username']);
+                $project->setUserId($userId); 
+                $project->showProjectsInDropdown();            
+        
 
 if (!empty($_POST)){
     // get values
@@ -70,6 +79,17 @@ include_once("header.php");
         <div class="form-group">
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
+
+        <div class="form-group">
+        <!--<label for="sel1">Project</label>
+        <select class="form-control" id="sel1">
+            
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        </div>  -->
 
         <div class="form-group">
             <input class="form-control" type="text" name="workhours" id="workhours" placeholder="Work hours">

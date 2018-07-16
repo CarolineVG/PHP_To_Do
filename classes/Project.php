@@ -7,6 +7,7 @@ class Project extends Database {
     private $adminId; 
     private $tasks;
     private $people; 
+    private $userId; 
 
     /** getters */
     public function getTitle(){
@@ -19,6 +20,10 @@ class Project extends Database {
 
     public function getProjectId(){
         return $this->projectId; 
+    }
+    
+    public function getUserId(){
+        return $this->userId; 
     }
 
     /** setters */
@@ -34,6 +39,11 @@ class Project extends Database {
 
     public function setProjectId($projectId){
         $this->projectId = $projectId; 
+        return $this; 
+    }
+
+    public function setUserId($userId){
+        $this->userId = $userId; 
         return $this; 
     }
     
@@ -67,6 +77,22 @@ class Project extends Database {
                 </li><li class="list-item">
                 <a href="">People</a></li><li class="list-item"><a href="">Files</a></li>
                 <li class="list-item"><a href="">Statistics</a></li></ul></div></div></div>'; 
+            }
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    public function showProjectsInDropdown(){
+        try {
+            echo "hoi"; 
+            $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
+            $query->bindParam(':userId', $this->userId);
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                echo '<option>' . $result['projectId'] . '</option>';
             }
 
         } catch (PDOException $e) {

@@ -51,36 +51,6 @@ include_once("header.php");
                     $project->showProjects($user->getUserId());
                 ?>
 
-                    <!-- project webtech -->
-                 <!-- <div class="card">
-                        <div class="card-header" role="tab">
-                            <h5 class="mb-0">
-                                <i class="fas fa-book"></i>
-                                <a data-toggle="collapse" aria-expanded="false" aria-controls=".item-1" href="div#item-1">not in db</a>
-                                <i class="fas fa-trash-alt"></i></h5>
-                        </div>
-
-                        <div class="collapse" id="item-1">
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    <li class="list-item">
-                                        <a href="">All Tasks</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a href="">People</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a href="">Files</a>
-                                    </li>
-                                    <li class="list-item">
-                                        <a href="">Statistics</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
--->
-
                 </div>
             </div>
             <!-- middle -->
@@ -119,7 +89,6 @@ include_once("header.php");
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-cog"></i>
                             </a>
-
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#">x</a>
                                 <a class="dropdown-item" href="#">x</a>
@@ -127,7 +96,6 @@ include_once("header.php");
                             </div>
                         </div>
                     </div>
-                    
                 </div>
 
                 <div class="searchbox" id="s2">
