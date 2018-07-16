@@ -14,12 +14,7 @@ include_once("classes/Project.php");
 /** SESSION */
 session_start();
 $user = new User(); 
-
-                // show projects
-                $project = new Project();
-                $userId = $user->getUserIdByName($_SESSION['username']);
-                $project->setUserId($userId); 
-                $project->showProjectsInDropdown();            
+  
         
 
 if (!empty($_POST)){
@@ -81,15 +76,17 @@ include_once("header.php");
         </div>
 
         <div class="form-group">
-        <!--<label for="sel1">Project</label>
         <select class="form-control" id="sel1">
-            
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            <option> Project </option>
+            <?php
+            // show projects
+            $project = new Project();
+            $userId = $user->getUserIdByName($_SESSION['username']);
+            $project->setUserId($userId); 
+            $project->showProjectsInDropdown();     
+            ?>
         </select>
-        </div>  -->
+        </div>
 
         <div class="form-group">
             <input class="form-control" type="text" name="workhours" id="workhours" placeholder="Work hours">

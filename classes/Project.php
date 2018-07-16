@@ -86,13 +86,19 @@ class Project extends Database {
 
     public function showProjectsInDropdown(){
         try {
-            echo "hoi"; 
             $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo '<option>' . $result['projectId'] . '</option>';
+                $id = $result['projectId'];
+                // project id to project name 
+                $q = $this->connection()->prepare("SELECT * FROM project WHERE id = :id"); 
+                $q->bindParam(':id', $id);
+                $q->execute(); 
+                $r = $q->fetch(PDO::FETCH_ASSOC); 
+                // project id in value
+                echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
             }
 
         } catch (PDOException $e) {
