@@ -93,8 +93,14 @@ include_once("header.php");
 
                 <?php 
                     /** show tasks from project */
-                    $task = new Task(); 
-                    $task->setProjectId(1); 
+                    $task = new Task();
+                    /** GET PROJECT ID */
+                    if ($_GET['project'] != null){
+                        $projectId = $_GET['project'];
+                    } else {
+                        $projectId = 1; 
+                    }
+                    $task->setProjectId($projectId); 
                     $task->showTasksFromProject(); 
                 ?>
                 

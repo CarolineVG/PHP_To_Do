@@ -62,7 +62,7 @@ class Project extends Database {
                 fa-trash-alt"></i></a></h5></a></h5></div>
                 <div class="collapse" id="item-' . $result['id'] . '"><div class="card-body"><ul class="list-group">
                 <li class="list-item">
-                <a href="projectDetail.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '">All Tasks</a>
+                <a href="index.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '">All Tasks</a>
                 
                 </li><li class="list-item">
                 <a href="">People</a></li><li class="list-item"><a href="">Files</a></li>
