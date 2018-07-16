@@ -61,7 +61,10 @@ class Project extends Database {
                 echo '<div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-' . $result['id'] . '" href="div#item-' . $result['id'] . '">' . $result['title'] . '<a href="deleteProject.php?post=' . $result['id'] . '"><i class="fas 
                 fa-trash-alt"></i></a></h5></a></h5></div>
                 <div class="collapse" id="item-' . $result['id'] . '"><div class="card-body"><ul class="list-group">
-                <li class="list-item"><a href="">All Tasks</a></li><li class="list-item">
+                <li class="list-item">
+                <a href="projectDetail.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '">All Tasks</a>
+                
+                </li><li class="list-item">
                 <a href="">People</a></li><li class="list-item"><a href="">Files</a></li>
                 <li class="list-item"><a href="">Statistics</a></li></ul></div></div></div>'; 
             }
