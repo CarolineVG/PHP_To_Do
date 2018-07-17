@@ -14,22 +14,24 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
-if (!empty($_POST)){
-    echo "ok"; 
+    if(isset($_POST['submit'])){
     // get values
     $text = $_POST['message'];
-    echo "ok"; 
 
                 // new comment
                 $comment = new Comment(); 
 
                 // new user
                 $user = new User(); 
-                $comment->setText($text); 
+                $comment->setReaction($text); 
                 $userId = $user->getUserIdByName($_SESSION['username']);
+                echo $userId; 
                 
                 // give userid to comment
                 $comment->setUserId($userId); 
+
+                // set project id 
+                $comment->setTaskId(1);
 
                 try {
                     $comment->addNewComment(); 
@@ -67,9 +69,9 @@ $task->showTaskFromId();
                     <hr>
 
                     <!-- write reaction -->
-                    <form id="mycomment" action="">
+                    <form id="mycomment" method="post">
                         <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-                        <input type="submit" value="Add Comment">
+                        <input type="submit" name="submit" value="Add Comment">
                     </form>
 </li>
 <?php 

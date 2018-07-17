@@ -12,11 +12,14 @@ include_once("classes/User.php");
 /** SESSION */
 session_start(); 
 
-if (!empty($_POST)){
-    echo "ok"; 
-        $title = $_POST['projectname'];
 
-        echo $title; 
+        
+    if(isset($_POST['submit'])){
+        
+    echo "ok"; 
+    $title = $_POST['projectname'];
+
+    echo $title; 
 
         /** add project */
         $project = new Project(); 

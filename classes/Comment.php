@@ -3,13 +3,13 @@
 class Comment extends Database {
 
     /** variables */
-    private $text;
+    private $reaction;
     private $taskId; 
     private $userId;
 
     /** getters */
-    public function getText(){
-        return $this->text;
+    public function getReaction(){
+        return $this->reaction;
     }
 
     public function getTaskId(){
@@ -17,16 +17,12 @@ class Comment extends Database {
     }
     
     public function getUserId(){
-        $query = $this->connection()->prepare("SELECT id FROM user WHERE username = :username"); 
-        $query->bindParam(':username', $this->username);
-        $query->execute(); 
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        return $result['id'];
+        return $this->userId; 
     }
 
     /** setters */
-    public function setText($text){
-        $this->text = $text;
+    public function setReaction($reaction){
+        $this->reaction = $reaction;
         return $this;
     }
 
@@ -56,26 +52,21 @@ class Comment extends Database {
     }
 
     public function addNewComment(){
-        $text = $this->getText(); 
+        $reaction = $this->getReaction(); 
         $taskId = $this->getTaskId(); 
         $userId = $this->getUserId(); 
 
-        echo $text; 
-        
-       /*try {
-            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, deadline, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :deadline, :taskStatus, :workhours)"); 
-            $query->bindParam(':title', $title);
-            $query->bindParam(':userid', $user);
-            $query->bindParam(':projectid', $projectId);
-            $query->bindParam(':startdate', $startDate);
-            $query->bindParam(':deadline', $deadline);
-            $query->bindParam(':taskStatus', $status);
-            $query->bindParam(':workhours', $workhours);
+       try {
+            $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId) VALUES (:reaction, :taskid, :userid);"); 
+            $query->bindParam(':reaction', $reaction);
+            $query->bindParam(':taskid', $taskId);
+            $query->bindParam(':userid', $userId);
             $query->execute(); 
+            echo "ok"; 
 
         } catch (PDOException $e) {
             print_r($e->getMessage);
-        }*/
+        }
     }
 }
 
