@@ -100,7 +100,6 @@ class Project extends Database {
                 // project id in value
                 echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
             }
-
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

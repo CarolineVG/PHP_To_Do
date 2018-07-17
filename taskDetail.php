@@ -14,30 +14,30 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
-
-
-/*if (!empty($_POST)){
+if (!empty($_POST)){
+    echo "ok"; 
     // get values
     $text = $_POST['message'];
+    echo "ok"; 
 
                 // new comment
                 $comment = new Comment(); 
 
                 // new user
                 $user = new User(); 
-                $user->setText($text); 
+                $comment->setText($text); 
                 $userId = $user->getUserIdByName($_SESSION['username']);
                 
                 // give userid to comment
                 $comment->setUserId($userId); 
 
                 try {
-                    $task->addNewComment(); 
+                    $comment->addNewComment(); 
                     //header("Location: index.php"); 
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-}*/
+}
 
 
 /** header */
@@ -48,13 +48,29 @@ include_once("header.php");
 <li class="list-group-item detail-task">
 <?php 
 /** GET TASK ID */
-$taskId = $_GET['task'];
-echo $taskId;
-
+//$taskId = $_GET['task'];
+//echo $taskId;
 $task = new Task();
-$task->setTaskId($taskId); 
+$task->setTaskId(1); 
 $task->showTaskFromId(); 
 ?>
+
+            <div class="media">
+                        <div class="media-body">
+                            <div class="media-text">
+                                <h5>Caroline Van Gossum</h5>
+                                <p class="comment">This is my reaction</p>
+                            </div>
+                        </div>                    
+                        <img src="img/user.png" alt="user">
+                    </div>
+                    <hr>
+
+                    <!-- write reaction -->
+                    <form id="mycomment" action="">
+                        <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
+                        <input type="submit" value="Add Comment">
+                    </form>
 </li>
 <?php 
 /** footer */

@@ -14,20 +14,22 @@ include_once("classes/Project.php");
 /** SESSION */
 session_start();
 $user = new User(); 
-  
-        
 
 if (!empty($_POST)){
     // get values
     $title = $_POST['taskname'];
     $workhours = $_POST['workhours'];
     $deadline = $_POST['deadline'];
+    $project = $_POST['projects'];
 
+    if(isset($_POST['submit'])){
+        
                 // new task
                 $task = new Task(); 
                 $task->setTitle($title);
                 $task->setWorkhours($workhours);
                 $task->setDeadline($deadline);
+                $task->setProjectId($project); 
 
                 // new user
                 $user = new User(); 
@@ -47,8 +49,6 @@ if (!empty($_POST)){
                 $task->setDeadline($deadline); 
                 $task->setTaskStatus("not started");
                 $task->setStartDate($today);
-                $task->setProjectId(1); 
-
 
                 try {
                     $task->addNewTask(); 
@@ -56,11 +56,14 @@ if (!empty($_POST)){
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-}
+    }
+
+} 
 
 /** header */
 include_once("header.php"); 
 ?>
+
 <div class="login">
 <form method="post">
 <h2>New Task</h2>
@@ -74,10 +77,8 @@ include_once("header.php");
         <div class="form-group">
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
-
-        <div class="form-group">
-        <select class="form-control" id="sel1">
-            <option> Project </option>
+        <select class="form-control" id="projects" name="projects">
+            <option>Project </option>
             <?php
             // show projects
             $project = new Project();
@@ -86,8 +87,6 @@ include_once("header.php");
             $project->showProjectsInDropdown();     
             ?>
         </select>
-        </div>
-
         <div class="form-group">
             <input class="form-control" type="text" name="workhours" id="workhours" placeholder="Work hours">
         </div>
@@ -96,7 +95,7 @@ include_once("header.php");
             <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline">
         </div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">Create Task</button>
+            <button class="btn btn-primary btn-block" type="submit" name="submit">Create Task</button>
         </div>
     </form>
 </div>

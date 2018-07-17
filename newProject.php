@@ -54,7 +54,7 @@ include_once("header.php");
                 <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Project Name">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block btnSaveNewProject" type="submit">Create Project</button>
+                <button class="btn btn-primary btn-block btnSaveNewProject" name="submit" type="submit">Create Project</button>
             </div>
     </form>
 </div>

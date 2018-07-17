@@ -140,6 +140,7 @@ class Task extends Database {
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute(); 
+            echo "a"; 
 
         } catch (PDOException $e) {
             print_r($e->getMessage);
@@ -168,21 +169,7 @@ class Task extends Database {
                     <p>' . $result["userId"] . '</p>
                 </div>
                 <input class="checkbox" type="checkbox">
-            </div></div><hr>
-            <div class="media">
-                        <div class="media-body">
-                            <div class="media-text">
-                                <h5>Caroline Van Gossum</h5>
-                                <p class="comment">This is my reaction</p>
-                            </div>
-                        </div>                    
-                        <img src="img/user.png" alt="user">
-                    </div>
-                    <hr>
-                    <form id="mycomment" action="">
-                        <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-                        <input type="submit" value="Add Comment">
-                    </form>';
+            </div></div><hr>';
         }
 
         } catch (PDOException $e) {
