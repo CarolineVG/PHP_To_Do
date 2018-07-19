@@ -106,7 +106,7 @@ class Task extends Database {
                     <img src="img/user.png" alt="user">
                     <div class="media-body">
                         <div class="media-text">
-                            <h5>'. $result['title'] . '&nbsp;<span>' . $result['taskStatus'] . '</span></h5>
+                            <h5>'. $result['title'] . '&nbsp;<span>' . $result['taskStatus'] . '</span> <span class="deadline">' . $result['deadline'] . '</h5>
                             <p>' . $r['username'] . '</p>
                         </div>
                         <input class="checkbox" type="checkbox">

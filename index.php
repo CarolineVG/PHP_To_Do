@@ -57,7 +57,8 @@ include_once("header.php");
             <div class="col-md-6">
                 <div class="date">
                     <i class="fa fa-calendar-alt"></i>
-                    <?php   
+                    <?php
+                        // source: http://pl.php.net/manual/en/function.date.php    
                         // default timezone
                         date_default_timezone_set('Europe/Brussels');
                         // show current date

@@ -245,6 +245,19 @@ input[type=search] {
     display: inline-block;
 }
 
+.media .deadline {
+    background-color: #fff; 
+    border: none;
+    color: var(--font_grey);
+    padding: 5px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+
 .media p {
     font-size: 1em; 
     color: var(--font_grey);
@@ -294,8 +307,13 @@ input[type=search] {
   /* task */
   .media:hover {
       cursor: pointer;
+      text-decoration: none; 
   }
 
+  h5:hover {
+      text-decoration: none; 
+      
+  }
   /* task detail */
   
 .detail-task {
