@@ -107,32 +107,34 @@ include_once("header.php");
                     </div>
                 </div>
 
-                <div class="searchbox" id="s2">
-                    <i class="fas fa-search"></i>
-                    <input type="search" class="form-control" placeholder="Search" />
-                </div>
-               <!-- <div class="projectDropdown">
-                    <select class="form-control" id="projects" name="projects">
-                        <option>Choose your project </option>
-                        <?php
-                        // show projects
-                        $project = new Project();
-                        $userId = $user->getUserIdByName($_SESSION['username']);
-                        $project->setUserId($userId); 
-                        $project->showProjectsInDropdown();
-                        ?>
-                    </select>
+                <form method="post" class="formProject">
+                    <div class="projectDropdown">
+                        <select class="form-control" id="projects" name="projects">
+                            <option>Choose your project </option>
+                            <?php
+                            // show projects
+                            $project = new Project();
+                            $userId = $user->getUserIdByName($_SESSION['username']);
+                            $project->setUserId($userId); 
+                            $project->showProjectsInDropdown();
+                            ?>
+                        </select>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit" name="submit">Filter</button>
+                        </div>
+                    </div>
+                </form>
+    
                     
-                </div>-->
                 
-  <div class="dropdown">
+  <!--<div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose your project
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="#">HTML</a></li>
       <li><a href="#">CSS</a></li>
     </ul>
-  </div>
+  </div>-->
 
                 
                 <?php include_once("deadlines.php"); ?>

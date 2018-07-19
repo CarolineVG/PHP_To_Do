@@ -14,13 +14,20 @@ if(isset ($_SESSION['username'])){
 /** header */
 include_once("header.php"); 
 
+if(isset($_POST['submit'])){
+
+
+$project = $_POST['projects'];
+//echo $project; 
+$task->setUserId($id); 
+$task->setProjectId($project); 
+$task->filterMyDeadlines(); 
+
+} else {
+    
 /** show tasks from project */
 $task = new Task();
 $task->setUserId($user->getUserId()); 
-/*$task->showMyDeadlines(); */
-
-$task->setProjectId(1); 
-$task->filterMyDeadlines(); 
-
-
+$task->showMyDeadlines(); 
+}
 ?>

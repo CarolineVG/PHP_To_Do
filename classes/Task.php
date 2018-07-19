@@ -250,7 +250,6 @@ class Task extends Database {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid AND projectId = :projectid");             
             $query->bindParam(':userid', $this->userId);
             $query->bindParam(':projectid', $this->projectId);
-            //echo $this->projectId;
 
             $query->execute(); 
             
