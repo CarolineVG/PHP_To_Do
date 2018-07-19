@@ -42,6 +42,9 @@ include_once("header.php");
                     <i class="fas fa-plus"></i>
                     <a href="newProject.php" class="btn btn-add">Add Project</a>
                 </div>
+
+                
+
                 <!-- accordion projecten -->
                 <div role="tablist" id="accordion-1">
 

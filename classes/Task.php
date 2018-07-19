@@ -205,8 +205,8 @@ class Task extends Database {
                 </div>
 
                 <div class="taskicons">
-                    <a href=""><i class="fas fa-pencil-alt"></i></a>
-                    <a href="deleteProject.php?post="><i class="fas fa-trash-alt"></i></a>
+                    <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>
                     <input class="checkbox" type="checkbox">
                 </div>
             </div>

@@ -13,11 +13,11 @@ session_start();
     echo $id; 
 
     /** delete project */
-    $task = new Project(); 
+    $task = new Task(); 
     $task->setTaskId($id);
 
     try {
-        $task->deleteProject(); 
+        $task->deleteTask(); 
         header("Location: index.php");
     } catch (Exception $e) {
         $error = $e->getMessage(); 
