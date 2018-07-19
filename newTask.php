@@ -87,7 +87,7 @@ include_once("header.php");
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
         <select class="form-control" id="projects" name="projects">
-            <option>Project </option>
+            <option>Choose your project </option>
             <?php
             // show projects
             $project = new Project();

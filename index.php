@@ -65,6 +65,7 @@ include_once("header.php");
                         echo '<h3>'. date('l jS \of F Y') .'</h3>';
                     ?>
                 </div>
+
                 <ul class="list-group">
 
                 <?php 
@@ -89,6 +90,8 @@ include_once("header.php");
             <div class="col-md-3">
                 <div class="menu">
                     <a class="btn" href="newTask.php">Add Task</a>
+                    
+                    <a class="btn" href="deadlines.php">Deadlines</a>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">
@@ -108,10 +111,37 @@ include_once("header.php");
                     <i class="fas fa-search"></i>
                     <input type="search" class="form-control" placeholder="Search" />
                 </div>
+               <!-- <div class="projectDropdown">
+                    <select class="form-control" id="projects" name="projects">
+                        <option>Choose your project </option>
+                        <?php
+                        // show projects
+                        $project = new Project();
+                        $userId = $user->getUserIdByName($_SESSION['username']);
+                        $project->setUserId($userId); 
+                        $project->showProjectsInDropdown();
+                        ?>
+                    </select>
+                    
+                </div>-->
+                
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose your project
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+    </ul>
+  </div>
 
+                
+                <?php include_once("deadlines.php"); ?>
+
+                <!--
                 <ul class="list-group">
 
-                    <!-- user -->
+
+                    
                     <li class="list-group-item">
                         <div class="media">
                             <img src="img/user.png" alt="user">
@@ -122,51 +152,7 @@ include_once("header.php");
                         </div>
                     </li>
 
-                    <!-- user -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="mediabody">
-                                <h5>Carry Jenkingson</h5>
-                                <p>PHP Developer</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- user -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="mediabody">
-                                <h5>Carry Jenkingson</h5>
-                                <p>PHP Developer</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- user -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="mediabody">
-                                <h5>Carry Jenkingson</h5>
-                                <p>PHP Developer</p>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- user -->
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="mediabody">
-                                <h5>Carry Jenkingson</h5>
-                                <p>PHP Developer</p>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

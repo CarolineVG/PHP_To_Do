@@ -211,6 +211,74 @@ class Task extends Database {
             print_r($e->getMessage);
         }
     }
+
+    public function showMyDeadlines(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid");             
+            $query->bindParam(':userid', $this->userId);
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                $projectid = $result['projectId'];
+
+                // select projectid
+                $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :projectid"); 
+                $q->bindParam(':projectid', $projectid);
+                $q->execute(); 
+                $r = $q->fetch(PDO::FETCH_ASSOC);
+                
+                echo '<li class="list-group-item">
+                <div class="media">
+                    <img src="img/user.png" alt="user">
+                    <div class="mediabody">
+                        <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
+                        </h5> 
+                        <p>' . $result['title'] . '</p>
+                    </div>
+                </div>
+            </li>';
+                
+            }
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    
+    public function filterMyDeadlines(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid AND projectId = :projectid");             
+            $query->bindParam(':userid', $this->userId);
+            $query->bindParam(':projectid', $this->projectId);
+            //echo $this->projectId;
+
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                $projectid = $result['projectId'];
+
+                // select projectid
+                $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :projectid"); 
+                $q->bindParam(':projectid', $projectid);
+                $q->execute(); 
+                $r = $q->fetch(PDO::FETCH_ASSOC);
+                
+                echo '<li class="list-group-item">
+                <div class="media">
+                    <img src="img/user.png" alt="user">
+                    <div class="mediabody">
+                        <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
+                        </h5> 
+                        <p>' . $result['title'] . '</p>
+                    </div>
+                </div>
+            </li>';
+                
+            }
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
 }
 
 ?>

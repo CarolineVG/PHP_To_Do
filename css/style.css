@@ -333,6 +333,11 @@ input[type=search] {
     box-shadow:1px 1px 5px rgba(0,0,0,0.1);
   }
 
+  /* all deadlines */
+  .deadlines {
+      display: none; 
+  }
+
 
   /* form comment */
   #mycomment {
