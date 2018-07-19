@@ -180,11 +180,27 @@ class Task extends Database {
 
         while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
             $userid = $result['userId'];
+
+            // show days to deadline 
+            $endDate = $result['deadline'];
+            $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+            $today = date("Y-m-d");      
+            $date1=date_create($today);
+            $date2=date_create($endDate);
+            
+            $interval = date_diff($date1, $date2);
+            if($interval->format('%r')){
+                $output =  $interval->format('%a') . ' days too late'; 
+            } else {
+                $output =  $interval->format('%a') . ' days left'; 
+            }
+
             echo '<div class="media">
             <img src="img/user.png" alt="user">
             <div class="media-body">
                 <div class="media-text">
-                    <h5>' . $result["title"] . '<span>'. $result["taskStatus"] . '</span></h5>
+                    <h5>' . $result["title"] . '<span>'. $result["taskStatus"] . '</span>
+                    <span class="deadline">' . $output . '</h5>
                     <p>' . $result["userId"] . '</p>
                 </div>
                 <input class="checkbox" type="checkbox">
