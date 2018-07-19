@@ -5,42 +5,43 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 /** INCLUDES */
-include_once("classes/Database.php"); 
-include_once("classes/Project.php"); 
-include_once("classes/User.php"); 
+include_once ("classes/Database.php");
+include_once ("classes/Project.php");
+include_once ("classes/User.php");
 
 /** SESSION */
-session_start(); 
+session_start();
 
+if (isset($_POST['submit'])){
+	echo "ok";
+	$title = $_POST['projectname'];
+	echo $title;
+	/** add project */
+	$project = new Project();
+	$project->setTitle($title);
+	$user = new User();
+	$userId = $user->getUserIdByName($_SESSION['username']);
+	$project->setAdminId($userId);
 
-        
-    if(isset($_POST['submit'])){
-        
-    echo "ok"; 
-    $title = $_POST['projectname'];
+	// echo $userId;
 
-    echo $title; 
+	try{
+		$project->saveToDatabase();
 
-        /** add project */
-        $project = new Project(); 
-        $project->setTitle($title);
-        
-        $user = new User();
-        $userId = $user->getUserIdByName($_SESSION['username']);
-        $project->setAdminId($userId); 
+		// echo "ok";
+		header("Location: index.php");
 
-        //echo $userId; 
-        try {
-            $project->saveToDatabase(); 
-            //echo "ok"; 
-            //header("Location: index.php");
-        } catch (Exception $e) {
-            $error = $e->getMessage(); 
-        }
-}
+		}
+
+	catch(Exception $e)
+		{
+		$error = $e->getMessage();
+		}
+	}
 
 /** header */
-include_once("header.php"); 
+include_once ("header.php");
+
 ?>
 <div class="login">
 <form method="post">
@@ -49,20 +50,26 @@ include_once("header.php");
                 <i class="fas fa-file-alt"></i>
             </div>
             <?php if (isset($error)): ?>
-                <div class="alert alert-danger" role="alert"> <?php echo $error ?>
-                </div>
+                <div class="alert alert-danger" role="alert"> <?php echo $error ?> </div>
             <?php endif ?>
 
             <div class="form-group">
                 <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Project Name">
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <button class="btn btn-primary btn-block btnSaveNewProject" name="submit" type="submit">Create Project</button>
-            </div>
+            </div>-->
+
+            
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit" name="submit">Create Task</button>
+        </div>
+
     </form>
 </div>
     
-<?php 
+<?php
 /** footer */
-include_once("footer.php"); 
+include_once ("footer.php");
+
 ?>
