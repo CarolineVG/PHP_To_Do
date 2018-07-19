@@ -56,26 +56,6 @@ $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
 ?>
-
-
-            <div class="media">
-            <img src="img/user.png" alt="user">
-            <div class="media-body">
-                <div class="media-text">
-                    <h5>title<span>nog iets</span>
-                    <span class="deadline"> zoveel dagen nog</h5>
-                    <p>naam</p>
-                </div>
-
-                <div class="taskicons">
-                    <a href=""><i class="fas fa-pencil-alt"></i></a>
-                    <a href=""><i class="fas fa-trash-alt"></i></a>
-                    <input class="checkbox" type="checkbox">
-                </div>
-            </div>
-            </div>
-            <hr>
-
             <div class="media">
                         <div class="media-body">
                             <div class="media-text">

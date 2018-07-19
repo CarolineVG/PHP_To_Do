@@ -199,12 +199,20 @@ class Task extends Database {
             <img src="img/user.png" alt="user">
             <div class="media-body">
                 <div class="media-text">
-                    <h5>' . $result["title"] . '<span>'. $result["taskStatus"] . '</span>
+                    <h5>' . $result['title'] . '<span>' . $result["taskStatus"] . '</span>
                     <span class="deadline">' . $output . '</h5>
                     <p>' . $result["userId"] . '</p>
                 </div>
-                <input class="checkbox" type="checkbox">
-            </div></div><hr>';
+
+                <div class="taskicons">
+                    <a href=""><i class="fas fa-pencil-alt"></i></a>
+                    <a href="deleteProject.php?post="><i class="fas fa-trash-alt"></i></a>
+                    <input class="checkbox" type="checkbox">
+                </div>
+            </div>
+        </div>
+        <hr>
+';
         }
 
         } catch (PDOException $e) {
