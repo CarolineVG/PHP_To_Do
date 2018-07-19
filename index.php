@@ -57,7 +57,12 @@ include_once("header.php");
             <div class="col-md-6">
                 <div class="date">
                     <i class="fa fa-calendar-alt"></i>
-                    <h3>Wednesday, 15th October, 2015</h3>
+                    <?php   
+                        // default timezone
+                        date_default_timezone_set('Europe/Brussels');
+                        // show current date
+                        echo '<h3>'. date('l jS \of F Y') .'</h3>';
+                    ?>
                 </div>
                 <ul class="list-group">
 

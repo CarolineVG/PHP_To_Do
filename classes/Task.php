@@ -180,17 +180,11 @@ class Task extends Database {
 
         while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
             $userid = $result['userId'];
-            // select username from user where id = :userId
-            /*$q = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
-            $q->bindParam(':userid', $userid);
-            $q->execute(); 
-            $r = $q->fetch(PDO::FETCH_ASSOC);*/
-
             echo '<div class="media">
             <img src="img/user.png" alt="user">
             <div class="media-body">
                 <div class="media-text">
-                    <h5>' . $result["title"] . '&nbsp;<span>'. $result["taskStatus"] . '</span></h5>
+                    <h5>' . $result["title"] . '<span>'. $result["taskStatus"] . '</span></h5>
                     <p>' . $result["userId"] . '</p>
                 </div>
                 <input class="checkbox" type="checkbox">
