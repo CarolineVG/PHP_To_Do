@@ -28,7 +28,6 @@ if (!empty($_POST)){
                 $task = new Task(); 
                 $task->setTitle($title);
                 $task->setWorkhours($workhours);
-                $task->setDeadline($deadline);
                 $task->setProjectId($project); 
 
                 // new user
@@ -45,17 +44,27 @@ if (!empty($_POST)){
                 // today
                 $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
                 $today = date("Y-m-d");
-                
-                $task->setDeadline($deadline); 
-                $task->setTaskStatus("not started");
+                $task->setTaskStatus("NOT STARTED");
                 $task->setStartDate($today);
 
-                try {
-                    $task->addNewTask(); 
-                    header("Location: index.php"); 
-                } catch (Exception $e) {
-                    $error = $e->getMessage(); 
+                if (!empty($deadline)){ 
+                    $task->setDeadline($deadline);                       
+                    try {
+                        $task->addNewTask(); 
+                        header("Location: index.php"); 
+                    } catch (Exception $e) {
+                        $error = $e->getMessage(); 
+                    }
+                } else {
+                    // add without deadline 
+                    try {
+                        $task->addNewTaskWithoutDeadline(); 
+                        header("Location: index.php"); 
+                    } catch (Exception $e) {
+                        $error = $e->getMessage(); 
+                    }
                 }
+
     }
 
 } 

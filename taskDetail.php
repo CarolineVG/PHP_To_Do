@@ -50,13 +50,12 @@ include_once("header.php");
 <li class="list-group-item detail-task">
 <?php 
 /** GET TASK ID */
-//$taskId = $_GET['task'];
+$taskId = $_GET['task'];
 //echo $taskId;
 $task = new Task();
-$task->setTaskId(1); 
+$task->setTaskId($taskId); 
 $task->showTaskFromId(); 
 ?>
-
             <div class="media">
                         <div class="media-body">
                             <div class="media-text">

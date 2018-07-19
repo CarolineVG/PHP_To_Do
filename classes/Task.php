@@ -121,6 +121,7 @@ class Task extends Database {
     }
 
     public function addNewTask(){
+
         $title = $this->getTitle(); 
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 
@@ -139,13 +140,37 @@ class Task extends Database {
             $query->bindParam(':deadline', $deadline);
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
-            $query->execute(); 
-            echo "a"; 
+            $query->execute();
 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
     }
+
+    public function addNewTaskWithoutDeadline(){
+        $title = $this->getTitle(); 
+        $workhours = $this->getWorkhours();
+        $startDate = $this->getStartDate(); 
+        $status = $this->getTaskStatus(); 
+        $projectId = $this->getProjectId();
+        $user = $this->getUserId(); 
+        echo $workhours; 
+        
+       try {
+            $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :taskStatus, :workhours)"); 
+            $query->bindParam(':title', $title);
+            $query->bindParam(':userid', $user);
+            $query->bindParam(':projectid', $projectId);
+            $query->bindParam(':startdate', $startDate);
+            $query->bindParam(':taskStatus', $status);
+            $query->bindParam(':workhours', $workhours);
+            $query->execute();
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
 
     public function showTaskFromId(){
         try {
