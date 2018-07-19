@@ -278,6 +278,16 @@ class Task extends Database {
             print_r($e->getMessage);
         }
     }
+    
+    public function deleteTask(){
+        try {
+            $query = $this->connection()->prepare("DELETE FROM task WHERE id = :id"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
 }
 
 ?>

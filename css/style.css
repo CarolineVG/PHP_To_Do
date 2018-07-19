@@ -131,7 +131,7 @@ input[type=search] {
     min-height: 500px; 
 }
 
-.fa-trash-alt {
+.card.fa-trash-alt {
     opacity: 0.4;
     padding: 0rem 1.25rem;
     float: right;
@@ -328,6 +328,18 @@ input[type=search] {
     color:#505e6c;
     box-shadow:1px 1px 5px rgba(0,0,0,0.1);
   }
+
+.taskicons {
+    line-height: 2rem; 
+}
+  
+.taskicons.checkbox {
+    padding: 1rem;
+}
+
+.taskicons i {
+    padding: 1rem; 
+}
 
   /* all deadlines */
   .deadlines {
