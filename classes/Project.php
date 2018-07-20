@@ -118,6 +118,14 @@ class Project extends Database {
             print_r($e->getMessage);
         }
     }
+
+    public function getProjectIdByName(){
+        $query = $this->connection()->prepare("SELECT id FROM project WHERE title = :title"); 
+        $query->bindParam(':title', $this->title);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['id'];
+    }
 }
 
 ?>

@@ -22,7 +22,7 @@ $userId = $user->getUserIdByName($_SESSION['username']);
 include_once("header.php"); 
 
 // get task id 
-$id = $_GET['post'];
+$taskid = $_GET['post'];
 
 
 if (!empty($_POST)){
@@ -32,22 +32,29 @@ if (!empty($_POST)){
     $startdate = $_POST['startdate'];
     $deadline = $_POST['deadline'];
     $taskstatus = $_POST['taskStatus'];
+    $projectname = $_POST['projectname'];
+    echo $projectname; 
+
+    $project = new Project(); 
+    $project->setTitle($projectname); 
+    $projectid =  $project->getProjectIdByName(); 
 
     if(isset($_POST['submit'])){
         echo "ok"; 
         
                 // new task
                 $task = new Task(); 
+                $task->setTaskId($taskid);
                 $task->setTitle($title);
                 $task->setWorkhours($workhours);
-                $task->setProjectId($project); 
+                $task->setProjectId($projectid); 
                 $task->setDeadline($deadline); 
                 $task->setUserId($userId); 
                 $task->setTaskStatus($taskstatus); 
 
                     try {
-                        $task->addNewTask(); 
-                        header("Location: index.php"); 
+                        $task->editTask(); 
+                        header("Location: taskDetail.php?task=". $taskid); 
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
@@ -73,7 +80,7 @@ if (!empty($_POST)){
             <?php 
                 // show current values 
                 $task = new Task();
-                $task->setTaskId($id); 
+                $task->setTaskId($taskid); 
                 $task->showEditTask(); 
             ?>
         

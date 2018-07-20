@@ -314,7 +314,7 @@ class Task extends Database {
             echo '
             <div class="form-group">
                 Project
-                <input class="form-control" disabled type="text" name="project" id="editTaskProject" value="'. $r['title'] . '">
+                <input class="form-control" type="text" name="projectname" id="editTaskProject" value="'. $r['title'] . '">
             </div>
             <div class="form-group">
                 Title
@@ -352,17 +352,18 @@ class Task extends Database {
     }
     
     public function editTask(){
+        $id = $this->getTaskId(); 
         $title = $this->getTitle(); 
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 
         $startDate = $this->getStartDate(); 
         $status = $this->getTaskStatus(); 
         $projectId = $this->getProjectId();
-        $user = $this->getUserId(); 
-        echo $workhours; 
+        $user = $this->getUserId();
         
        try {
-            $query = $this->connection()->prepare("UPDATE task SET id=:id title=:title,userId=:userId, projectId=:projectid,startDate=:startdate,deadline=:deadline,taskStatus=:taskstatus,workhours=:workhours WHERE 1"); 
+            $query = $this->connection()->prepare("UPDATE task SET title=:title,userId=:userid, projectId=:projectid,startDate=:startdate,deadline=:deadline,taskStatus=:taskstatus,workhours=:workhours WHERE id =:id"); 
+            $query->bindParam(':id', $id); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
             $query->bindParam(':projectid', $projectId);
