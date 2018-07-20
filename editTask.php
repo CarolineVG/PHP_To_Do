@@ -13,10 +13,50 @@ include_once("classes/Project.php");
 
 /** SESSION */
 session_start();
+
+/** USER */
 $user = new User(); 
+$userId = $user->getUserIdByName($_SESSION['username']);
 
 /** header */
 include_once("header.php"); 
+
+// get task id 
+$id = $_GET['post'];
+
+
+if (!empty($_POST)){
+    // get values
+    $title = $_POST['taskname'];
+    $workhours = $_POST['workhours'];    
+    $startdate = $_POST['startdate'];
+    $deadline = $_POST['deadline'];
+    $taskstatus = $_POST['taskStatus'];
+
+    if(isset($_POST['submit'])){
+        echo "ok"; 
+        
+                // new task
+                $task = new Task(); 
+                $task->setTitle($title);
+                $task->setWorkhours($workhours);
+                $task->setProjectId($project); 
+                $task->setDeadline($deadline); 
+                $task->setUserId($userId); 
+                $task->setTaskStatus($taskstatus); 
+
+                    try {
+                        $task->addNewTask(); 
+                        header("Location: index.php"); 
+                    } catch (Exception $e) {
+                        $error = $e->getMessage(); 
+                    }
+
+    }
+}
+
+
+
 ?>
 
 <div class="login">
@@ -29,28 +69,14 @@ include_once("header.php");
                 <div class="alert alert-danger" role="alert"> <?php echo $error ?>
                 </div>
             <?php endif ?>
-        <div class="form-group">
-            <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="text" name="workhours" id="workhours" placeholder="Work hours">
-        </div>
 
-        <div class="form-group">
-            <input class="form-control" type="text" name="startdate" id="startDate" placeholder="Start date">
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline">
-        </div>
-
-        <div class="form-group">
-            <input class="form-control" type="text" name="taskStatus" id="taskStatus" placeholder="Status">
-        </div>
-
-        <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" name="submit">Edit Task</button>
-        </div>
+            <?php 
+                // show current values 
+                $task = new Task();
+                $task->setTaskId($id); 
+                $task->showEditTask(); 
+            ?>
+        
     </form>
 </div>
     

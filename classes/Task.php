@@ -171,7 +171,6 @@ class Task extends Database {
         }
     }
 
-
     public function showTaskFromId(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
@@ -211,8 +210,7 @@ class Task extends Database {
                 </div>
             </div>
         </div>
-        <hr>
-';
+        <hr>';
         }
 
         } catch (PDOException $e) {
@@ -252,7 +250,6 @@ class Task extends Database {
         }
     }
 
-    
     public function filterMyDeadlines(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid AND projectId = :projectid");             
@@ -292,6 +289,89 @@ class Task extends Database {
             $query = $this->connection()->prepare("DELETE FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    public function showEditTask(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->execute(); 
+
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+            $projectId = $result['projectId'];
+                            
+            // select username from user where id = :userId
+            $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :projectid"); 
+            $q->bindParam(':projectid', $projectId);
+            $q->execute(); 
+            $r = $q->fetch(PDO::FETCH_ASSOC); 
+
+
+            // show current data in placeholders
+            echo '
+            <div class="form-group">
+                Project
+                <input class="form-control" disabled type="text" name="project" id="editTaskProject" placeholder="'. $r['title'] . '">
+            </div>
+            <div class="form-group">
+                Title
+                <input class="form-control" type="text" name="taskname" id="taskname" placeholder="'. $result['title'] . '">
+            </div>
+            <div class="form-group">
+                Work hours
+                <input class="form-control" type="text" name="workhours" id="workhours" placeholder="'.$result['workhours'].'">
+            </div>
+
+            <div class="form-group">
+                Start date
+                <input class="form-control" type="text" name="startdate" id="startDate" placeholder="'.$result['startDate'].'">
+            </div>
+
+            <div class="form-group">
+                Deadline
+                <input class="form-control" type="text" name="deadline" id="deadline" placeholder="'.$result['deadline'].'">
+            </div>
+
+            <div class="form-group">
+                Status
+                <input class="form-control" type="text" name="taskStatus" id="taskStatus" placeholder="'.$result['taskStatus'].'">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit" name="submit">Edit Task</button>
+            </div>';
+        }
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+
+    }
+    
+    public function editTask(){
+        $title = $this->getTitle(); 
+        $workhours = $this->getWorkhours(); 
+        $deadline = $this->getDeadline(); 
+        $startDate = $this->getStartDate(); 
+        $status = $this->getTaskStatus(); 
+        $projectId = $this->getProjectId();
+        $user = $this->getUserId(); 
+        echo $workhours; 
+        
+       try {
+            $query = $this->connection()->prepare("UPDATE task SET id=:id title=:title,userId=:userId, projectId=:projectid,startDate=:startdate,deadline=:deadline,taskStatus=:taskstatus,workhours=:workhours WHERE 1"); 
+            $query->bindParam(':title', $title);
+            $query->bindParam(':userid', $user);
+            $query->bindParam(':projectid', $projectId);
+            $query->bindParam(':startdate', $startDate);
+            $query->bindParam(':deadline', $deadline);
+            $query->bindParam(':taskstatus', $status);
+            $query->bindParam(':workhours', $workhours);
+            $query->execute();
+
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

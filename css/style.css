@@ -341,11 +341,13 @@ input[type=search] {
     padding: 1rem; 
 }
 
+#editTaskProject {
+    background-color: var(--green);
+}
   /* all deadlines */
   .deadlines {
       display: none; 
   }
-
 
   /* form comment */
   #mycomment {
