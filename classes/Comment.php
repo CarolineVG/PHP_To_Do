@@ -71,7 +71,6 @@ class Comment extends Database {
             $query->bindParam(':taskid', $taskId);
             $query->bindParam(':userid', $userId);
             $query->execute(); 
-            echo "ok"; 
 
         } catch (PDOException $e) {
             print_r($e->getMessage);

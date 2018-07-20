@@ -14,28 +14,27 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
+/** GET TASK ID */
+$taskId = $_GET['task'];
+
 // new user
 $user = new User(); 
 $userId = $user->getUserIdByName($_SESSION['username']);
 
-   /* if(isset($_POST['submit'])){
+    if(isset($_POST['submit'])){
     // get values
     $text = $_POST['message'];
 
                 // new comment
-                $comment = new Comment(); 
-
-                // new user
-                $user = new User(); 
-                $comment->setReaction($text); 
-                $userId = $user->getUserIdByName($_SESSION['username']);
-                echo $userId; 
+                $comment = new Comment();
+                
+                $comment->setReaction($text);
                 
                 // give userid to comment
                 $comment->setUserId($userId); 
 
-                // set project id 
-                $comment->setTaskId(1);
+                // set task id 
+                $comment->setTaskId($taskId);
 
                 try {
                     $comment->addNewComment(); 
@@ -43,7 +42,8 @@ $userId = $user->getUserIdByName($_SESSION['username']);
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-}*/
+    
+}
 
 
 /** header */
@@ -53,9 +53,6 @@ include_once("header.php");
 
 <li class="list-group-item detail-task">
 <?php 
-/** GET TASK ID */
-$taskId = $_GET['task'];
-//echo $taskId;
 $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
