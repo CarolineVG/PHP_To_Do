@@ -7,7 +7,7 @@
 <html>
 <body>
 
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<form action="../uploads/upload.php" method="post" enctype="multipart/form-data">
     <input type="file" name="file">
     <button type="submit" name="submit" >upload image</button>
 

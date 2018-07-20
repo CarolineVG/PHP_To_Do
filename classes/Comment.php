@@ -44,7 +44,16 @@ class Comment extends Database {
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo $result['text'];
+                // userid to name 
+                $q = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+                $q->bindParam(':userid', $this->userId);
+                $q->execute(); 
+
+                while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<h5>'.$r['username'].'</h5>
+                    <p class="comment">' . $result['reaction'] . '</p>';
+                }
+            
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);

@@ -14,7 +14,11 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
-    if(isset($_POST['submit'])){
+// new user
+$user = new User(); 
+$userId = $user->getUserIdByName($_SESSION['username']);
+
+   /* if(isset($_POST['submit'])){
     // get values
     $text = $_POST['message'];
 
@@ -39,7 +43,7 @@ session_start();
                 } catch (Exception $e) {
                     $error = $e->getMessage(); 
                 }
-}
+}*/
 
 
 /** header */
@@ -59,8 +63,13 @@ $task->showTaskFromId();
             <div class="media">
                         <div class="media-body">
                             <div class="media-text">
-                                <h5>Caroline Van Gossum</h5>
-                                <p class="comment">This is my reaction</p>
+                            <?php 
+                                // show comments
+                                $comment = new Comment();
+                                $comment->setTaskid($taskId); 
+                                $comment->setUserId($userId); 
+                                $comment->showCommentsFromTask(); 
+                            ?>
                             </div>
                         </div>                    
                         <img src="img/user.png" alt="user">
