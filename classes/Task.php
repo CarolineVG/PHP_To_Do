@@ -314,30 +314,30 @@ class Task extends Database {
             echo '
             <div class="form-group">
                 Project
-                <input class="form-control" disabled type="text" name="project" id="editTaskProject" placeholder="'. $r['title'] . '">
+                <input class="form-control" disabled type="text" name="project" id="editTaskProject" value="'. $r['title'] . '">
             </div>
             <div class="form-group">
                 Title
-                <input class="form-control" type="text" name="taskname" id="taskname" placeholder="'. $result['title'] . '">
+                <input class="form-control" type="text" name="taskname" id="taskname" value="'. $result['title'] . '">
             </div>
             <div class="form-group">
                 Work hours
-                <input class="form-control" type="text" name="workhours" id="workhours" placeholder="'.$result['workhours'].'">
+                <input class="form-control" type="text" name="workhours" id="workhours" value="'.$result['workhours'].'">
             </div>
 
             <div class="form-group">
                 Start date
-                <input class="form-control" type="text" name="startdate" id="startDate" placeholder="'.$result['startDate'].'">
+                <input class="form-control" type="text" name="startdate" id="startDate" value="'.$result['startDate'].'">
             </div>
 
             <div class="form-group">
                 Deadline
-                <input class="form-control" type="text" name="deadline" id="deadline" placeholder="'.$result['deadline'].'">
+                <input class="form-control" type="text" name="deadline" id="deadline" value="'.$result['deadline'].'">
             </div>
 
             <div class="form-group">
                 Status
-                <input class="form-control" type="text" name="taskStatus" id="taskStatus" placeholder="'.$result['taskStatus'].'">
+                <input class="form-control" type="text" name="taskStatus" id="taskStatus" value="'.$result['taskStatus'].'">
             </div>
 
             <div class="form-group">
