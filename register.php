@@ -3,6 +3,9 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
+// picture
+
+
 if (!empty($_POST)){
     if (empty($_POST['name'])){
         $error = "Please enter a username. \r\n"; 
@@ -99,6 +102,12 @@ if (!empty($_POST)){
             <div class="form-group">
                 <input class="form-control" type="password" name="password2" placeholder="Repeat Password">
             </div>
+            <!-- upload picture -->
+
+            <div class="form-group">
+                <input class="form-control" type="file" name="img">
+            </div>
+
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Create Account</button>
             </div>
