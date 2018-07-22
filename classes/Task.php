@@ -190,6 +190,13 @@ class Task extends Database {
         while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
             $userid = $result['userId'];
 
+             // select username from user where id = :userId
+             $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
+             $q->bindParam(':userid', $userid);
+             $q->execute(); 
+             $r = $q->fetch(PDO::FETCH_ASSOC); 
+
+
             // show days to deadline 
             $endDate = $result['deadline'];
             $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
@@ -204,8 +211,10 @@ class Task extends Database {
                 $output =  $interval->format('%a') . ' days left'; 
             }
 
+
+
             echo '<div class="media">
-            <img src="img/user.png" alt="user">
+            <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
             <div class="media-body">
                 <div class="media-text">
                     <h5>' . $result['title'] . '<span>' . $result["taskStatus"] . '</span>
