@@ -21,6 +21,7 @@ if (!empty($_POST)){
         $education = $_POST['education'];
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
+        $defaultImage = "uploads/user.png"; 
                
         try {
             // make new user 
@@ -32,6 +33,7 @@ if (!empty($_POST)){
             $user->setEducation($education);
             $user->setPassword($password);
             $user->setPassword2($password2); 
+            $user->setImage($defaultImage); 
 
             try {
                 // check passwords

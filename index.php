@@ -28,7 +28,7 @@ include_once("header.php");
             <!-- left -->
             <div class="col-md-3">
                 <div class="profile">
-                    <?php 
+                    <?php
                     echo $user->showUserImage(); 
                     //echo '<img src="'. $user->getImage(). '" alt="'. $user->getImage(). '">';
                     echo '<h1>' . $user->getUsername() . '</h1>' ?>

@@ -144,11 +144,13 @@ class User extends Database {
     function register(){
         try {
             //echo "register"; 
-            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass) VALUES (:username, :education, :email, :pass)");
+            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture) VALUES (:username, :education, :email, :pass, :picture)");
             $query->bindParam(':username', $this->username);
             $query->bindParam(':education', $this->education);
             $query->bindParam(':email', $this->mail);
             $query->bindParam(':pass', $this->hash);
+            $query->bindParam(':picture', $this->image);
+
             $query->execute(); 
 
         } catch (PDOException $e) {
@@ -201,8 +203,7 @@ class User extends Database {
         $query = $this->connection()->prepare("SELECT picture FROM user WHERE id = :id"); 
         $query->bindParam(':id', $this->userId);
         $query->execute(); 
-        $result = $query->fetch(PDO::FETCH_ASSOC); 
-       
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return '<img src="'. $result['picture'] . '" alt="'. $result['picture'] . '">';
 
     }
