@@ -14,6 +14,7 @@ session_start();
 /** USER */
 $user = new User(); 
 $userId = $user->getUserIdByName($_SESSION['username']);
+$user->setUserId($userId); 
 
 
 if (isset($_POST['submit'])){
@@ -37,10 +38,7 @@ if (isset($_POST['submit'])){
 
         // check img size - max 1mb 
         if ($_FILES['uploadimg']['size'] < 100000){
-            echo "size ok"; 
-
-            // change img name - give uniq id
-            //$newImgName = uniqid('', true). '.' . $imgExt; 
+            //echo "size ok"; 
 
             // change name to user id 
             $newImgName = $userId . '.' . $imgExt; 
@@ -49,7 +47,13 @@ if (isset($_POST['submit'])){
             $imgLocation = 'uploads/' . $newImgName; 
 
             // move file from tmp to uploads
-            move_uploaded_file($_FILES['uploadimg']['tmp_name'], $imgLocation);             
+            move_uploaded_file($_FILES['uploadimg']['tmp_name'], $imgLocation);     
+            
+            // insert filename into database
+            $user->setImage($imgLocation); 
+            $user->uploadUserPicture(); 
+
+            header("Location: index.php"); 
 
         } else {
             echo "file size is max 1mb";

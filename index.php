@@ -28,8 +28,10 @@ include_once("header.php");
             <!-- left -->
             <div class="col-md-3">
                 <div class="profile">
-                    <img src="img/user.png" alt="user">
-                    <?php echo '<h1>' . $user->getUsername() . '</h1>' ?>
+                    <?php 
+                    echo $user->showUserImage(); 
+                    //echo '<img src="'. $user->getImage(). '" alt="'. $user->getImage(). '">';
+                    echo '<h1>' . $user->getUsername() . '</h1>' ?>
                     <h2>Student IMD</h2>
 
                     <div class="searchbox">

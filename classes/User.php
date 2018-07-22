@@ -10,6 +10,7 @@ class User extends Database {
     private $password2;
     private $hash; 
     private $userId; 
+    private $image; 
 
     /** getters */
     public function getUsername(){
@@ -42,6 +43,10 @@ class User extends Database {
         $query->execute(); 
         $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result['id'];
+    }
+
+    public function getImage(){
+        return $this->image; 
     }
 
     /** setters */
@@ -77,6 +82,11 @@ class User extends Database {
 
     public function setUserId($id){
         $this->userId = $id;
+        return $this; 
+    }
+
+    public function setImage($image){
+        $this->image = $image;
         return $this; 
     }
 
@@ -180,7 +190,21 @@ class User extends Database {
     }
 
     function uploadUserPicture(){
-        
+        $query = $this->connection()->prepare("UPDATE user SET picture=:picture WHERE id =:userid"); 
+        $query->bindParam(':userid', $this->userId); 
+        $query->bindParam(':picture', $this->image);
+        $query->execute();
+
+    }
+
+    function showUserImage(){
+        $query = $this->connection()->prepare("SELECT picture FROM user WHERE id = :id"); 
+        $query->bindParam(':id', $this->userId);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC); 
+       
+        return '<img src="'. $result['picture'] . '" alt="'. $result['picture'] . '">';
+
     }
 }
 
