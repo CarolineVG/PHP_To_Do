@@ -100,7 +100,7 @@ include_once("header.php");
                                 <i class="fa fa-cog"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">x</a>
+                                <a class="dropdown-item" href="updateProfile.php">Upload Profile Picture</a>
                                 <a class="dropdown-item" href="#">x</a>
                                 <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>

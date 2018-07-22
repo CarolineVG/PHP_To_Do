@@ -178,6 +178,10 @@ class User extends Database {
         $result = $query->fetch(PDO::FETCH_ASSOC); 
         return $result['id']; 
     }
+
+    function uploadUserPicture(){
+        
+    }
 }
 
 ?>

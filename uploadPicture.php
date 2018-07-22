@@ -1,4 +1,21 @@
 <?php
+/** ERRORS */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+/** INCLUDES */
+include_once("classes/Database.php");
+include_once("classes/User.php");
+
+/** SESSION */
+session_start();
+
+/** USER */
+$user = new User(); 
+$userId = $user->getUserIdByName($_SESSION['username']);
+
+
 if (isset($_POST['submit'])){
     echo "ok"; 
     $img = $_FILES['uploadimg'];
@@ -23,16 +40,16 @@ if (isset($_POST['submit'])){
             echo "size ok"; 
 
             // change img name - give uniq id
-            $newImgName = uniqid('', true). '.' . $imgExt; 
+            //$newImgName = uniqid('', true). '.' . $imgExt; 
+
+            // change name to user id 
+            $newImgName = $userId . '.' . $imgExt; 
 
             // file location
             $imgLocation = 'uploads/' . $newImgName; 
 
             // move file from tmp to uploads
-            move_uploaded_file($_FILES['uploadimg']['tmp_name'], $imgLocation); 
-
-
-            // upload img
+            move_uploaded_file($_FILES['uploadimg']['tmp_name'], $imgLocation);             
 
         } else {
             echo "file size is max 1mb";

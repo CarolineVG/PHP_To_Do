@@ -46,7 +46,7 @@ if (!empty($_POST)){
                             
                 // register
                 $user->register();
-                header('Location: registerImg.php'); 
+                header('Location: login.php'); 
 
             } catch (Exception $e){
                 // show error
