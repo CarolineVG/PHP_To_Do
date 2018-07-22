@@ -10,6 +10,7 @@ class Task extends Database {
     private $endDate;
     private $status; 
     private $workhours; 
+    private $document; 
 
     /** getters */
     public function getTaskId(){
@@ -42,6 +43,10 @@ class Task extends Database {
 
     public function getWorkhours(){
         return $this->workhours;
+    }
+
+    public function getDocument(){
+        return $this->document; 
     }
     
     /** setters  */
@@ -83,6 +88,11 @@ class Task extends Database {
     public function setWorkhours($workhours){
         $this->workhours = $workhours;
         return $this;
+    }
+
+    public function setDocument($document){
+        $this->document = $document; 
+        return $this; 
     }
 
     /** functions */
@@ -376,6 +386,24 @@ class Task extends Database {
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
+    }
+
+    public function uploadFile(){
+        $id = $this->getTaskId();
+        $document = $this->getDocument();  
+        
+       try {
+            $query = $this->connection()->prepare("UPDATE task SET document=:document WHERE id =:id"); 
+            $query->bindParam(':id', $id); 
+            $query->bindParam(':document', $document); 
+            $query->execute();
+
+            
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+
+            
     }
 }
 

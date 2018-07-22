@@ -52,9 +52,13 @@ include_once("header.php");
 
 
 <li class="list-group-item detail-task">
+    
 <?php 
 $task = new Task();
 $task->setTaskId($taskId); 
+
+echo '<a class="btn" href="uploadFile.php?task='. $taskId . '">Upload File</a>';
+
 $task->showTaskFromId(); 
 ?>
             <div class="media">

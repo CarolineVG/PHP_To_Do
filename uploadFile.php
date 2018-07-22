@@ -13,10 +13,8 @@ include_once("classes/Task.php");
 /** SESSION */
 session_start();
 
-/** USER */
-$user = new User(); 
-$userId = $user->getUserIdByName($_SESSION['username']);
-$user->setUserId($userId); 
+/** GET TASK ID */
+$taskId = $_GET['task'];
 
 
 if (isset($_POST['submit'])){
@@ -44,7 +42,14 @@ if (isset($_POST['submit'])){
 
             // move file from tmp to uploads
             move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fileLocation);     
-            header("Location: index.php"); 
+
+            // update database 
+            $task = new Task();
+            $task->setTaskId($taskId); 
+            $task->setDocument($fileLocation); 
+            $task->uploadFile(); 
+
+            header("Location: taskDetail.php?task=" . $taskId . ".php"); 
 
         } else {
             echo "file size is max 1mb";

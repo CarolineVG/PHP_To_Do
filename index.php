@@ -95,7 +95,6 @@ include_once("header.php");
             <div class="col-md-3">
                 <div class="menu">
                     <a class="btn" href="newTask.php">Add Task</a>
-                    <a class="btn" href="uploadFile.php">Upload File</a>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">
