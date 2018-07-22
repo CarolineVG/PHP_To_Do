@@ -107,13 +107,13 @@ class Task extends Database {
                 $userid = $result['userId'];
 
                 // select username from user where id = :userId
-                $q = $this->connection()->prepare("SELECT username FROM user WHERE id = :userid"); 
+                $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
                 $q->bindParam(':userid', $userid);
                 $q->execute(); 
                 $r = $q->fetch(PDO::FETCH_ASSOC); 
 
                 echo '<li class="list-group-item"><a href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">;<div class="media">
-                    <img src="img/user.png" alt="user">
+                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
                     <div class="media-body">
                         <div class="media-text">
                             <h5>'. $result['title'] . '&nbsp;<span>' . $result['taskStatus'] . '</span> <span class="deadline">' . $result['deadline'] . '</h5>
