@@ -36,9 +36,21 @@ if (isset($_POST['submit'])){
 
     // check if file is pdf word or excel
     if (in_array($fileExt, $docs)){
-        echo "ok"; 
+        // check size - max 1mb 
+        if ($_FILES['uploadfile']['size'] < 1000000000){
+
+            // file location
+            $fileLocation = 'uploads/' . $fileName; 
+
+            // move file from tmp to uploads
+            move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fileLocation);     
+            header("Location: index.php"); 
+
+        } else {
+            echo "file size is max 1mb";
+        }
     } else {
-        echo "file is not a pdf, word or excel file"; 
+        echo "file is not a pdf, word or excel"; 
     }
 
 }
