@@ -1,4 +1,49 @@
+<?php
+/** ERRORS */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
+/** INCLUDES */
+include_once("classes/Database.php");
+include_once("classes/User.php");
+include_once("classes/Task.php");
+
+
+/** SESSION */
+session_start();
+
+/** USER */
+$user = new User(); 
+$userId = $user->getUserIdByName($_SESSION['username']);
+$user->setUserId($userId); 
+
+
+if (isset($_POST['submit'])){
+    echo "ok"; 
+    $file = $_FILES['uploadfile'];
+    print_r($file); 
+
+    //name
+    $fileName = $_FILES['uploadfile']['name'];
+
+    // get extension after . 
+    $fileExtension = explode('.', $fileName); 
+    $fileExt = strtolower(end($fileExtension));
+
+    // only allow pdf, word and excel 
+    $docs = array('pdf', 'docx', 'xlsx');
+
+    // check if file is pdf word or excel
+    if (in_array($fileExt, $docs)){
+        echo "ok"; 
+    } else {
+        echo "file is not a pdf, word or excel file"; 
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +59,7 @@
 
 <body>
     <div class="login">
-        <form method="post" action="uploadPicture.php" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <h2 class="sr-only">Upload File</h2>
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
