@@ -50,8 +50,12 @@ class Comment extends Database {
                 $q->execute(); 
 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<h5>'.$r['username'].'</h5>
-                    <p class="comment">' . $result['reaction'] . '</p>';
+                    echo '<div class="media">
+                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                    <div class="media-body">
+                    <h5>'.$r['username'].'</h5>
+                    <p class="comment">' . $result['reaction'] . '</p>
+                    </div></div>';
                 }
             
             }

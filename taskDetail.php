@@ -61,9 +61,6 @@ echo '<a class="btn" href="uploadFile.php?task='. $taskId . '">Upload File</a>';
 
 $task->showTaskFromId(); 
 ?>
-            <div class="media">
-                        <div class="media-body">
-                            <div class="media-text">
                             <?php 
                                 // show comments
                                 $comment = new Comment();
@@ -71,10 +68,7 @@ $task->showTaskFromId();
                                 $comment->setUserId($userId); 
                                 $comment->showCommentsFromTask(); 
                             ?>
-                            </div>
-                        </div>                    
-                        <img src="img/user.png" alt="user">
-                    </div>
+                          
                     <hr>
 
                     <!-- write reaction -->
