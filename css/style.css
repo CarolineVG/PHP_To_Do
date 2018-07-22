@@ -549,6 +549,18 @@ hr {
     text-decoration:none;
   }
 
+  /* upload picture */
+  .login form #uploadimg {
+    background: var(--green);
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: none !important;
+  }
+
   .login form .loginlink {
     display:block;
     text-align:center;

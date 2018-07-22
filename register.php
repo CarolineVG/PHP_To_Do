@@ -100,11 +100,11 @@ if (!empty($_POST)){
             <div class="form-group">
                 <input class="form-control" type="password" name="password2" placeholder="Repeat Password">
             </div>
-            
+
             <!-- upload picture --> 
 
             <div class="form-group">
-                <input class="form-control" type="file" name="img" id="img">
+                <input class="form-control" type="file" name="uploadimg" id="uploadimg">
             </div>
 
             <div class="form-group">
