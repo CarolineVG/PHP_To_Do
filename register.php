@@ -3,7 +3,6 @@
 include_once("classes/Database.php"); 
 include_once("classes/User.php"); 
 
-
 if (!empty($_POST)){
     if (empty($_POST['name'])){
         $error = "Please enter a username. \r\n"; 
@@ -47,6 +46,7 @@ if (!empty($_POST)){
                             
                 // register
                 $user->register();
+                header('Location: registerImg.php'); 
 
             } catch (Exception $e){
                 // show error
@@ -76,7 +76,7 @@ if (!empty($_POST)){
 
 <body>
     <div class="login">
-        <form method="post" enctype="multipart/formdata">
+        <form method="post">
             <h2 class="sr-only">Register Form</h2>
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
@@ -99,12 +99,6 @@ if (!empty($_POST)){
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password2" placeholder="Repeat Password">
-            </div>
-
-            <!-- upload picture --> 
-
-            <div class="form-group">
-                <input class="form-control" type="file" name="uploadimg" id="uploadimg">
             </div>
 
             <div class="form-group">

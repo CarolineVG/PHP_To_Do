@@ -1,6 +1,7 @@
 <?php
 if (isset($_POST['submit'])){
-    $file = $_FILES['file'];
-    print_r($file); 
+    echo "ok"; 
+    $file = $_FILES['uploadimg'];
+    //print_r($file); 
 }
 ?>
