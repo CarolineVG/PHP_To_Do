@@ -34,15 +34,17 @@ include_once("header.php");
                     echo '<h1>' . $user->getUsername() . '</h1>' ?>
                     <h2>Student IMD</h2>
 
-                    <div class="searchbox">
-                        <i class="fas fa-search"></i>
-                        <input type="search" class="form-control" placeholder="Search" />
-                    </div>
                 </div>
 
                 <div class="addproject">
                     <i class="fas fa-plus"></i>
                     <a href="newProject.php" class="btn btn-add">Add Project</a>
+                </div>
+
+                
+                <div class="addproject">
+                    <i class="fas fa-plus"></i>
+                    <a href="joinProject.php" class="btn btn-add">Join Project</a>
                 </div>
 
                 

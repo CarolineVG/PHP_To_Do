@@ -112,7 +112,7 @@ class Task extends Database {
                 $q->execute(); 
                 $r = $q->fetch(PDO::FETCH_ASSOC); 
 
-                echo '<li class="list-group-item"><a href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">;<div class="media">
+                echo '<li class="list-group-item"><a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">;<div class="media">
                     <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
                     <div class="media-body">
                         <div class="media-text">

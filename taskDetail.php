@@ -50,7 +50,7 @@ $userId = $user->getUserIdByName($_SESSION['username']);
 include_once("header.php"); 
 ?>
 
-
+<div class="detailtask">
 <li class="list-group-item detail-task">
     
 <?php 
@@ -77,6 +77,7 @@ $task->showTaskFromId();
                         <input type="submit" name="submit" value="Add Comment">
                     </form>
 </li>
+</div>
 <?php 
 /** footer */
 include_once("footer.php"); 
