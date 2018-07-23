@@ -3,6 +3,21 @@
 /** INCLUDES */
 include_once("classes/Database.php"); 
 include_once("classes/Project.php"); 
+include_once("classes/User.php"); 
+
+/** SESSION */
+session_start(); 
+
+$user = new User(); 
+$user->setUsername($_SESSION['username']);
+$id = $user->getUserId();
+
+// get value from dropdown
+$project = new Project(); 
+$projectid = $_POST['projects'];
+$project->setProjectId($projectid); 
+$project->setUserId($id); 
+$project->joinProject(); 
 
 /** header */
 include_once("header.php"); 

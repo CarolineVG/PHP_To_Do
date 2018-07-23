@@ -162,6 +162,19 @@ class Project extends Database {
         $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result['id'];
     }
+
+    public function joinProject(){
+        $project = $this->getProjectId();
+        $user = $this->getUserId(); 
+        try {
+            $query = $this->connection()->prepare("INSERT INTO project_user (projectId, userId)VALUES(:projectId, :userId)"); 
+            $query->bindParam(':projectId', $project);
+            $query->bindParam(':userId', $user);
+            $query->execute(); 
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
 }
 
 ?>
