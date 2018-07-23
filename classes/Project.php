@@ -61,10 +61,10 @@ class Project extends Database {
         }
     }
 
-    public function showProjects($id){
+    public function showProjects(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM project WHERE adminId = :adminId"); 
-            $query->bindParam(':adminId', $id);
+            $query->bindParam(':adminId', $this->userId);
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -84,6 +84,10 @@ class Project extends Database {
         }
     }
 
+    public function showJoinedProjects(){
+
+    }
+
     public function showProjectsInDropdown(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
@@ -99,6 +103,19 @@ class Project extends Database {
                 $r = $q->fetch(PDO::FETCH_ASSOC); 
                 // project id in value
                 echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
+            }
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    public function showAllProjectsInDropdown(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM project");
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                echo '<option value=' . $result['id'] . '>' . $result['title'] . '</option>';
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);

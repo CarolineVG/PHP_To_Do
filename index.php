@@ -50,15 +50,27 @@ include_once("header.php");
                 
 
                 <!-- accordion projecten -->
+                <h1>My Projects</h1>
                 <div role="tablist" id="accordion-1">
 
                 <?php
-                    /** show projects */
+                    /** show own projects */
                     $project = new Project();
-                    $project->showProjects($user->getUserId());
+                    $project->setUserId($user->getUserId()); 
+                    $project->showProjects();
                 ?>
 
                 </div>
+
+                <h1>Joined Projects</h1>
+                <div role="tablist" id="accordion-2">
+
+                <?php
+                    /** show joined projects */
+                    $project->showJoinedProjects();
+                ?>
+                </div>
+
             </div>
             <!-- middle -->
             <div class="col-md-6">
