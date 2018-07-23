@@ -63,13 +63,13 @@ include_once("header.php");
                 </div>
 
                 <h1>Joined Projects</h1>
-                <div role="tablist" id="accordion-2">
+                <ul class="list-group">
+                    <?php
+                        /** show joined projects */
+                        $project->showJoinedProjects();
+                    ?>
+                </ul>
 
-                <?php
-                    /** show joined projects */
-                    $project->showJoinedProjects();
-                ?>
-                </div>
 
             </div>
             <!-- middle -->

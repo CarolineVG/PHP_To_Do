@@ -85,7 +85,26 @@ class Project extends Database {
     }
 
     public function showJoinedProjects(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
+            $query->bindParam(':userId', $this->userId);
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                $id = $result['projectId'];
+                // project id to project name 
+                $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :id"); 
+                $q->bindParam(':id', $id);
+                $q->execute(); 
+                while ($r = $q->fetch(PDO::FETCH_ASSOC)){
+                    echo '<a href="" class="btn"><li class="list-group-item">'. $r['title'] . '</li></a>';
+                } 
+                
+            }
 
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
     }
 
     public function showProjectsInDropdown(){
