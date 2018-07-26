@@ -49,8 +49,10 @@ include_once("header.php");
 
                 
 
-                <!-- accordion projecten -->
+                <!-- my projects -->
+                <div class="my-project">
                 <h1>My Projects</h1>
+                </div>
                 <?php
                     /** show own projects */
                     $project = new Project();
@@ -58,7 +60,10 @@ include_once("header.php");
                     $project->showProjects();
                 ?>
 
+                
+                <div class="my-project">
                 <h1>Joined Projects</h1>
+                </div>
                 <ul class="list-group">
                     <?php
                         /** show joined projects */
@@ -113,7 +118,7 @@ include_once("header.php");
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="updateProfile.php">Upload Profile Picture</a>
-                                <a class="dropdown-item" href="#">x</a>
+                            
                                 <a class="dropdown-item" href="logout.php">Logout</a>
                             </div>
                         </div>
@@ -133,41 +138,13 @@ include_once("header.php");
                             ?>
                         </select>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit" name="submit">Filter</button>
+                            <button class="btn btn-primary btn-block btn-filter" type="submit" name="submit">Filter</button>
                         </div>
                     </div>
                 </form>
-    
-                    
-                
-  <!--<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose your project
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li><a href="#">HTML</a></li>
-      <li><a href="#">CSS</a></li>
-    </ul>
-  </div>-->
 
-                
                 <?php include_once("deadlines.php"); ?>
-
-                <!--
-                <ul class="list-group">
-
-
-                    
-                    <li class="list-group-item">
-                        <div class="media">
-                            <img src="img/user.png" alt="user">
-                            <div class="mediabody">
-                                <h5>Carry Jenkingson</h5>
-                                <p>PHP Developer</p>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul> -->
+                
             </div>
         </div>
     </div>

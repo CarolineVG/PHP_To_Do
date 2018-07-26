@@ -95,9 +95,10 @@ class Project extends Database {
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)){
                     // only show projects with different admin id 
                     if ($r['adminId'] != $this->userId){
-                         echo '<div class="card-project">
-                        <i class="fas fa-book"></i><h5>' . $r['title'] . '</h5>
-                        <a href=""><i class="fas fa-trash-alt"></i></a></div>';
+                        echo '<div class="card-project">
+                        <i class="fas fa-book"></i>
+                        <a href="index.php?project=' . $r['id'] . '" data-id="'. $r['id'] . '"><h5>' . $r['title'] . '</h5></a>
+                        <a href="deleteProject.php?project=' . $r['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
                     }
                 } 
             }

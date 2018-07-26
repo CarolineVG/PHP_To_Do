@@ -111,16 +111,22 @@ class Task extends Database {
                 $q->execute(); 
                 $r = $q->fetch(PDO::FETCH_ASSOC); 
 
-                echo '<li class="list-group-item"><a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">;<div class="media">
-                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
-                    <div class="media-body">
-                        <div class="media-text">
-                            <h5>'. $result['title'] . '&nbsp;<span>' . $result['taskStatus'] . '</span> <span class="deadline">' . $result['deadline'] . '</h5>
-                            <p>' . $r['username'] . '</p>
+                echo '<li class="list-group-item">
+                        <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
+                        <div class="media">
+                            <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                            <div class="media-body">
+                                <div class="media-text">
+                                    <h5>'. $result['title'] . '
+                                    <p class="status">' . $result['taskStatus'] . '</p> 
+                                    <p class="deadline">' . $result['deadline'] . '</h5>
+                                </div>
+                                <div class="media-input">
+                                    <p>' . $r['username'] . '</p>
+                                    <input class="checkbox" type="checkbox">
+                                </div>
+                            </div>
                         </div>
-                        <input class="checkbox" type="checkbox">
-                    </div>
-                    </div>
                     <hr>
                 </li>';
             }
@@ -253,10 +259,16 @@ class Task extends Database {
                 $q->bindParam(':projectid', $projectid);
                 $q->execute(); 
                 $r = $q->fetch(PDO::FETCH_ASSOC);
+
+                // select user picture 
+                $z = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+                $z->bindParam(':userid', $this->userId);
+                $z->execute(); 
+                $y = $z->fetch(PDO::FETCH_ASSOC);
                 
                 echo '<li class="list-group-item">
                 <div class="media">
-                    <img src="img/user.png" alt="user">
+                    <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
                         <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
                         </h5> 
