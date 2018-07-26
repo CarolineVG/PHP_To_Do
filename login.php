@@ -32,10 +32,16 @@ include_once("header.php");
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
             </div>
-            <?php if (isset($error)): ?>
-                <div class="alert alert-danger" role="alert"> <?php echo $error ?>
+
+            <?php if(isset($error) ): ?>
+                <div >
+                    <p>
+                        <?php echo $error ?>
+                    </p>    
                 </div>
-            <?php endif ?>
+            <?php endif; ?>
+
+
             <div class="form-group">
                 <input class="form-control" type="text" name="email" placeholder="Email">
             </div>
