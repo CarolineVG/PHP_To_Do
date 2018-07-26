@@ -414,6 +414,20 @@ class Task extends Database {
 
             
     }
+
+    public function checkIfTaskExists(){
+        $query = $this->connection()->prepare("SELECT title FROM task WHERE projectId = :projectId"); 
+        $query->bindParam(':projectId', $this->projectId); 
+        $query->execute(); 
+
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+            if ($this->title == $result['title']){
+                echo "task name already exists";
+                return false; 
+            }
+            
+        }
+    }
 }
 
 ?>

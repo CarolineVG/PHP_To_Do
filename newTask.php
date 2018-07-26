@@ -50,16 +50,20 @@ if (!empty($_POST)){
                 if (!empty($deadline)){ 
                     $task->setDeadline($deadline);                       
                     try {
-                        $task->addNewTask(); 
-                        header("Location: index.php"); 
+                        if ($task->checkIfTaskExists()){
+                            //$task->addNewTask(); 
+                            //header("Location: index.php"); 
+                        }
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
                 } else {
                     // add without deadline 
                     try {
-                        $task->addNewTaskWithoutDeadline(); 
-                        header("Location: index.php"); 
+                        if ($task->checkIfTaskExists()){
+                            $task->addNewTaskWithoutDeadline(); 
+                            header("Location: index.php"); 
+                        }
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
