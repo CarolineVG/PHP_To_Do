@@ -81,24 +81,26 @@ class Project extends Database {
 
     public function showJoinedProjects(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
+            // select distinct -> show value only once
+            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM project_user WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
                 $id = $result['projectId'];
                 // project id to project name 
-                $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :id"); 
+                $q = $this->connection()->prepare("SELECT * FROM project WHERE id = :id"); 
                 $q->bindParam(':id', $id);
                 $q->execute(); 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)){
-                    echo '<div class="card-project">
-                    <i class="fas fa-book"></i><h5>' . $r['title'] . '</h5>
-                    <a href=""><i class="fas fa-trash-alt"></i></a></div>';
+                    // only show projects with different admin id 
+                    if ($r['adminId'] != $this->userId){
+                         echo '<div class="card-project">
+                        <i class="fas fa-book"></i><h5>' . $r['title'] . '</h5>
+                        <a href=""><i class="fas fa-trash-alt"></i></a></div>';
+                    }
                 } 
-                
             }
-
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
