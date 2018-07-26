@@ -130,6 +130,12 @@ class Task extends Database {
         }
     }
 
+    public function checkWorkHours(){
+        if ($this->workhours > 300) {
+            throw new Exception("You're never gonna work that long!");
+        }
+    }
+
     public function addNewTask(){
 
         $title = $this->getTitle(); 

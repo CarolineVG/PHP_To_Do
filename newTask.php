@@ -50,10 +50,10 @@ if (!empty($_POST)){
                 if (!empty($deadline)){ 
                     $task->setDeadline($deadline);                       
                     try {
-                        if ($task->checkIfTaskExists()){
-                            //$task->addNewTask(); 
-                            //header("Location: index.php"); 
-                        }
+                        $task->checkIfTaskExists();
+                        $task->checkWorkHours(); 
+                        //$task->addNewTask(); 
+                        //header("Location: index.php");
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
@@ -83,10 +83,12 @@ include_once("header.php");
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
             </div>
-            <?php if (isset($error)): ?>
-                <div class="alert alert-danger" role="alert"> <?php echo $error ?>
-                </div>
-            <?php endif ?>
+
+            <?php if(isset($error) ): ?>
+                <div class="error"><p>
+                <?php echo $error ?></p></div>
+            <?php endif; ?>
+            
         <div class="form-group">
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
