@@ -52,18 +52,18 @@ if (!empty($_POST)){
                     try {
                         $task->checkIfTaskExists();
                         $task->checkWorkHours(); 
-                        //$task->addNewTask(); 
-                        //header("Location: index.php");
+                        $task->addNewTask(); 
+                        header("Location: index.php");
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
                 } else {
                     // add without deadline 
                     try {
-                        if ($task->checkIfTaskExists()){
-                            $task->addNewTaskWithoutDeadline(); 
-                            header("Location: index.php"); 
-                        }
+                        $task->checkIfTaskExists();
+                        $task->checkWorkHours(); 
+                        $task->addNewTask(); 
+                        header("Location: index.php");
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }

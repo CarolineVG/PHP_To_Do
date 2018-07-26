@@ -97,7 +97,6 @@ class Task extends Database {
 
     /** functions */
     public function showTasksFromProject(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE projectId = :id"); 
             $query->bindParam(':id', $this->projectId);
             $query->execute(); 
@@ -125,9 +124,6 @@ class Task extends Database {
                     <hr>
                 </li>';
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function checkWorkHours(){
@@ -428,8 +424,7 @@ class Task extends Database {
 
         while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
             if ($this->title == $result['title']){
-                echo "task name already exists";
-                return false; 
+                throw new Exception("Task name already exists!");
             }
             
         }

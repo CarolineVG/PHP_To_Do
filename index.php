@@ -51,16 +51,12 @@ include_once("header.php");
 
                 <!-- accordion projecten -->
                 <h1>My Projects</h1>
-                <div role="tablist" id="accordion-1">
-
                 <?php
                     /** show own projects */
                     $project = new Project();
                     $project->setUserId($user->getUserId()); 
                     $project->showProjects();
                 ?>
-
-                </div>
 
                 <h1>Joined Projects</h1>
                 <ul class="list-group">

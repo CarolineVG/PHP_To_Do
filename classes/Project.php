@@ -68,15 +68,10 @@ class Project extends Database {
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo '<div class="card"><div class="card-header" role="tab"><h5 class="mb-0"><i class="fas fa-book"></i><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-' . $result['id'] . '" href="div#item-' . $result['id'] . '">' . $result['title'] . '<a href="deleteProject.php?post=' . $result['id'] . '"><i class="fas 
-                fa-trash-alt"></i></a></h5></a></h5></div>
-                <div class="collapse" id="item-' . $result['id'] . '"><div class="card-body"><ul class="list-group">
-                <li class="list-item">
-                <a href="index.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '">All Tasks</a>
-                
-                </li><li class="list-item">
-                <a href="">People</a></li><li class="list-item"><a href="">Files</a></li>
-                <li class="list-item"><a href="">Statistics</a></li></ul></div></div></div>'; 
+                echo '<div class="card-project">
+                <i class="fas fa-book"></i>
+                <a href="index.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '"><h5>' . $result['title'] . '</h5></a>
+                <a href="deleteProject.php?project=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
             }
 
         } catch (PDOException $e) {
@@ -97,7 +92,9 @@ class Project extends Database {
                 $q->bindParam(':id', $id);
                 $q->execute(); 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)){
-                    echo '<a href="" class="btn"><li class="list-group-item">'. $r['title'] . '</li></a>';
+                    echo '<div class="card-project">
+                    <i class="fas fa-book"></i><h5>' . $r['title'] . '</h5>
+                    <a href=""><i class="fas fa-trash-alt"></i></a></div>';
                 } 
                 
             }
