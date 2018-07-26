@@ -34,13 +34,9 @@ include_once("header.php");
             </div>
 
             <?php if(isset($error) ): ?>
-                <div >
-                    <p>
-                        <?php echo $error ?>
-                    </p>    
-                </div>
+                <div class="error"><p>
+                <?php echo $error ?></p></div>
             <?php endif; ?>
-
 
             <div class="form-group">
                 <input class="form-control" type="text" name="email" placeholder="Email">

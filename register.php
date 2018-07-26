@@ -5,15 +5,15 @@ include_once("classes/User.php");
 
 if (!empty($_POST)){
     if (empty($_POST['name'])){
-        $error = "Please enter a username. \r\n"; 
+        $error = "Please enter a username."; 
     } else if (empty($_POST['email'])){
-        $error .= "Please enter an email. \r\n"; 
+        $error = "Please enter an email."; 
     } else if (empty($_POST['education'])){
-        $error .= "Please enter an education. \r\n"; 
+        $error = "Please enter an education."; 
     } else if (empty($_POST['password'])){
-        $error .= "Please enter a password. \r\n"; 
+        $error = "Please enter a password."; 
     } else if (empty($_POST['password2'])){
-        $error .= "Please repeat your password. \r\n"; 
+        $error = "Please repeat your password."; 
     } else {
         // add values to variables
         $username = $_POST['name'];
@@ -36,6 +36,9 @@ if (!empty($_POST)){
             $user->setImage($defaultImage); 
 
             try {
+                // strong passwords 
+                $user->strongPassword(); 
+
                 // check passwords
                 $user->checkPasswords();
 
@@ -83,10 +86,12 @@ if (!empty($_POST)){
             <div class="illustration">
                 <i class="fas fa-file-alt"></i>
             </div>
-            <?php if (isset($error)): ?>
-            <div class="alert alert-danger" role="alert"> <?php echo $error ?>
-            </div>
-            <?php endif ?>
+
+             <?php if(isset($error) ): ?>
+                <div class="error"><p>
+                <?php echo $error ?></p></div>
+            <?php endif; ?>
+
             <div class="form-group">
                 <input class="form-control" type="text" name="name" placeholder="Name">
             </div>

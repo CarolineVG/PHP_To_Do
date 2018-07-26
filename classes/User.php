@@ -141,6 +141,14 @@ class User extends Database {
         }
     }
 
+    function strongPassword(){
+        if (strlen($this->password) >= 8) {
+            return true; 
+        } else {
+            throw new Exception("Your password has to be longer than 8 characters.");
+        }
+    }
+
     function register(){
         try {
             //echo "register"; 
