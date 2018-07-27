@@ -7,19 +7,38 @@ if (!empty($_POST)){
     // get values
     $mail = $_POST['email'];
     $password = $_POST['password'];
-    
-    $user = new User;
-    $user->setMail($mail);
-    $user->setPassword($password);
 
-    try {
-        $user->checkLogin();
-        $username = $user->findUsername(); 
-        $user->setUsername($username); 
-        $user->login(); 
-    } catch (Exception $e) {
-        $error = $e->getMessage(); 
+    // check if admin 
+    if (isset($_POST['admin'])){
+        //echo "admin"; 
+        $user = new User;
+        $user->setMail($mail);
+        $user->setPassword($password);
+    
+        try {
+            $user->checkLogin();
+            $username = $user->findUsername(); 
+            $user->setUsername($username); 
+            $user->setAdmin(1); 
+            $user->login(); 
+        } catch (Exception $e) {
+            $error = $e->getMessage(); 
+        }
+    } else {
+        $user = new User;
+        $user->setMail($mail);
+        $user->setPassword($password);
+    
+        try {
+            $user->checkLogin();
+            $username = $user->findUsername(); 
+            $user->setUsername($username); 
+            $user->login(); 
+        } catch (Exception $e) {
+            $error = $e->getMessage(); 
+        }
     }
+    
 
 }
 
@@ -43,6 +62,9 @@ include_once("header.php");
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label><input type="checkbox" name = "admin"> Login as Admin</label>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Log In</button>
