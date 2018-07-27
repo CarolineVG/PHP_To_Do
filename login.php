@@ -11,20 +11,8 @@ if (!empty($_POST)){
     // check if admin 
     if (isset($_POST['admin'])){
         //echo "admin"; 
-        $user = new User;
-        $user->setMail($mail);
-        $user->setPassword($password);
-    
-        try {
-            $user->checkLogin();
-            $username = $user->findUsername(); 
-            $user->setUsername($username); 
-            $user->setAdmin(1); 
-            $user->login(); 
-        } catch (Exception $e) {
-            $error = $e->getMessage(); 
-        }
-    } else {
+        
+    } 
         $user = new User;
         $user->setMail($mail);
         $user->setPassword($password);
@@ -37,7 +25,7 @@ if (!empty($_POST)){
         } catch (Exception $e) {
             $error = $e->getMessage(); 
         }
-    }
+    
     
 
 }
@@ -65,9 +53,6 @@ include_once("header.php");
             </div>
             <div class="form-group">
                 <label><input type="checkbox" name = "admin"> Login as Admin</label>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
             <a href="register.php" class="registerlink">Register here</a>
         </form>
