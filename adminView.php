@@ -54,10 +54,16 @@ include_once("header.php");
 
                 <div class="students">
                     <h1>Work Scheme</h1>
-                    <?php     
+                    <h2>This week</h2>
+
+
+                    <?php
                     $task = new Task; 
                     $task->showWeeklyDeadlines();
+                    
                     ?>
+
+                    <h2>Next week</h2>
 
                 </div>
 
@@ -66,7 +72,7 @@ include_once("header.php");
             <!-- right -->
             <div class="col-md-3">
                 <div class="menu">
-                    <a class="btn" href="newTask.php">Add Task</a>
+                    <a class="btn" href="register.php">Add Admin</a>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">

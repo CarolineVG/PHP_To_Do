@@ -247,7 +247,7 @@ class Task extends Database {
 
     public function showWeeklyDeadlines(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM task");             
+            $query = $this->connection()->prepare("SELECT * FROM task ORDER BY deadline");             
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -264,17 +264,35 @@ class Task extends Database {
                 $z->bindParam(':userid', $this->userId);
                 $z->execute(); 
                 $y = $z->fetch(PDO::FETCH_ASSOC);
+
+                // only show when deadline is within 7 days
+                $endDate = $result['deadline'];
+                $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+                $today = date("Y-m-d");      
+                $date1=date_create($today);
+                $date2=date_create($endDate);
                 
-                echo '<h2>' . $result['deadline'] . '</h2><li class="list-group-item">
-                <div class="media">
-                    <i class="fas fa-book"></i>
-                    <div class="mediabody">
-                        <h5>'. $r['title'] . ' <span>' . $result['taskStatus'] . '</span>
-                        </h5> 
-                        <p>' . $result['title'] . '</p>
-                    </div>
-                </div>
-            </li>';
+                $interval = date_diff($date1, $date2);
+
+                // check if interval is + 
+                if (!$interval->format('%r')){
+                    // check if interval < 7
+                    if($interval->format('%a') < 7){
+                        // show days left
+                        $output = $interval->format('%a') . ' days left'; 
+                        
+                        echo '<li class="list-group-item">
+                        <div class="media">
+                            <i class="fas fa-book"></i>
+                            <div class="mediabody">
+                                <h5>'. $r['title'] . ' <span>' . $result['workhours'] . ' hours</span>
+                                </h5> <p>' . $result['deadline'] . ' ' . $output . '</p>
+                                <p>' . $result['title'] . '</p>
+                            </div>
+                        </div>
+                    </li>';
+                    }
+                }
                 
             }
         } catch (PDOException $e) {
@@ -359,6 +377,16 @@ class Task extends Database {
         try {
             $query = $this->connection()->prepare("DELETE FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
+            $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    public function deleteTasksByProjectId(){
+        try {
+            $query = $this->connection()->prepare("DELETE FROM task WHERE projectId = :id"); 
+            $query->bindParam(':id', $this->projectId);
             $query->execute();
         } catch (PDOException $e) {
             print_r($e->getMessage);
