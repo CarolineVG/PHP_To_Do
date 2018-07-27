@@ -107,8 +107,19 @@ class User extends Database {
         session_start(); 
         // save username
         $_SESSION['username'] = $this->username; 
-        header("Location: index.php"); 
+    }
 
+    function checkAdmin(){
+        $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
+        $query->bindParam(':email', $this->mail);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        echo $result['isAdmin'];
+            
+        if ($result['isAdmin'] == 1) {
+            return true; 
+        }
     }
 
     function checklogin(){
@@ -167,7 +178,6 @@ class User extends Database {
             $query->bindParam(':pass', $this->hash);
             $query->bindParam(':picture', $this->image);
             $query->bindParam(':isAdmin', $this->admin); 
-            echo 'admin ' . $this->admin; 
 
             $query->execute(); 
 

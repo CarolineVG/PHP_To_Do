@@ -7,12 +7,6 @@ if (!empty($_POST)){
     // get values
     $mail = $_POST['email'];
     $password = $_POST['password'];
-
-    // check if admin 
-    if (isset($_POST['admin'])){
-        //echo "admin"; 
-        
-    } 
         $user = new User;
         $user->setMail($mail);
         $user->setPassword($password);
@@ -22,6 +16,13 @@ if (!empty($_POST)){
             $username = $user->findUsername(); 
             $user->setUsername($username); 
             $user->login(); 
+
+            if ($user->checkAdmin()){
+                header("Location: adminView.php");
+            } else {
+                header("Location: index.php");
+            }
+
         } catch (Exception $e) {
             $error = $e->getMessage(); 
         }

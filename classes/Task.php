@@ -245,6 +245,44 @@ class Task extends Database {
         }
     }
 
+    public function showWeeklyDeadlines(){
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM task");             
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                $projectid = $result['projectId'];
+
+                // select projectid
+                $q = $this->connection()->prepare("SELECT title FROM project WHERE id = :projectid"); 
+                $q->bindParam(':projectid', $projectid);
+                $q->execute(); 
+                $r = $q->fetch(PDO::FETCH_ASSOC);
+
+                // select user picture 
+                $z = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+                $z->bindParam(':userid', $this->userId);
+                $z->execute(); 
+                $y = $z->fetch(PDO::FETCH_ASSOC);
+                
+                echo '<h2>' . $result['deadline'] . '</h2><li class="list-group-item">
+                <div class="media">
+                    <i class="fas fa-book"></i>
+                    <div class="mediabody">
+                        <h5>'. $r['title'] . ' <span>' . $result['taskStatus'] . '</span>
+                        </h5> 
+                        <p>' . $result['title'] . '</p>
+                    </div>
+                </div>
+            </li>';
+                
+            }
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    
+    }
+
     public function showMyDeadlines(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid");             
