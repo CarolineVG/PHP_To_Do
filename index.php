@@ -30,9 +30,10 @@ include_once("header.php");
                 <div class="profile">
                     <?php
                     echo $user->showUserImage(); 
-                    //echo '<img src="'. $user->getImage(). '" alt="'. $user->getImage(). '">';
-                    echo '<h1>' . $user->getUsername() . '</h1>' ?>
-                    <h2>Student IMD</h2>
+                    echo '<h1>' . $user->getUsername() . '</h1>';
+                    echo '<h2>' . $user->showEducation() . '</h2>';
+                    
+                    ?>
 
                 </div>
 

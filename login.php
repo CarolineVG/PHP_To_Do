@@ -52,7 +52,7 @@ include_once("header.php");
                 <input class="form-control" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <label><input type="checkbox" name = "admin"> Login as Admin</label>
+                <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
             <a href="register.php" class="registerlink">Register here</a>
         </form>

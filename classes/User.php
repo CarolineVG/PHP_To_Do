@@ -225,6 +225,16 @@ class User extends Database {
         return '<img src="'. $result['picture'] . '" alt="'. $result['picture'] . '">';
 
     }
+
+    
+    function showEducation(){
+        $query = $this->connection()->prepare("SELECT * FROM user WHERE id = :id"); 
+        $query->bindParam(':id', $this->userId);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return ($result['isAdmin'] ? 'Admin ' : 'Student ') . $result['education'];
+
+    }
 }
 
 ?>
