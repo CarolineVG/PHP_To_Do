@@ -5,7 +5,7 @@ include_once("classes/User.php");
 include_once("classes/Admin.php"); 
 
 if (!empty($_POST)){
-    echo "ok"; 
+    //echo "ok"; 
     if (empty($_POST['name'])){
         $error = "Please enter a username."; 
     } else if (empty($_POST['email'])){
@@ -27,47 +27,15 @@ if (!empty($_POST)){
 
         // check if admin 
         if (isset($_POST['admin'])){
-            echo "admin"; 
-            // make new admin 
-            try {
-                $admin = new Admin; 
-                $admin->setUsername($username); 
-                $admin->setEmail($mail); 
-                $admin->setEducation($education);
-                $admin->setPass($password);
-                $admin->setPass2($password2);
-                
-                try {
-                    // strong passwords 
-                    $admin->strongPassword(); 
-    
-                    // check passwords
-                    $admin->checkPasswords();
-    
-                    // check register
-                    $admin->checkRegister();
-    
-                    // hash password
-                    $hashed = $admin->hashPassword();
-                    $admin->setHash($hashed); 
-                                
-                    // register
-                    $admin->register();
-                    header('Location: login.php'); 
-                } catch (Exception $e){
-                    // show error
-                    $error = $e->getMessage();
-                }
-                
-            } catch (Exception $e){
-                // show error
-                $error = $e->getMessage();
-            }
-            
-        } else {
+            echo 'admin'; 
+            // make new admin
+            $admin = new Admin; 
+            $admin->setAdmin(1);
+        }
             try {
                 // make new user 
                 $user = new User;
+                $user->setAdmin(1); 
     
                 // assign values to user
                 $user->setUsername($username);
@@ -92,8 +60,8 @@ if (!empty($_POST)){
                     $user->setHash($hashed); 
                                 
                     // register
-                    //$user->register();
-                    //header('Location: login.php'); 
+                    $user->register();
+                    header('Location: login.php'); 
     
                 } catch (Exception $e){
                     // show error
@@ -104,48 +72,7 @@ if (!empty($_POST)){
                 // show error
                 $error = $e->getMessage();        
             }
-        }
-               
-        try {
-            // make new user 
-            $user = new User;
-
-            // assign values to user
-            $user->setUsername($username);
-            $user->setMail($mail); 
-            $user->setEducation($education);
-            $user->setPassword($password);
-            $user->setPassword2($password2); 
-            $user->setImage($defaultImage); 
-
-            try {
-                // strong passwords 
-                $user->strongPassword(); 
-
-                // check passwords
-                $user->checkPasswords();
-
-                // check register
-                $user->checkRegister();
-
-                // hash password
-                $hashed = $user->hashPassword();
-                $user->setHash($hashed); 
-                            
-                // register
-                $user->register();
-                header('Location: login.php'); 
-
-            } catch (Exception $e){
-                // show error
-                $error = $e->getMessage();
-            }
-
-        } catch (Exception $e){
-            // show error
-            $error = $e->getMessage();        
-        }     
-    }
+        }    
 }
 ?>
 

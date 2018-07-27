@@ -11,6 +11,7 @@ class User extends Database {
     private $hash; 
     private $userId; 
     private $image; 
+    protected $admin; 
 
     /** getters */
     public function getUsername(){
@@ -47,6 +48,11 @@ class User extends Database {
 
     public function getImage(){
         return $this->image; 
+    }
+
+    public function getAdmin(){
+        echo $this->admin; 
+        return 'admin: ' . $this->admin; 
     }
 
     /** setters */
@@ -90,11 +96,13 @@ class User extends Database {
         return $this; 
     }
 
+    public function setAdmin($admin){
+        $this->admin = $admin;
+        return $this; 
+    }
+
     /** functions */
     function login() {
-        /*echo "logging in"; 
-        echo $this->username; */
-
         // start session
         session_start(); 
         // save username
@@ -152,12 +160,14 @@ class User extends Database {
     function register(){
         try {
             //echo "register"; 
-            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture) VALUES (:username, :education, :email, :pass, :picture)");
+            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture, isAdmin) VALUES (:username, :education, :email, :pass, :picture, :isAdmin)");
             $query->bindParam(':username', $this->username);
             $query->bindParam(':education', $this->education);
             $query->bindParam(':email', $this->mail);
             $query->bindParam(':pass', $this->hash);
             $query->bindParam(':picture', $this->image);
+            $query->bindParam(':isAdmin', $this->admin); 
+            echo 'admin ' . $this->admin; 
 
             $query->execute(); 
 
