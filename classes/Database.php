@@ -1,23 +1,29 @@
 <?php
 
+/** INCLUDES */
+include_once("./settings.php"); 
+
 class Database {
 
     private $conn; 
-    private $host;
-    private $user;
-    private $password;
-    private $databaseName;
+    private $host = 'localhost';
+    private $user = 'root';
+    private $password = '';
+    private $databaseName = 'todo';
 
     // connection
     public function connection(){   
-        /*$this->host = "localhost"; 
-        $this->user = "root";
-        $this->password = "";
-        $this->databaseName = "todo"; */
+                
+        $settings = [
+            "host" => "localhost",
+            "username" => "root",
+            "password" => "",
+            "databaseName" => "todo",
+        ];
 
         try {
-            //$conn = new PDO("'mysql:host=" . $this->host . "; dbname=" . $this->databaseName . "', " . $this->user . ", ". $this->password); 
-            $conn = new PDO('mysql:host=localhost;dbname=todo', 'root', '');
+
+            $conn = new PDO("mysql:host=".$settings['host'].";dbname=".$settings['databaseName'], $settings['username'], $settings['password']);
 
             //echo "connection ok";
             return $conn;
