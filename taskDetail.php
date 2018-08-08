@@ -72,6 +72,10 @@ $comment->showCommentsFromTask();
     <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
     <input type="submit" name="submit" value="Add Comment" id="submitcomment">
 </form>
+
+<a href="index.php" class="btn btn-add">Back</a>
+
+
 </li>
 </div>
 
