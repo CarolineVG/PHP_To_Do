@@ -4,7 +4,7 @@ class Project extends Database {
     /** variables */
     private $title;
     private $projectId; 
-    private $adminId; 
+    private $creator; 
     private $tasks;
     private $people; 
     private $userId; 
@@ -14,8 +14,8 @@ class Project extends Database {
         return $this->title; 
     }
 
-    public function getAdminId(){
-        return $this->adminId; 
+    public function getCreator(){
+        return $this->creator; 
     }
 
     public function getProjectId(){
@@ -32,8 +32,8 @@ class Project extends Database {
         return $this; 
     }
 
-    public function setAdminId($adminId){
-        $this->adminId = $adminId; 
+    public function setCreator($creator){
+        $this->creator = $creator; 
         return $this; 
     }
 
@@ -63,8 +63,8 @@ class Project extends Database {
 
     public function showProjects(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM project WHERE adminId = :adminId"); 
-            $query->bindParam(':adminId', $this->userId);
+            $query = $this->connection()->prepare("SELECT * FROM project WHERE creator = :creator"); 
+            $query->bindParam(':creator', $this->userId);
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -94,7 +94,7 @@ class Project extends Database {
                 $q->execute(); 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)){
                     // only show projects with different admin id 
-                    if ($r['adminId'] != $this->userId){
+                    if ($r['creator'] != $this->userId){
                         echo '<div class="card-project">
                         <i class="fas fa-book"></i>
                         <a href="index.php?project=' . $r['id'] . '" data-id="'. $r['id'] . '"><h5>' . $r['title'] . '</h5></a>
@@ -139,10 +139,6 @@ class Project extends Database {
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
-    }
-    
-    public function showTasks(){
-        // select * from tasks where project id = this projectid
     }
 
     public function deleteProject(){

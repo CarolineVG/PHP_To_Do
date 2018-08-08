@@ -21,7 +21,7 @@ if (isset($_POST['submit'])){
 	$project->setTitle($title);
 	$user = new User();
 	$userId = $user->getUserIdByName($_SESSION['username']);
-	$project->setAdminId($userId);
+	$project->setCreator($userId);
 
 	// echo $userId;
 
