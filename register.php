@@ -31,11 +31,14 @@ if (!empty($_POST)){
             // make new admin
             $admin = new Admin; 
             $admin->setAdmin(1);
+            $adminValue = 1;
+        } else {
+            $adminValue = 0;
         }
             try {
                 // make new user 
                 $user = new User;
-                $user->setAdmin(1); 
+                $user->setAdmin($adminValue); 
     
                 // assign values to user
                 $user->setUsername($username);

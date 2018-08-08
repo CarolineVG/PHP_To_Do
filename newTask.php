@@ -107,7 +107,7 @@ include_once("header.php");
         </div>
 
         <div class="form-group">
-            <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline">
+            <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline (YYYY-mm-dd)">
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="submit">Create Task</button>

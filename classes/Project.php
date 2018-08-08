@@ -50,11 +50,11 @@ class Project extends Database {
     /** functions */
     public function saveToDatabase(){
         $title = $this->getTitle();
-        $adminId = $this->getAdminId(); 
+        $creator = $this->getCreator(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO project(title, adminId)VALUES(:title, :adminId)"); 
+            $query = $this->connection()->prepare("INSERT INTO project(title, creator)VALUES(:title, :creator)"); 
             $query->bindParam(':title', $title);
-            $query->bindParam(':adminId', $adminId);
+            $query->bindParam(':creator', $creator);
             $query->execute(); 
         } catch (PDOException $e) {
             print_r($e->getMessage);
@@ -109,7 +109,7 @@ class Project extends Database {
 
     public function showProjectsInDropdown(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM project_user WHERE userId = :userId"); 
+            $query = $this->connection()->prepare("SELECT * FROM projectUser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
@@ -163,7 +163,7 @@ class Project extends Database {
         $project = $this->getProjectId();
         $user = $this->getUserId(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO project_user (projectId, userId)VALUES(:projectId, :userId)"); 
+            $query = $this->connection()->prepare("INSERT INTO projectUser (projectId, userId)VALUES(:projectId, :userId)"); 
             $query->bindParam(':projectId', $project);
             $query->bindParam(':userId', $user);
             $query->execute(); 
