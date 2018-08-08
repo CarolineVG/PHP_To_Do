@@ -60,6 +60,22 @@ class Project extends Database {
             print_r($e->getMessage);
         }
     }
+    
+
+    public function saveToProjectUser(){
+        $projectId = $this->getProjectId();
+        $creator = $this->getCreator(); 
+        
+        // save to table projectUser
+        try {
+            $query = $this->connection()->prepare("INSERT INTO projectUser(projectId, userId)VALUES(:projectId, :userId)"); 
+            $query->bindParam(':projectId', $projectId);
+            $query->bindParam(':userId', $creator);
+            $query->execute(); 
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
 
     public function showProjects(){
         try {

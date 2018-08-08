@@ -27,6 +27,7 @@ if (isset($_POST['submit'])){
 
 	try{
 		$project->saveToDatabase();
+		$project->saveToProjectUser(); 
 
 		// echo "ok";
 		header("Location: index.php");
