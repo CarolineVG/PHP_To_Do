@@ -17,7 +17,8 @@ $project = new Project();
 $projectid = $_POST['projects'];
 $project->setProjectId($projectid); 
 $project->setUserId($id); 
-$project->joinProject(); 
+$project->joinProject();
+header("Location: index.php");
 
 /** header */
 include_once("header.php"); 
