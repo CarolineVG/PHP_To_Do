@@ -97,7 +97,7 @@ class Project extends Database {
     public function showJoinedProjects(){
         try {
             // select distinct -> show value only once
-            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM project_user WHERE userId = :userId"); 
+            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectUser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
@@ -182,7 +182,7 @@ class Project extends Database {
             $query->bindParam(':projectId', $project);
             $query->bindParam(':userId', $user);
             $query->execute(); 
-            
+
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
