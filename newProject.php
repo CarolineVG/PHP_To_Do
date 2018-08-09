@@ -13,32 +13,40 @@ include_once ("classes/User.php");
 session_start();
 
 if (isset($_POST['submit'])){
-	echo "ok";
-	$title = $_POST['projectname'];
-	echo $title;
-	/** add project */
-	$project = new Project();
-	$project->setTitle($title);
-	$user = new User();
-	$userId = $user->getUserIdByName($_SESSION['username']);
-	$project->setCreator($userId);
 
-	// echo $userId;
-
-	try{
-		$project->saveToDatabase();
-		$project->saveToProjectUser(); 
-
-		// echo "ok";
-		header("Location: index.php");
-
-		}
-
-	catch(Exception $e)
-		{
-		$error = $e->getMessage();
+	// check if not empty
+	if (empty($_POST['projectname'])){
+		$error = "Please enter a project."; 
+	} else {
+		$title = $_POST['projectname'];
+	
+		/** add project */
+		$project = new Project();
+		$project->setTitle($title);
+		$user = new User();
+		$userId = $user->getUserIdByName($_SESSION['username']);
+		$project->setCreator($userId);
+	
+		// echo $userId;
+	
+		try{
+			$project->saveToDatabase();
+			$project->saveToProjectUser(); 
+	
+			// echo "ok";
+			header("Location: index.php");
+	
+			}
+	
+		catch(Exception $e)
+			{
+			$error = $e->getMessage();
+			}
 		}
 	}
+
+
+	
 
 /** header */
 include_once ("header.php");
@@ -57,13 +65,9 @@ include_once ("header.php");
             <div class="form-group">
                 <input class="form-control" type="text" name="projectname" id="projectname" placeholder="Project Name">
             </div>
-            <!--<div class="form-group">
-                <button class="btn btn-primary btn-block btnSaveNewProject" name="submit" type="submit">Create Project</button>
-            </div>-->
-
             
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit" name="submit">Create Task</button>
+            <button class="btn btn-primary btn-block" type="submit" name="submit">Create Project</button>
         </div>
 
     </form>
