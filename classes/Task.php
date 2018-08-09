@@ -153,6 +153,30 @@ class Task extends Database {
         }
     }
 
+    
+
+    public function checkDeadline(){
+
+        // source: https://secure.php.net/manual/en/function.checkdate.php
+        function validateDate($date, $format = 'Y-m-d'){
+            $d = DateTime::createFromFormat($format, $date);
+            return $d && $d->format($format) == $date;
+        }
+
+        // check if correct date
+        if (!validateDate($this->deadline)){
+            throw new Exception("Please enter a date in the following format: Y-m-d (2018-12-05)");
+        } 
+
+        // check if not in the past
+        $today = $this->startDate; 
+        $deadline = $this->deadline; 
+
+        if ($deadline < $today) {
+            throw new Exception("Deadline is in the past!");
+        }
+    }
+
     public function addNewTask(){
 
         $title = $this->getTitle(); 

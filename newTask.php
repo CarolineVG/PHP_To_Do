@@ -54,8 +54,10 @@ if (!empty($_POST)){
                     try {
                         $task->checkIfTaskExists();
                         $task->checkWorkHours(); 
-                        $task->addNewTask(); 
-                        header("Location: index.php");
+                        $task->checkDeadline(); 
+
+                      /*  $task->addNewTask(); 
+                        header("Location: index.php");*/
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
@@ -63,9 +65,9 @@ if (!empty($_POST)){
                     // add without deadline 
                     try {
                         $task->checkIfTaskExists();
-                        $task->checkWorkHours(); 
-                        /*$task->addNewTask(); 
-                        header("Location: index.php");*/
+                        $task->checkWorkHours();
+                        $task->addNewTask(); 
+                        header("Location: index.php");
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
@@ -94,16 +96,21 @@ include_once("header.php");
         <div class="form-group">
             <input class="form-control" type="text" name="taskname" id="taskname" placeholder="Task name">
         </div>
-        <select class="form-control" id="projects" name="projects">
-            <option>Choose your project </option>
-            <?php
-            // show projects
-            $project = new Project();
-            $userId = $user->getUserIdByName($_SESSION['username']);
-            $project->setUserId($userId); 
-            $project->showProjectsInDropdown();     
-            ?>
-        </select>
+
+        <div class="form-group">
+
+                <select class="form-control" id="projects" name="projects">
+                    <option>Choose your project </option>
+                    <?php
+                    // show projects
+                    $project = new Project();
+                    $userId = $user->getUserIdByName($_SESSION['username']);
+                    $project->setUserId($userId); 
+                    $project->showProjectsInDropdown();     
+                    ?>
+                </select>
+        </div>
+
         <div class="form-group">
             <input class="form-control" type="text" name="workhours" id="workhours" placeholder="Work hours">
         </div>
@@ -111,6 +118,7 @@ include_once("header.php");
         <div class="form-group">
             <input class="form-control" type="text" name="deadline" id="deadline" placeholder="Deadline (YYYY-mm-dd)">
         </div>
+
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="submit">Create Task</button>
         </div>
