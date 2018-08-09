@@ -142,6 +142,12 @@ class Task extends Database {
     }
 
     public function checkWorkHours(){
+        // check if number
+        if (is_numeric($this->workhours)!=1) {
+            throw new Exception("Please enter a number.");
+        }
+
+        // check if not too high
         if ($this->workhours > 300) {
             throw new Exception("You're never gonna work that long!");
         }

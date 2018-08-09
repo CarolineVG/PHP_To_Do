@@ -30,6 +30,8 @@ if (!empty($_POST)){
                 $task->setWorkhours($workhours);
                 $task->setProjectId($project); 
 
+                echo is_int($workhours); 
+
                 // new user
                 $user = new User(); 
                 $userId = $user->getUserIdByName($_SESSION['username']);
@@ -62,8 +64,8 @@ if (!empty($_POST)){
                     try {
                         $task->checkIfTaskExists();
                         $task->checkWorkHours(); 
-                        $task->addNewTask(); 
-                        header("Location: index.php");
+                        /*$task->addNewTask(); 
+                        header("Location: index.php");*/
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }
