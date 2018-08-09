@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Upload Picture</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="fonts/font-awesome.min.css">
@@ -32,7 +32,6 @@
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" name="submit">Upload Image</button>
             </div>
-            <a href="login.php" class="loginlink">Login</a>
         </form>
     </div>
 </body>

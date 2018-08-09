@@ -45,7 +45,7 @@ if (!empty($_POST)){
             $adminValue = 0;
         }
         
-           /* try {
+            try {
                 // make new user 
                 $user = new User;
                 $user->setAdmin($adminValue); 
@@ -84,7 +84,7 @@ if (!empty($_POST)){
             } catch (Exception $e){
                 // show error
                 $error = $e->getMessage();        
-            }*/
+            }
         }    
     
 }

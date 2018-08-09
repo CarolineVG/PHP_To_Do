@@ -110,17 +110,14 @@ class User extends Database {
     }
 
     function checkAdmin(){
-        $query = $this->connection()->prepare("SELECT * FROM user WHERE email = :email"); 
-        $query->bindParam(':email', $this->mail);
+        $query = $this->connection()->prepare("SELECT * FROM user WHERE username = :username"); 
+        $query->bindParam(':username', $this->username);
         $query->execute(); 
         $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        echo $result['isAdmin'];
             
-        /*if ($result['isAdmin'] == 1) {
-            echo "admin"; 
+        if ($result['isAdmin'] == 1) {
             return true; 
-        }*/
+        }
     }
 
     function checklogin(){
@@ -236,7 +233,6 @@ class User extends Database {
         return '<img src="'. $result['picture'] . '" alt="'. $result['picture'] . '">';
 
     }
-
     
     function showEducation(){
         $query = $this->connection()->prepare("SELECT * FROM user WHERE id = :id"); 

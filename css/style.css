@@ -567,6 +567,6 @@ hr {
     color: black;
   }
 
-  .students.media {
-      cursor: pointer; 
+  .students .list-group-item > *:hover {
+      cursor: default; 
   }

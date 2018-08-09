@@ -13,6 +13,7 @@ session_start();
 
 /** USER */
 $user = new User(); 
+$user->setUsername($_SESSION['username']); 
 $userId = $user->getUserIdByName($_SESSION['username']);
 $user->setUserId($userId); 
 
@@ -51,17 +52,14 @@ if (isset($_POST['submit'])){
             // insert filename into database
             $user->setImage($imgLocation); 
             $user->uploadUserPicture(); 
-
-            echo "test admin"; 
-            echo $user->checkAdmin(); 
-
+            
             // check if admin
-           /* if ($user->checkAdmin()) {
+            if ($user->checkAdmin()) {
                 echo 'admin'; 
-                //header("Location: adminView.php"); 
+                header("Location: adminView.php"); 
             } else {
-                //header("Location: index.php"); 
-            }*/
+                header("Location: index.php"); 
+            }
 
 
         } else {
