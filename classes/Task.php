@@ -116,6 +116,13 @@ class Task extends Database {
                     $q->bindParam(':userid', $userid);
                     $q->execute(); 
                     $r = $q->fetch(PDO::FETCH_ASSOC); 
+
+                    // check deadline
+                    if ($result['deadline'] == "0000-00-00"){
+                        $deadline = 'No Deadline';
+                    } else {
+                        $deadline = $result['deadline'];
+                    }
     
                     echo '<li class="list-group-item">
                             <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
@@ -125,7 +132,7 @@ class Task extends Database {
                                     <div class="media-text">
                                         <h5>'. $result['title'] . '
                                         <p class="status">' . $result['taskStatus'] . '</p> 
-                                        <p class="deadline">' . $result['deadline'] . '</h5>
+                                        <p class="deadline">' . $deadline . '</h5>
                                     </div>
                                     <div class="media-input">
                                         <p>' . $r['username'] . '</p>
@@ -151,9 +158,7 @@ class Task extends Database {
         if ($this->workhours > 300) {
             throw new Exception("You're never gonna work that long!");
         }
-    }
-
-    
+    }   
 
     public function checkDeadline(){
 
@@ -211,7 +216,6 @@ class Task extends Database {
         $status = $this->getTaskStatus(); 
         $projectId = $this->getProjectId();
         $user = $this->getUserId(); 
-        echo $workhours; 
         
        try {
             $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :taskStatus, :workhours)"); 
@@ -243,22 +247,25 @@ class Task extends Database {
              $q->execute(); 
              $r = $q->fetch(PDO::FETCH_ASSOC); 
 
-
-            // show days to deadline 
-            $endDate = $result['deadline'];
-            $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-            $today = date("Y-m-d");      
-            $date1=date_create($today);
-            $date2=date_create($endDate);
-            
-            $interval = date_diff($date1, $date2);
-            if($interval->format('%r')){
-                $output =  $interval->format('%a') . ' days too late'; 
+            // check deadline
+            if ($result['deadline'] == "0000-00-00"){
+                // no deadline
+                $output = "No Deadline"; 
             } else {
-                $output =  $interval->format('%a') . ' days left'; 
+                // show days to deadline 
+                $endDate = $result['deadline'];
+                $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+                $today = date("Y-m-d");      
+                $date1=date_create($today);
+                $date2=date_create($endDate);
+                
+                $interval = date_diff($date1, $date2);
+                if($interval->format('%r')){
+                    $output =  $interval->format('%a') . ' days too late'; 
+                } else {
+                    $output =  $interval->format('%a') . ' days left'; 
+                }
             }
-
-
 
             echo '<div class="media">
             <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
@@ -266,7 +273,7 @@ class Task extends Database {
                 <div class="media-text">
                     <h5>' . $result['title'] . '<span>' . $result["taskStatus"] . '</span>
                     <span class="deadline">' . $output . '</h5>
-                    <p>' . $result["userId"] . '</p>
+                    <p>' . $r['username'] . '</p>
                 </div>
 
                 <div class="taskicons">
@@ -304,7 +311,9 @@ class Task extends Database {
                 $z->execute(); 
                 $y = $z->fetch(PDO::FETCH_ASSOC);
 
-                // only show when deadline is within 7 days
+                // check deadline
+                if (!$result['deadline'] == "0000-00-00"){
+                    // only show when deadline is within 7 days
                 $endDate = $result['deadline'];
                 $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
                 $today = date("Y-m-d");      
@@ -332,6 +341,9 @@ class Task extends Database {
                     </li>';
                     }
                 }
+                }
+
+                
                 
             }
         } catch (PDOException $e) {
@@ -360,12 +372,19 @@ class Task extends Database {
                 $z->bindParam(':userid', $this->userId);
                 $z->execute(); 
                 $y = $z->fetch(PDO::FETCH_ASSOC);
+
+                // check deadline
+                if ($result['deadline'] == "0000-00-00"){
+                    $deadline = 'No Deadline';
+                } else {
+                    $deadline = $result['deadline'];
+                }
                 
                 echo '<li class="list-group-item">
                 <div class="media">
                     <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
-                        <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
+                        <h5>'. $r['title'] . ' <span>' . $deadline . '</span>
                         </h5> 
                         <p>' . $result['title'] . '</p>
                     </div>
