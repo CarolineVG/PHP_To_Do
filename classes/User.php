@@ -117,9 +117,10 @@ class User extends Database {
 
         echo $result['isAdmin'];
             
-        if ($result['isAdmin'] == 1) {
+        /*if ($result['isAdmin'] == 1) {
+            echo "admin"; 
             return true; 
-        }
+        }*/
     }
 
     function checklogin(){

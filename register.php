@@ -27,15 +27,25 @@ if (!empty($_POST)){
 
         // check if admin 
         if (isset($_POST['admin'])){
-            echo 'admin'; 
+            
             // make new admin
             $admin = new Admin; 
-            $admin->setAdmin(1);
+            $admin->setUsername($username);
+            $admin->setEducation($education);
+
+            try {
+                $admin->saveAdmin(); 
+            } catch (Exception $e){
+                $error = $e->getMessage();
+            }
+            
             $adminValue = 1;
+
         } else {
             $adminValue = 0;
         }
-            try {
+        
+           /* try {
                 // make new user 
                 $user = new User;
                 $user->setAdmin($adminValue); 
@@ -74,8 +84,9 @@ if (!empty($_POST)){
             } catch (Exception $e){
                 // show error
                 $error = $e->getMessage();        
-            }
+            }*/
         }    
+    
 }
 ?>
 

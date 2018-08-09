@@ -113,7 +113,7 @@ class Project extends Database {
                         echo '<div class="card-project">
                         <i class="fas fa-book"></i>
                         <a href="index.php?project=' . $r['id'] . '" data-id="'. $r['id'] . '"><h5>' . $r['title'] . '</h5></a>
-                        </a></div>';
+                        <a class="disabled" href="deleteProject.php?project=' . $r['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
                     }
                 } 
             }

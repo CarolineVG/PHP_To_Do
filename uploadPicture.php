@@ -18,7 +18,6 @@ $user->setUserId($userId);
 
 
 if (isset($_POST['submit'])){
-    echo "ok"; 
     $img = $_FILES['uploadimg'];
     //print_r($img); 
 
@@ -37,7 +36,7 @@ if (isset($_POST['submit'])){
         //echo "ok img"; 
 
         // check img size - max 1mb 
-        if ($_FILES['uploadimg']['size'] < 100000){
+        if ($_FILES['uploadimg']['size'] < 100000000){
             //echo "size ok"; 
 
             // change name to user id 
@@ -53,7 +52,17 @@ if (isset($_POST['submit'])){
             $user->setImage($imgLocation); 
             $user->uploadUserPicture(); 
 
-            header("Location: index.php"); 
+            echo "test admin"; 
+            echo $user->checkAdmin(); 
+
+            // check if admin
+           /* if ($user->checkAdmin()) {
+                echo 'admin'; 
+                //header("Location: adminView.php"); 
+            } else {
+                //header("Location: index.php"); 
+            }*/
+
 
         } else {
             echo "file size is max 1mb";

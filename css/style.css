@@ -559,3 +559,14 @@ hr {
     opacity:1;
     text-decoration:none;
   }
+
+  .disabled {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+  }
+
+  .students.media {
+      cursor: pointer; 
+  }
