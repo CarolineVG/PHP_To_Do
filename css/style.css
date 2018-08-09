@@ -570,3 +570,15 @@ hr {
   .students .list-group-item > *:hover {
       cursor: default; 
   }
+
+  .btn-red {
+      background-color: #C82333; 
+      text-decoration: none; 
+      color: #fff; 
+      padding: 11px; 
+  }
+
+  .btn-red:hover {
+    color: #fff; 
+    padding: 11px; 
+}

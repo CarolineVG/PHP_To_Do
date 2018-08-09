@@ -68,6 +68,10 @@ include_once ("header.php");
             
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" name="submit">Create Project</button>
+		</div>
+		
+		<div class="form-group">
+			<a href="index.php" class="btn btn-block btn-red">Back</a>
         </div>
 
     </form>
