@@ -100,36 +100,45 @@ class Task extends Database {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE projectId = :id"); 
             $query->bindParam(':id', $this->projectId);
             $query->execute(); 
-            
-            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
 
-                $userid = $result['userId'];
+            // check if there are tasks
+            if($query->rowCount() == 0){
+                // no tasks
+                echo "This project doesn't have a task yet. "; 
 
-                // select username from user where id = :userId
-                $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
-                $q->bindParam(':userid', $userid);
-                $q->execute(); 
-                $r = $q->fetch(PDO::FETCH_ASSOC); 
-
-                echo '<li class="list-group-item">
-                        <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
-                        <div class="media">
-                            <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
-                            <div class="media-body">
-                                <div class="media-text">
-                                    <h5>'. $result['title'] . '
-                                    <p class="status">' . $result['taskStatus'] . '</p> 
-                                    <p class="deadline">' . $result['deadline'] . '</h5>
-                                </div>
-                                <div class="media-input">
-                                    <p>' . $r['username'] . '</p>
-                                    <input class="checkbox" type="checkbox">
+            } else {
+                // show tasks
+                while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                    $userid = $result['userId'];
+    
+                    // select username from user where id = :userId
+                    $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
+                    $q->bindParam(':userid', $userid);
+                    $q->execute(); 
+                    $r = $q->fetch(PDO::FETCH_ASSOC); 
+    
+                    echo '<li class="list-group-item">
+                            <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
+                            <div class="media">
+                                <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                                <div class="media-body">
+                                    <div class="media-text">
+                                        <h5>'. $result['title'] . '
+                                        <p class="status">' . $result['taskStatus'] . '</p> 
+                                        <p class="deadline">' . $result['deadline'] . '</h5>
+                                    </div>
+                                    <div class="media-input">
+                                        <p>' . $r['username'] . '</p>
+                                        <input class="checkbox" type="checkbox">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <hr>
-                </li>';
+                        <hr>
+                    </li>';
+                }
             }
+            
+            
     }
 
     public function checkWorkHours(){
