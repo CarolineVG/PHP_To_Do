@@ -20,7 +20,7 @@ if (!empty($_POST)){
         // add values to variables
         $username = $_POST['name'];
         $mail = $_POST['email'];
-        $education = $_POST['education'];
+        $education = strtoupper($_POST['education']);
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
         $defaultImage = "uploads/user.png"; 
