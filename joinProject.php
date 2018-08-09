@@ -12,13 +12,18 @@ $user = new User();
 $user->setUsername($_SESSION['username']);
 $id = $user->getUserId();
 
-// get value from dropdown
-$project = new Project(); 
-$projectid = $_POST['projects'];
-$project->setProjectId($projectid); 
-$project->setUserId($id); 
-$project->joinProject();
-header("Location: index.php");
+
+if(isset($_POST['submit'])){
+    // get value from dropdown
+    $project = new Project(); 
+    $projectid = $_POST['projects'];
+
+    // join project
+    $project->setProjectId($projectid); 
+    $project->setUserId($id); 
+    $project->joinProject();
+    header("Location: index.php");
+}
 
 /** header */
 include_once("header.php"); 
