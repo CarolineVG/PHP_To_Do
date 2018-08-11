@@ -267,23 +267,32 @@ class Task extends Database {
                 }
             }
 
-            echo '<div class="media">
-            <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
-            <div class="media-body">
-                <div class="media-text">
-                    <h5>' . $result['title'] . '<span>' . $result["taskStatus"] . '</span>
-                    <span class="deadline">' . $output . '</h5>
-                    <p>' . $r['username'] . '</p>
-                </div>
-
-                <div class="taskicons">
-                    <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
-                    <a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>
-                    <input class="checkbox" type="checkbox">
-                </div>
+        echo '<div class="task_wrapper">
+            <div class="task_img">
+                <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
             </div>
-        </div>
-        <hr>';
+            <div class="task_title">
+                <h5>' . $result['title'] . '</h5>
+            </div>
+            <div class="task_status">
+                <h5>' . $result["taskStatus"] . '</h5>
+            </div>
+            <div class="task_deadline">
+                <h5 class="deadline">' . $output . '</h5>
+            </div>
+            <div class="task_icons">
+                <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
+                <a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>
+                <input class="checkbox" type="checkbox">
+            </div>
+            <div class="task_user">
+                <p>' . $r['username'] . '</p>
+            </div>
+            <div class="task_document">
+                <i class="fas fa-paperclip"></i>
+                <a href="' . $result['document'] . '"> ' . $result['document'] . '</a>
+            </div>
+        </div>';
         }
 
         } catch (PDOException $e) {
