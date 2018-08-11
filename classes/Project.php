@@ -61,16 +61,34 @@ class Project extends Database {
         }
     }
 
+    public function getProjectIdFromDatabase(){
+        $title = $this->getTitle(); 
+
+        // save to table projectUser
+        try {
+            $query = $this->connection()->prepare("SELECT * FROM project WHERE title = :title"); 
+            $query->bindParam(':title', $title);
+            $query->execute(); 
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            return $result['id'];
+            
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
     public function saveToProjectUser(){
         $projectId = $this->getProjectId();
         $creator = $this->getCreator(); 
 
         // save to table projectUser
         try {
-            $query = $this->connection()->prepare("INSERT INTO projectUser(projectId, userId)VALUES(:projectId, :userId)"); 
+            $query = $this->connection()->prepare("INSERT INTO projectuser (projectId, userId) VALUES(:projectId, :userId);"); 
             $query->bindParam(':projectId', $projectId);
             $query->bindParam(':userId', $creator);
             $query->execute(); 
+            //echo "ok"; 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
@@ -97,7 +115,7 @@ class Project extends Database {
     public function showJoinedProjects(){
         try {
             // select distinct -> show value only once
-            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectUser WHERE userId = :userId"); 
+            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
@@ -124,7 +142,7 @@ class Project extends Database {
 
     public function showProjectsInDropdown(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM projectUser WHERE userId = :userId"); 
+            $query = $this->connection()->prepare("SELECT * FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             
@@ -178,7 +196,7 @@ class Project extends Database {
         $project = $this->getProjectId();
         $user = $this->getUserId(); 
         try {
-            $query = $this->connection()->prepare("INSERT INTO projectUser (projectId, userId)VALUES(:projectId, :userId)"); 
+            $query = $this->connection()->prepare("INSERT INTO projectuser (projectId, userId)VALUES(:projectId, :userId)"); 
             $query->bindParam(':projectId', $project);
             $query->bindParam(':userId', $user);
             $query->execute(); 

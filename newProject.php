@@ -26,14 +26,11 @@ if (isset($_POST['submit'])){
 		$user = new User();
 		$userId = $user->getUserIdByName($_SESSION['username']);
 		$project->setCreator($userId);
-	
-		// echo $userId;
-	
 		try{
 			$project->saveToDatabase();
+			$projectId = $project->getProjectIdFromDatabase();
+			$project->setProjectId($projectId);
 			$project->saveToProjectUser(); 
-	
-			// echo "ok";
 			header("Location: index.php");
 	
 			}
