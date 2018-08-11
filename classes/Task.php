@@ -272,6 +272,8 @@ class Task extends Database {
                 }
             }
 
+            // check color of status 
+
         echo '<div class="task_wrapper">
             <div class="task_img">
                 <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">

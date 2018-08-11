@@ -308,6 +308,7 @@ input[type=search] {
   .task_wrapper h5 {
       margin: 0;
       padding: 5px;
+      font-size: 1em; 
   }
 
   .task_img {
@@ -328,6 +329,18 @@ input[type=search] {
 .task_status {
     grid-column: 3/4 ;
     grid-row: 1;
+}
+
+.task_status h5 {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px 10px;
+    font-size: 1em; 
 }
 
 .task_deadline {
