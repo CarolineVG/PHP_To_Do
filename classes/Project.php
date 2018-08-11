@@ -177,9 +177,19 @@ class Project extends Database {
     }
 
     public function deleteProject(){
+        // delete in table project
         try {
             $query = $this->connection()->prepare("DELETE FROM project WHERE id = :id"); 
             $query->bindParam(':id', $this->projectId);
+            $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+
+        // delete in table projectUser
+        try {
+            $query = $this->connection()->prepare("DELETE FROM projectuser WHERE projectId = :projectId"); 
+            $query->bindParam(':projectId', $this->projectId);
             $query->execute();
         } catch (PDOException $e) {
             print_r($e->getMessage);
