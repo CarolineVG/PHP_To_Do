@@ -23,37 +23,42 @@ $user = new User();
 $userId = $user->getUserIdByName($_SESSION['username']);
 
     if(isset($_POST['submit'])){
-    // get values
-    $text = $_POST['message'];
 
-    // new comment
-    $comment = new Comment();
-    $comment->setReaction($text);
-                
-    // give userid to comment
-    $comment->setUserId($userId); 
+        // check if not empty
+        if (empty($_POST['message'])){
+            $error = "Please enter a message."; 
+        } else {
+        // get values
+        $text = $_POST['message'];
 
-    // set task id 
-    $comment->setTaskId($taskId);
+        // new comment
+        $comment = new Comment();
+        $comment->setReaction($text);
+                    
+        // give userid to comment
+        $comment->setUserId($userId); 
 
-    // get project id from task
-    $task = new Task();
-    $task->setTaskId($taskId); 
-    $projectId = $task->getProjectIdByTaskId();
+        // set task id 
+        $comment->setTaskId($taskId);
 
-    //echo 'project ' . $projectId; 
+        // get project id from task
+        $task = new Task();
+        $task->setTaskId($taskId); 
+        $projectId = $task->getProjectIdByTaskId();
 
-    // set project id
-    $comment->setProjectId($projectId); 
+        //echo 'project ' . $projectId; 
 
-    try {
-        $comment->addNewComment(); 
-        //header("Location: index.php"); 
-    } catch (Exception $e) {
-        $error = $e->getMessage(); 
+        // set project id
+        $comment->setProjectId($projectId); 
+
+        try {
+            $comment->addNewComment(); 
+            //header("Location: index.php"); 
+        } catch (Exception $e) {
+            $error = $e->getMessage(); 
+        }
     }
 }
-
 
 /** header */
 include_once("header.php"); 
@@ -77,13 +82,16 @@ $comment->showCommentsFromTask();
 
 <!-- write reaction -->
 <form id="mycomment" method="post">
+    <?php if(isset($error) ): ?>
+        <div class="error error-message"><p><?php echo $error ?></p></div>
+    <?php endif; ?>
+
     <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
     <a href="index.php" class="btn btn-back"><i class="fas fa-chevron-left"></i>Back</a>
     <input type="submit" class="btn btn-addcomment" name="submit" value="Add Comment" id="submitcomment">
     
-    <?php  
-        echo '<a class="btn btn-addcomment" href="uploadFile.php?task='. $taskId . '">Upload File</a>';
-    ?>
+    <?php echo '<a class="btn btn-addcomment" href="uploadFile.php?task='. $taskId . '">Upload File</a>'; ?>
+    
 </form>
 
 

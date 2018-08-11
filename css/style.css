@@ -737,3 +737,13 @@ hr {
     color: #fff;
     opacity: 0.6;
   }
+
+  .error-message {
+      margin-top: 5px;
+      margin-bottom: 5px; 
+
+  }
+
+  .error-message p {
+      margin-bottom: 0px; 
+  }
