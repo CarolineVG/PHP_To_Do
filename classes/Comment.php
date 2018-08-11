@@ -97,11 +97,23 @@ class Comment extends Database {
         }
     }
 
-    public function deleteComment(){
+    public function deleteCommentfromTaskId(){
         // delete comment from task
         try {
             $query = $this->connection()->prepare("DELETE FROM comment WHERE taskId = :id"); 
             $query->bindParam(':id', $this->taskId);
+            $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
+    public function deleteCommentfromProjectId(){
+        $projectId = $this->getProjectId(); 
+        // delete comment from project
+        try {
+            $query = $this->connection()->prepare("DELETE FROM comment WHERE projectId = :id"); 
+            $query->bindParam(':id', $projectId);
             $query->execute();
         } catch (PDOException $e) {
             print_r($e->getMessage);

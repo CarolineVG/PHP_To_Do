@@ -12,12 +12,17 @@ session_start();
     $id = $_GET['post'];
     echo $id; 
 
-    /** delete project */
+    /** delete task */
     $task = new Task(); 
     $task->setTaskId($id);
 
+    // delete comments from task
+    $comment = new Comment(); 
+    $comment->setTaskId($id); 
+
     try {
         $task->deleteTask(); 
+        $comment->deleteCommentfromTaskId();
         header("Location: index.php");
     } catch (Exception $e) {
         $error = $e->getMessage(); 

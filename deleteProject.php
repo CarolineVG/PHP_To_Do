@@ -3,6 +3,7 @@
 include_once("classes/Database.php"); 
 include_once("classes/Project.php");  
 include_once("classes/Task.php"); 
+include_once("classes/Comment.php"); 
 
 /** SESSION */
 session_start();
@@ -21,12 +22,12 @@ session_start();
 
         // delete all comments with task id 
         $comment = new Comment; 
-        $comment->setTaskId(); 
-        $comment->deleteComment(); 
+        $comment->setProjectId($id);  
 
     try {
         $project->deleteProject();
         $task->deleteTasksByProjectId(); 
+        $comment->deleteCommentfromProjectId(); 
         header("Location: index.php");
     } catch (Exception $e) {
         $error = $e->getMessage(); 
