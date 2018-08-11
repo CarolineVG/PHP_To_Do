@@ -14,8 +14,8 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
-/** GET TASK ID */
-$taskId = $_GET['task'];
+// get project id 
+
 
 // new user
 $user = new User(); 
@@ -32,8 +32,21 @@ $userId = $user->getUserIdByName($_SESSION['username']);
     // give userid to comment
     $comment->setUserId($userId); 
 
+    // get task id
+    $taskId = $_GET['task'];
+
     // set task id 
     $comment->setTaskId($taskId);
+
+    // get project id from task
+    $task = new Task();
+    $task->setTaskId($taskId); 
+    $projectId = $task->getProjectIdByTaskId();
+
+    //echo 'project ' . $projectId; 
+
+    // set project id
+    $comment->setProjectId($projectId); 
 
     try {
         $comment->addNewComment(); 

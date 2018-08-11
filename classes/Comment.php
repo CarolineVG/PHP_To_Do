@@ -20,6 +20,10 @@ class Comment extends Database {
         return $this->userId; 
     }
 
+    public function getProjectId(){
+        return $this->projectId;
+    }
+
     /** setters */
     public function setReaction($reaction){
         $this->reaction = $reaction;
@@ -33,6 +37,11 @@ class Comment extends Database {
 
     public function setUserId($id){
         $this->userId = $id;
+        return $this; 
+    }
+
+    public function setProjectId($projectId){
+        $this->projectId = $projectId;
         return $this; 
     }
 
@@ -73,18 +82,32 @@ class Comment extends Database {
         $reaction = $this->getReaction(); 
         $taskId = $this->getTaskId(); 
         $userId = $this->getUserId(); 
+        $projectId = $this->getProjectId();
 
        try {
-            $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId) VALUES (:reaction, :taskid, :userid);"); 
+            $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId, projectId) VALUES (:reaction, :taskid, :userid, :projectId);"); 
             $query->bindParam(':reaction', $reaction);
             $query->bindParam(':taskid', $taskId);
             $query->bindParam(':userid', $userId);
+            $query->bindParam(':projectId', $projectId);
             $query->execute(); 
 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
     }
+
+    public function deleteComment(){
+        // delete comment from task
+        try {
+            $query = $this->connection()->prepare("DELETE FROM comment WHERE taskId = :id"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->execute();
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
 }
 
 ?>

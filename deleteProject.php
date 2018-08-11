@@ -19,6 +19,11 @@ session_start();
         $task = new Task; 
         $task->setProjectId($id); 
 
+        // delete all comments with task id 
+        $comment = new Comment; 
+        $comment->setTaskId(); 
+        $comment->deleteComment(); 
+
     try {
         $project->deleteProject();
         $task->deleteTasksByProjectId(); 

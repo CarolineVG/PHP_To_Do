@@ -589,6 +589,16 @@ class Task extends Database {
             
         }
     }
+    
+    public function getProjectIdByTaskId(){
+        $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :taskId"); 
+        $query->bindParam(':taskId', $this->taskId); 
+        $query->execute(); 
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['projectId'];            
+        
+    }
 }
 
 ?>
