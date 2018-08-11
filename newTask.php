@@ -56,8 +56,8 @@ if (!empty($_POST)){
                         $task->checkWorkHours(); 
                         $task->checkDeadline(); 
 
-                      /*  $task->addNewTask(); 
-                        header("Location: index.php");*/
+                        $task->addNewTask(); 
+                        header("Location: index.php");
                     } catch (Exception $e) {
                         $error = $e->getMessage(); 
                     }

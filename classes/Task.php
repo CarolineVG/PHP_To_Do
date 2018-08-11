@@ -431,10 +431,16 @@ class Task extends Database {
                 $q->bindParam(':projectid', $projectid);
                 $q->execute(); 
                 $r = $q->fetch(PDO::FETCH_ASSOC);
+
+                // select user picture 
+                $z = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+                $z->bindParam(':userid', $this->userId);
+                $z->execute(); 
+                $y = $z->fetch(PDO::FETCH_ASSOC);
                 
                 echo '<li class="list-group-item">
                 <div class="media">
-                    <img src="img/user.png" alt="user">
+                <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
                         <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
                         </h5> 

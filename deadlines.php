@@ -6,7 +6,6 @@ if(isset ($_SESSION['username'])){
     $user->setUsername($_SESSION['username']);
     $id = $user->getUserId();
     $user->setUserId($id);
-
 } else {
     header('Location: login.php');
 }
@@ -15,19 +14,15 @@ if(isset ($_SESSION['username'])){
 include_once("header.php"); 
 
 if(isset($_POST['submit'])){
-
-
-$project = $_POST['projects'];
-//echo $project; 
-$task->setUserId($id); 
-$task->setProjectId($project); 
-$task->filterMyDeadlines(); 
-
+    $project = $_POST['projects'];
+    //echo $project; 
+    $task->setUserId($id); 
+    $task->setProjectId($project); 
+    $task->filterMyDeadlines(); 
 } else {
-    
-/** show tasks from project */
-$task = new Task();
-$task->setUserId($user->getUserId()); 
-$task->showMyDeadlines(); 
+    /** show tasks from project */
+    $task = new Task();
+    $task->setUserId($user->getUserId()); 
+    $task->showMyDeadlines(); 
 }
 ?>

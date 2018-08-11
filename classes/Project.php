@@ -152,9 +152,11 @@ class Project extends Database {
                 $q = $this->connection()->prepare("SELECT * FROM project WHERE id = :id"); 
                 $q->bindParam(':id', $id);
                 $q->execute(); 
-                $r = $q->fetch(PDO::FETCH_ASSOC); 
-                // project id in value
-                echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
+
+                while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
+                    // project id in value
+                    echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
+                }
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);
