@@ -299,7 +299,9 @@ class Task extends Database {
                 <i class="fas fa-paperclip"></i>
                 <a href="' . $result['document'] . '"> ' . $result['document'] . '</a>
             </div>
-        </div>';
+        </div>
+        <hr>
+        <p>Comments:</p>';
         }
 
         } catch (PDOException $e) {

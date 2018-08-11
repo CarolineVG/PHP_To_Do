@@ -179,6 +179,7 @@ input[type=search] {
 
 .media {
     padding: 10px;
+    align-items: center;
 }
 
 .media img {
@@ -468,6 +469,36 @@ input[type=search] {
    .comment-hidden {
        display: none;
    }
+
+   /* comments */
+   .comment {
+       margin-bottom: 0px; 
+   }
+   
+
+.reactions {
+    padding: 0px 0px 10px 0px; 
+}
+
+.reactions img {
+    height: 55px;
+    border-radius: 100%;
+}
+
+.reactions-body{
+    padding-left: 20px;
+}
+
+.reactions h5 {
+    font-size: 1em; 
+    margin: 0;
+    text-decoration: none; 
+}
+
+.reactions p {
+    font-size: 1em; 
+    color: var(--font_grey);
+}
 
    /* new task */
    .dropdown-menu.dropdown-task {
