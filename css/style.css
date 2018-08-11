@@ -196,18 +196,6 @@ input[type=search] {
     text-decoration: none; 
 }
 
-.media .status {
-    background-color: var(--orange); 
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 0px 20px;
-}
-
 .media .deadline {
     background-color: #fff; 
     border: none;
@@ -241,6 +229,25 @@ input[type=search] {
     display: flex;     
     justify-content: space-between;
     align-items: center;
+}
+
+.media .status {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+.orange {
+    background-color: var(--orange); 
+}
+
+.green {
+    background-color: var(--green); 
 }
 
 /* checkbox */
@@ -343,8 +350,14 @@ input[type=search] {
 
 .task_icons i {
     padding: 1rem; 
+    color: #007bff;
+    opacity: 0.4;
 }
 
+.task_icons i:hover {
+    text-decoration: none; 
+    color: var(--font_black);
+}
 
 .task_user {
     grid-column: 2/3 ;
@@ -388,8 +401,6 @@ input[type=search] {
     box-shadow:1px 1px 5px rgba(0,0,0,0.1);
   }
 
-
-
 #editTaskProject {
     background-color: var(--green);
 }
@@ -404,12 +415,11 @@ input[type=search] {
     border-radius: 4px;
     width: 400px;
     height: 180px;
-    margin: 0 auto;
    }
 
    #mycomment textarea {
     border: 1px solid #e2e6e6;
-    margin: 10px 0 10px 5;
+    margin: 20px 0px;
     width: 100%;
     height: 100px;
    }
@@ -423,16 +433,22 @@ input[type=search] {
     float: left;
    }
    
-   #mycomment input[type=submit] {
+   .btn-addcomment {
     cursor: pointer;
     border: 1px solid;
     background-color: var(--green);
     border-radius: 20px;
     color: white;
-    float: right;
+    text-decoration: none;
+    width: 129px;
    }
 
-   #mycomment input[type=submit]:hover {
+   .btn-addcomment:hover {
+    color: white;
+    text-decoration: none;
+   }
+
+   .btn-addcomment:hover {
        opacity: 0.6;
    }
 
@@ -660,6 +676,20 @@ hr {
     padding: 11px; 
 }
 
-.hidden {
-    color: #fff;
+.btn-back .fa-chevron-left {
+    padding-right: 10px; 
 }
+
+.btn-back {
+    background: var(--red);
+    border-radius:20px;
+    text-decoration: none;
+    color: #fff; 
+    width: 129px;
+  }
+  
+.btn-back:hover, .btn-back:active {
+    background:var(--red);
+    color: #fff;
+    opacity: 0.6;
+  }

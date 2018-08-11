@@ -107,6 +107,11 @@ class Task extends Database {
                 echo "This project doesn't have a task yet. "; 
 
             } else {
+                // check status of task 
+                // to do 
+                // if not started -> class orange, else ... 
+
+
                 // show tasks
                 while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
                     $userid = $result['userId'];
@@ -131,7 +136,7 @@ class Task extends Database {
                                 <div class="media-body">
                                     <div class="media-text">
                                         <h5>'. $result['title'] . '
-                                        <p class="status">' . $result['taskStatus'] . '</p> 
+                                        <p class="status orange">' . $result['taskStatus'] . '</p> 
                                         <p class="deadline">' . $deadline . '</h5>
                                     </div>
                                     <div class="media-input">
@@ -275,7 +280,7 @@ class Task extends Database {
                 <h5>' . $result['title'] . '</h5>
             </div>
             <div class="task_status">
-                <h5>' . $result["taskStatus"] . '</h5>
+                <h5 class="orange">' . $result["taskStatus"] . '</h5>
             </div>
             <div class="task_deadline">
                 <h5 class="deadline">' . $output . '</h5>

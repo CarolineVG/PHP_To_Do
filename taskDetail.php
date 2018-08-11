@@ -54,9 +54,6 @@ include_once("header.php");
 <?php 
 $task = new Task();
 $task->setTaskId($taskId); 
-
-echo '<a class="btn" href="uploadFile.php?task='. $taskId . '">Upload File</a>';
-
 $task->showTaskFromId(); 
 
 // show comments
@@ -70,10 +67,14 @@ $comment->showCommentsFromTask();
 <!-- write reaction -->
 <form id="mycomment" method="post">
     <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-    <input type="submit" name="submit" value="Add Comment" id="submitcomment">
+    <a href="index.php" class="btn btn-back"><i class="fas fa-chevron-left"></i>Back</a>
+    <input type="submit" class="btn btn-addcomment" name="submit" value="Add Comment" id="submitcomment">
+    
+    <?php  
+        echo '<a class="btn btn-addcomment" href="uploadFile.php?task='. $taskId . '">Upload File</a>';
+    ?>
 </form>
 
-<a href="index.php" class="btn btn-add">Back</a>
 
 
 </li>
