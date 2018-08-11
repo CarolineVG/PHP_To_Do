@@ -45,9 +45,12 @@ include_once("header.php");
                 <div class="error"><p>
                 <?php echo $error ?></p></div>
             <?php endif; ?>
+            
+            <!-- keep value after validating the form
+            source: https://stackoverflow.com/questions/33276966/php-keep-entered-values-after-validation-error -->
 
             <div class="form-group">
-                <input class="form-control" type="text" name="email" placeholder="Email">
+                <input class="form-control" type="text" name="email" placeholder="Email" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ''; ?>">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">

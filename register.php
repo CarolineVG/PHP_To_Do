@@ -117,13 +117,13 @@ if (!empty($_POST)){
             <?php endif; ?>
 
             <div class="form-group">
-                <input class="form-control" type="text" name="name" placeholder="Name">
+                <input class="form-control" type="text" name="name" placeholder="Name" value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ''; ?>">
             </div>
             <div class="form-group">
-                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" placeholder="Email" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ''; ?>">
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="education" placeholder="Education">
+                <input class="form-control" type="text" name="education" placeholder="Education" value="<?php echo isset($_POST["education"]) ? $_POST["education"] : ''; ?>">
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
