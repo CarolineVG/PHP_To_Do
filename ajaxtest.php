@@ -10,7 +10,7 @@
 <!-- write reaction -->
 <form id="mycomment" method="post">
     <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
-    <input type="submit" name="submit" value="Add Comment" id="submitajax" onclick="start()">
+    <input type="submit" name="submit" value="Add Comment" id="submitajax">
 </form>
 
 <div id="result"></div>

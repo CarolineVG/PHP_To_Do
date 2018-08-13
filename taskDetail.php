@@ -17,51 +17,8 @@ session_start();
 // get task id 
 $taskId = $_GET['task'];
 
-
-// new user
-$user = new User(); 
-$userId = $user->getUserIdByName($_SESSION['username']);
-
-    if(isset($_POST['submit'])){
-
-        // check if not empty
-        if (empty($_POST['message'])){
-            $error = "Please enter a message."; 
-        } else {
-        // get values
-        $text = $_POST['message'];
-
-        // new comment
-        $comment = new Comment();
-        $comment->setReaction($text);
-                    
-        // give userid to comment
-        $comment->setUserId($userId); 
-
-        // set task id 
-        $comment->setTaskId($taskId);
-
-        // get project id from task
-        $task = new Task();
-        $task->setTaskId($taskId); 
-        $projectId = $task->getProjectIdByTaskId();
-
-        //echo 'project ' . $projectId; 
-
-        // set project id
-        $comment->setProjectId($projectId); 
-
-        try {
-            $comment->addNewComment(); 
-            //header("Location: index.php"); 
-        } catch (Exception $e) {
-            $error = $e->getMessage(); 
-        }
-    }
-}
-
 /** header */
-include_once("header.php"); 
+include_once("header.php");
 ?>
 
 <div class="detailtask">
@@ -71,14 +28,12 @@ include_once("header.php");
 $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
-
-// show comments
-/*$comment = new Comment();
-$comment->setTaskid($taskId); 
-$comment->setUserId($userId); 
-$comment->showCommentsFromTask(); */
 ?>
 <hr>
+
+<!-- show comments -->
+<div class="media reactions">
+</div>
 
 <!-- write reaction -->
 <form id="mycomment" method="post">
