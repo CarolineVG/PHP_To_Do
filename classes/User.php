@@ -242,6 +242,14 @@ class User extends Database {
         return ($result['isAdmin'] ? 'Admin ' : 'Student ') . $result['education'];
 
     }
+
+    function showUser(){
+        $query = $this->connection()->prepare("SELECT * FROM user WHERE id = :id"); 
+        $query->bindParam(':id', $this->userId);
+        $query->execute(); 
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        echo $result['username'];
+    }
 }
 
 ?>

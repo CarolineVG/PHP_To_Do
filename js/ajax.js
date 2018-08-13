@@ -1,11 +1,5 @@
-
-    $(document).ready(function(){
-        $("#submitcomment").click(function(){
-            //event.preventDefault();
-
-            console.log("clicked"); 
-            $.post("taskDetail.php", function(data){
-                $("#result").html(data); 
-            });
-        });
-    });
+$("#submitcomment").on("click", function(e){
+    var comment = $("#message").val();
+    console.log(comment); 
+    e.preventDefault();
+});

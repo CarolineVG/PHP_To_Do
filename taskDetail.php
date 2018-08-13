@@ -73,10 +73,10 @@ $task->setTaskId($taskId);
 $task->showTaskFromId(); 
 
 // show comments
-$comment = new Comment();
+/*$comment = new Comment();
 $comment->setTaskid($taskId); 
 $comment->setUserId($userId); 
-$comment->showCommentsFromTask(); 
+$comment->showCommentsFromTask(); */
 ?>
 <hr>
 
@@ -87,53 +87,18 @@ $comment->showCommentsFromTask();
     <?php endif; ?>
 
     <textarea maxlength="140" name="message" id="message" placeholder="Add your comment!"></textarea>
+
     <a href="index.php" class="btn btn-back"><i class="fas fa-chevron-left"></i>Back</a>
-    <input type="submit" class="btn btn-addcomment" name="submit" value="Add Comment" id="submitcomment">
+
+    <input type="submit" class="btn btn-addcomment" name="submitcomment" value="Add Comment" id="submitcomment">
     
     <?php echo '<a class="btn btn-addcomment" href="uploadFile.php?task='. $taskId . '">Upload File</a>'; ?>
     
 </form>
-
-
-
 </li>
 </div>
 
 <div id="result">test</div>
-
-<script>
-/*
-$(document).ready(function(){
-    $("#submitcomment").click(function(){
-        echo "clicked"; 
-        // run ajax 
-        /*$.post("taskDetail.php", function(data){
-            // show response
-            $("#result").html(data); 
-        });*/
-     /*   
-    $.ajax({
-        type: "POST",
-        url: "addComment.php",
-        data: { reaction: reaction },
-        
-    }).done(function( res ) { //als ajax antwoord (echo) terugstuurt
-        console.log("Data Saved: "+ res);
-        $("#valueEditText").toggleClass('hidden visible');
-        $("#formEditText").toggleClass('visible hidden');
-        $("#editProfileText").show();
-        $("#valueEditText").html(profile_text);
-        
-    }).fail(function(res)  {
-       console.log("Sorry. Ajax failed");
-    }); 
-    });*/
-//});
-
-
-
-
-</script>
 
 <?php 
 /** footer */
