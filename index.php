@@ -32,23 +32,18 @@ include_once("header.php");
                     echo $user->showUserImage(); 
                     echo '<h1>' . $user->getUsername() . '</h1>';
                     echo '<h2>' . $user->showEducation() . '</h2>';
-                    
                     ?>
-
                 </div>
 
                 <div class="addproject">
                     <i class="fas fa-plus"></i>
                     <a href="newProject.php" class="btn btn-add">Add Project</a>
                 </div>
-
                 
                 <div class="addproject">
                     <i class="fas fa-plus"></i>
                     <a href="joinProject.php" class="btn btn-add">Join Project</a>
                 </div>
-
-                
 
                 <!-- my projects -->
                 <div class="my-project">
@@ -60,7 +55,6 @@ include_once("header.php");
                     $project->setUserId($user->getUserId()); 
                     $project->showProjects();
                 ?>
-
                 
                 <div class="my-project">
                 <h1>Joined Projects</h1>
@@ -71,7 +65,6 @@ include_once("header.php");
                         $project->showJoinedProjects();
                     ?>
                 </ul>
-
 
             </div>
             <!-- middle -->
@@ -143,8 +136,9 @@ include_once("header.php");
                     </div>
                 </form>
 
-                <?php include_once("deadlines.php"); ?>
-                
+                <li class="list-group-item filter-wrapper">
+                    <?php include_once("deadlines.php"); ?>
+                </li>
             </div>
         </div>
     </div>

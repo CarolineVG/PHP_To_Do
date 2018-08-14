@@ -423,6 +423,15 @@ class Task extends Database {
             $query->bindParam(':projectid', $this->projectId);
 
             $query->execute(); 
+
+            if($query->rowCount() == 0){
+                // no tasks
+                return '<div class="media media-filter">
+                There are no deadlines for you in this project!
+                </div>';
+                
+
+            } else {
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
                 $projectid = $result['projectId'];
@@ -439,18 +448,16 @@ class Task extends Database {
                 $z->execute(); 
                 $y = $z->fetch(PDO::FETCH_ASSOC);
                 
-                echo '<li class="list-group-item">
-                <div class="media">
+                return '<div class="media media-filter">
                 <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
                         <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
                         </h5> 
                         <p>' . $result['title'] . '</p>
                     </div>
-                </div>
-            </li>';
+                </div>';
                 
-            }
+            }}
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

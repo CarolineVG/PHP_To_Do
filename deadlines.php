@@ -21,8 +21,8 @@ include_once("header.php");
     $task->filterMyDeadlines(); 
 } else {*/
     /** show tasks from project */
-    $task = new Task();
+    /*$task = new Task();
     $task->setUserId($user->getUserId()); 
-    $task->showMyDeadlines(); 
+    $task->showMyDeadlines(); */
 //}
 ?>

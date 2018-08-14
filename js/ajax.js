@@ -29,9 +29,34 @@ $("#submitcomment").on("click", function(e){
 
 // filter deadlines
 $("#submitfilter").on("click", function(e){
+
+    // delete previous filter
+    $(".media-filter").remove(); 
     
     var projectId = $("#projects").val(); 
     console.log(projectId); 
+
+    //if (val != 0){
+        $.ajax({
+            method: "POST",
+            url: "ajax/filterDeadlines.php",
+            data: {projectId: projectId}
+        })
+        .done(function(res) { 
+            if(res.status == "success") {
+                // show tasks from project
+                console.log("success"); 
+                var output = res.output;
+
+                console.log(output); 
+                 
+                $(".projectDropdown").append(output);
+            } 
+        })
+        .fail(function(err){
+            console.log(err.status); 
+        });
+    //}
     e.preventDefault();
 });
 
