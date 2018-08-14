@@ -83,7 +83,7 @@ class Comment extends Database {
 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
                     echo '
-                    <div class="media">
+                    <div class="media reactions">
                         <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
                         <div class="media-body">
                             <h5>'.$r['username'].'</h5>

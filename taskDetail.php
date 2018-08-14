@@ -35,10 +35,10 @@ $comment = new Comment();
 $comment->setTaskId($taskId); 
 $comment->showCommentsFromTask(); 
 ?>
-<hr>
 
 <!-- show comments -->
 <div class="allreactions">
+
 </div>
 
 <!-- write reaction -->
