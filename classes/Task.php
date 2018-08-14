@@ -141,7 +141,7 @@ class Task extends Database {
                                     </div>
                                     <div class="media-input">
                                         <p>' . $r['username'] . '</p>
-                                        <input class="checkbox" type="checkbox">
+                                        <input class="checkbox" type="checkbox" id="check">
                                     </div>
                                 </div>
                             </div>

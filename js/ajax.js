@@ -60,3 +60,17 @@ $("#submitfilter").on("click", function(e){
     e.preventDefault();
 });
 
+// task checked
+$('#check').on('click',function (e) {
+    if ($('#check').is(':checked')) {
+        // checked
+        console.log("checked"); 
+
+        var checked = $("#check").val(); 
+        console.log(checked); 
+        e.preventDefault();
+    } else {
+        // unchecked
+        console.log("unchecked"); 
+    }
+});
