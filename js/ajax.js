@@ -8,7 +8,7 @@ $("#submitcomment").on("click", function(e){
     $.ajax({
         method: "POST",
         url: "ajax/addComment.php",
-        data: { comment: comment, taskid: taskid}
+        data: {comment: comment, taskid: taskid}
    })
    .done(function(res) { 
    
@@ -17,7 +17,7 @@ $("#submitcomment").on("click", function(e){
           var output = res.output;
            
            console.log("toegevoegd"); 
-          $(".reactions").append(output);
+          $(".allreactions").append(output);
           $("#message").val("");
        } 
    })

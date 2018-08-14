@@ -83,7 +83,7 @@ class Comment extends Database {
 
                 while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
                     echo '
-                    <div class="media reactions">
+                    <div class="media">
                         <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
                         <div class="media-body">
                             <h5>'.$r['username'].'</h5>
@@ -99,6 +99,7 @@ class Comment extends Database {
     }
 
     public function showNewComment(){
+        // select last record 
             $query = $this->connection()->prepare("SELECT * FROM comment WHERE id = :id"); 
             $query->bindParam(':id', $this->id);
             $query->execute(); 
@@ -112,8 +113,8 @@ class Comment extends Database {
                 $q->bindParam(':userid', $user);
                 $q->execute(); 
 
-                while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
-                    echo '
+                $r = $q->fetch(PDO::FETCH_ASSOC);
+                return '
                     <div class="media reactions">
                         <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
                         <div class="media-body">
@@ -121,7 +122,7 @@ class Comment extends Database {
                             <p class="comment">' . $result['reaction'] . '</p>
                         </div>
                     </div>';
-                }
+                
             
             }
     }

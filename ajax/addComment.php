@@ -33,10 +33,12 @@ if(!empty($_POST)){
 
     try {
         $comment->addNewComment(); 
-        $id = $comment->getIdFromDb(); 
+        $id = $comment->getIdFromDb();
+        $comment->setId($id);  
+        $output = $comment->showNewComment(); 
         // feedback
         $response['status'] = 'success'; 
-        $response['output'] = $id;  
+        $response['output'] = $output;  
     } catch (Exception $e) {
         $error = $e->getMessage(); 
     }

@@ -38,7 +38,7 @@ $comment->showCommentsFromTask();
 <hr>
 
 <!-- show comments -->
-<div class="media reactions">
+<div class="allreactions">
 </div>
 
 <!-- write reaction -->
@@ -58,8 +58,6 @@ $comment->showCommentsFromTask();
 </form>
 </li>
 </div>
-
-<div id="result">test</div>
 
 <?php 
 /** footer */
