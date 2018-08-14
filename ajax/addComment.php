@@ -7,21 +7,37 @@ include_once("../classes/User.php");
 include_once("../classes/Comment.php");
 
 /** SESSION */
-//session_start(); 
+session_start(); 
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// new user
+$user = new User(); 
+$userId = $user->getUserIdByName($_SESSION['username']);
 
 if(!empty($_POST)){
     $value = $_POST['comment'];
+    $taskId = $_POST['taskid'];
+
     // add to database 
     $comment = new Comment();
     $comment->setReaction($value);
-    $comment->test();
+    $comment->setUserId($userId); 
+    $comment->setTaskId($taskId); 
 
-    // send feedback 
-    $response["status"] = "success";
-    //$response['output'] = $output; 
+    // get project id from task
+    $task = new Task();
+    $task->setTaskId($taskId); 
+    $projectId = $task->getProjectIdByTaskId();
+
+    // set project id
+    $comment->setProjectId($projectId); 
+
+    try {
+        $comment->addNewComment(); 
+        // feedback
+        $response['status'] = 'success';
+    } catch (Exception $e) {
+        $error = $e->getMessage(); 
+    }
 }
 
 header('Content-type: application/json');

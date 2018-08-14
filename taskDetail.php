@@ -28,25 +28,6 @@ include_once("header.php");
 $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
-
-// testen
-/*if(!empty($_POST)){
-
-
-    $value = $_POST['message'];
-    echo $value; 
-
-    
-    /*if(isset($_POST['submit'])){
-        // add to database 
-        $comment = new Comment();
-        $comment->setReaction($value);
-        $comment->test();
-    }
-
-    
-}*/
-
 ?>
 <hr>
 

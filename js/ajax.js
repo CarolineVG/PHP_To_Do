@@ -1,10 +1,14 @@
 $("#submitcomment").on("click", function(e){
     var comment = $("#message").val();
+    var taskid = $(".task_wrapper").attr('id'); 
+
+    console.log(taskid); 
+
 
     $.ajax({
         method: "POST",
         url: "ajax/addComment.php",
-        data: { comment: comment}
+        data: { comment: comment, taskid: taskid}
    })
    .done(function(res) { 
    

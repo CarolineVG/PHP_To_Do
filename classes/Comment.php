@@ -123,7 +123,7 @@ class Comment extends Database {
     public function test(){
         $reaction = $this->getReaction(); 
         $taskId = 1; 
-        $userId = 1;
+        $userId = $this->getUserId(); 
         $projectId = 1;
         
        try {
