@@ -1,8 +1,8 @@
 <?php
 /** INCLUDES */
-include_once(__ROOT__."classes/Database.php"); 
-include_once(__ROOT__."classes/User.php"); 
-include_once(__ROOT__."classes/Admin.php"); 
+include_once("classes/Database.php"); 
+include_once("classes/User.php"); 
+include_once("classes/Admin.php"); 
 
 if (!empty($_POST)){
     //echo "ok"; 

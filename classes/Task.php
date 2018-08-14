@@ -398,7 +398,8 @@ class Task extends Database {
                     $deadline = $result['deadline'];
                 }
                 
-                echo '<li class="list-group-item">
+                echo '<a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">        
+                <li class="list-group-item">
                 <div class="media">
                     <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">

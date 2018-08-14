@@ -5,9 +5,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 /** INCLUDES */
-include_once(__ROOT__."classes/Database.php");
-include_once(__ROOT__."classes/User.php");
-include_once(__ROOT__."classes/Task.php");
+include_once("classes/Database.php");
+include_once("classes/User.php");
+include_once("classes/Task.php");
 
 
 /** SESSION */

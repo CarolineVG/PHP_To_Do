@@ -1,9 +1,9 @@
 <?php
 /** INCLUDES */
-include_once(__ROOT__."classes/Database.php"); 
-include_once(__ROOT__."classes/Project.php");  
-include_once(__ROOT__."classes/Task.php"); 
-include_once(__ROOT__."classes/Comment.php"); 
+include_once("classes/Database.php"); 
+include_once("classes/Project.php");  
+include_once("classes/Task.php"); 
+include_once("classes/Comment.php"); 
 
 /** SESSION */
 session_start();
