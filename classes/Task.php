@@ -400,7 +400,7 @@ class Task extends Database {
                 
                 echo '<a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">        
                 <li class="list-group-item">
-                <div class="media">
+                <div class="media" id="' . $projectid . '">
                     <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
                         <h5>'. $r['title'] . ' <span>' . $deadline . '</span>

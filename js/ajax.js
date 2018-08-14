@@ -1,3 +1,4 @@
+// comments
 $("#submitcomment").on("click", function(e){
     var comment = $("#message").val();
     var taskid = $(".task_wrapper").attr('id'); 
@@ -25,3 +26,12 @@ $("#submitcomment").on("click", function(e){
     }
     e.preventDefault();
 });
+
+// filter deadlines
+$("#submitfilter").on("click", function(e){
+    
+    var projectId = $("#projects").val(); 
+    console.log(projectId); 
+    e.preventDefault();
+});
+

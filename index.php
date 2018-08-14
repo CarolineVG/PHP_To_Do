@@ -138,7 +138,7 @@ include_once("header.php");
                             ?>
                         </select>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block btn-filter" type="submit" name="submit">Filter</button>
+                            <button class="btn btn-primary btn-block btn-filter" type="submit" name="submitfilter" id="submitfilter">Filter</button>
                         </div>
                     </div>
                 </form>
