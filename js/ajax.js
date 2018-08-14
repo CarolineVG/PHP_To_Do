@@ -14,11 +14,11 @@ $("#submitcomment").on("click", function(e){
    
        if(res.status == "success") {
            // show new comment
-          // var output = res.output;
+          var output = res.output;
            
            console.log("toegevoegd"); 
-          // $(".reactions").append(output);
-          // $("#message").val("");
+          $(".reactions").append(output);
+          $("#message").val("");
        } 
    })
    .fail(function(err){

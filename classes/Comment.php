@@ -6,6 +6,7 @@ class Comment extends Database {
     private $reaction;
     private $taskId; 
     private $userId;
+    private $id; 
 
     /** getters */
     public function getReaction(){
@@ -22,6 +23,10 @@ class Comment extends Database {
 
     public function getProjectId(){
         return $this->projectId;
+    }
+
+    public function getId(){
+        return $this->id;
     }
 
     /** setters */
@@ -45,7 +50,22 @@ class Comment extends Database {
         return $this; 
     }
 
+    public function setId($id){
+        $this->id = $id;
+        return $this; 
+    }
+
     /** functions */
+    public function getIdFromDb(){
+        $query = $this->connection()->prepare("SELECT * FROM comment WHERE reaction = :reaction AND userId = :userid"); 
+        $query->bindParam(':reaction', $this->reaction);
+        $query->bindParam(':userid', $this->userId);$query->execute(); 
+            
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+        return $result['id'];
+    }
+
     public function showCommentsFromTask(){
         try {
             $query = $this->connection()->prepare("SELECT * FROM comment WHERE taskId = :id"); 
@@ -76,6 +96,34 @@ class Comment extends Database {
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
+    }
+
+    public function showNewComment(){
+            $query = $this->connection()->prepare("SELECT * FROM comment WHERE id = :id"); 
+            $query->bindParam(':id', $this->id);
+            $query->execute(); 
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                // get user
+                $user = $result['userId'];
+
+                // userid to name 
+                $q = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
+                $q->bindParam(':userid', $user);
+                $q->execute(); 
+
+                while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
+                    echo '
+                    <div class="media reactions">
+                        <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                        <div class="media-body">
+                            <h5>'.$r['username'].'</h5>
+                            <p class="comment">' . $result['reaction'] . '</p>
+                        </div>
+                    </div>';
+                }
+            
+            }
     }
 
     public function addNewComment(){

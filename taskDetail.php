@@ -25,9 +25,15 @@ include_once("header.php");
 <li class="list-group-item detail-task">
     
 <?php 
+// show task
 $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
+
+// show comments
+$comment = new Comment();
+$comment->setTaskId($taskId); 
+$comment->showCommentsFromTask(); 
 ?>
 <hr>
 
