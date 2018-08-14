@@ -1,9 +1,9 @@
 <?php
 /** INCLUDES */
-include_once("classes/Database.php"); 
-include_once("classes/Project.php"); 
-include_once("classes/User.php"); 
-include_once("classes/Task.php"); 
+include_once(__ROOT__."classes/Database.php"); 
+include_once(__ROOT__."classes/Project.php"); 
+include_once(__ROOT__."classes/User.php"); 
+include_once(__ROOT__."classes/Task.php"); 
 
 // only show this page when user is logged in
 session_start(); 

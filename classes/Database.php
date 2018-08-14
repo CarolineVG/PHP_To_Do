@@ -1,6 +1,8 @@
 <?php
 class Database {
+    // source: cursus school
     private static $conn;
+
      public static function connection() {
         // SET ROOT OF THE FILES
         if(!defined('__ROOT__')){

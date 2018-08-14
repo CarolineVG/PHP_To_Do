@@ -2,8 +2,8 @@
 
 echo "ja"; 
 /** INCLUDES */
-include_once("classes/Database.php"); 
-include_once("classes/Task.php"); 
+include_once(__ROOT__."classes/Database.php"); 
+include_once(__ROOT__."classes/Task.php"); 
 
 /** SESSION */
 session_start();
