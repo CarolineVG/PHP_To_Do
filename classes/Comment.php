@@ -120,6 +120,25 @@ class Comment extends Database {
         }
     }
 
+    public function test(){
+        $reaction = $this->getReaction(); 
+        $taskId = 1; 
+        $userId = 1;
+        $projectId = 1;
+        
+       try {
+            $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId, projectId) VALUES (:reaction, :taskid, :userid, :projectId);"); 
+            $query->bindParam(':reaction', $reaction);
+            $query->bindParam(':taskid', $taskId);
+            $query->bindParam(':userid', $userId);
+            $query->bindParam(':projectId', $projectId);
+            $query->execute(); 
+
+        } catch (PDOException $e) {
+            print_r($e->getMessage);
+        }
+    }
+
 }
 
 ?>

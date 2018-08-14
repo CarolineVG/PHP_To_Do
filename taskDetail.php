@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 include_once("classes/Database.php"); 
 include_once("classes/Task.php"); 
 include_once("classes/User.php"); 
-include_once("classes/Comment.php"); 
+include_once("classes/Comment.php");
 
 /** SESSION */
 session_start(); 
@@ -28,6 +28,25 @@ include_once("header.php");
 $task = new Task();
 $task->setTaskId($taskId); 
 $task->showTaskFromId(); 
+
+// testen
+/*if(!empty($_POST)){
+
+
+    $value = $_POST['message'];
+    echo $value; 
+
+    
+    /*if(isset($_POST['submit'])){
+        // add to database 
+        $comment = new Comment();
+        $comment->setReaction($value);
+        $comment->test();
+    }
+
+    
+}*/
+
 ?>
 <hr>
 

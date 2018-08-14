@@ -10,15 +10,15 @@ $("#submitcomment").on("click", function(e){
    
        if(res.status == "success") {
            // show new comment
-           var output = res.comment;
+          // var output = res.output;
            
-           console.log(output); 
-           $(".reactions").append(output);
-           $("#message").val("");
+           console.log("toegevoegd"); 
+          // $(".reactions").append(output);
+          // $("#message").val("");
        } 
    })
    .fail(function(err){
-    console.log(res.status); 
+    console.log(err.status); 
    });
 
     e.preventDefault();

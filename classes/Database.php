@@ -1,19 +1,23 @@
 <?php
-
-
 class Database {
+    private static $conn;
+     public static function connection() {
+        // SET ROOT OF THE FILES
+        if(!defined('__ROOT__')){
+            define('__ROOT__', dirname(dirname(__FILE__)));
+        }
 
-    // connection
-    public function connection(){  
-        require("./settings.php"); 
+        // REQUIRE SETTINGS.PHP
+        require_once(__ROOT__.'/settings.php');
 
-        try {
-            $conn = new PDO("mysql:host=".$settings['host']."; dbname=".$settings['databaseName'] . ";", $settings['username'], $settings['password']);
-            //echo "connection ok"; 
-            return $conn;
-        } catch (PDOException $e) {
-            print_r($e->getMessage); 
-            //echo "not ok"; 
+        // IF CONNECTION DOESNT EXIST YET -> MAKE NEW CONNECTION
+        if( self::$conn == null ){
+            self::$conn = new PDO("mysql:host=".$settings['host']."; dbname=".$settings['databaseName'] . ";", $settings['username'], $settings['password']);
+                
+            return self::$conn;
+        // ELSE RETURN EXISTING CONNECTION 
+        } else {
+            return self::$conn;
         }
     }
 }
