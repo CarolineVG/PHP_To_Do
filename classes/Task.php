@@ -141,7 +141,7 @@ class Task extends Database {
                                     </div>
                                     <div class="media-input">
                                         <p>' . $r['username'] . '</p>
-                                        <input class="checkbox" type="checkbox" id="check">
+                                        <input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">
                                     </div>
                                 </div>
                             </div>
@@ -151,6 +151,15 @@ class Task extends Database {
             }
             
             
+    }
+
+    public function taskIsDone(){
+        $status = "DONE";
+        
+        $query = $this->connection()->prepare("UPDATE task SET taskStatus = :taskStatus WHERE id = :id"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->bindParam(':taskStatus', $status);
+            $query->execute(); 
     }
 
     public function checkWorkHours(){

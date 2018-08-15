@@ -80,7 +80,7 @@ include_once("header.php");
                     ?>
                 </div>
 
-                <ul class="list-group">
+                <ul class="list-group alltasks">
 
                 <?php 
                     /** show tasks from project */
