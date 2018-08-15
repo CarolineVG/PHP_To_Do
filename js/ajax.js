@@ -65,8 +65,6 @@ $('#check').on('click',function (e) {
     if ($('#check').is(':checked')) {
         // checked
         var taskId = $("#check").attr('data-value');
-        //console.log(checked);  
-
         $.ajax({
             method: "POST",
             url: "ajax/checkTask.php",
@@ -74,13 +72,10 @@ $('#check').on('click',function (e) {
         })
         .done(function(res) { 
             if(res.status == "success") {
-                // change status to done
-                console.log("success"); 
-                //var output = res.output;
-
-                //console.log(output); 
-                 
-                //$(".alltasks").append(output);
+                // change status to DONE
+                // get id from div status
+                var showid = $('#id' + taskId).attr('id');
+                $('#'+showid).html(res.output); 
             } 
         })
         .fail(function(err){
@@ -91,5 +86,24 @@ $('#check').on('click',function (e) {
     } else {
         // unchecked
         console.log("unchecked"); 
+
+        var taskId = $("#check").attr('data-value');
+        $.ajax({
+            method: "POST",
+            url: "ajax/uncheckTask.php",
+            data: {taskId: taskId}
+        })
+        .done(function(res) { 
+            if(res.status == "success") {
+                // change status to TO DO
+                console.log(res.output); 
+                // get id from div status
+                var showid = $('#id' + taskId).attr('id');
+                $('#'+showid).html(res.output); 
+            } 
+        })
+        .fail(function(err){
+            console.log(err.status); 
+        });
     }
 });

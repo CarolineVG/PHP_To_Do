@@ -88,7 +88,9 @@ include_once("header.php");
                     /** GET PROJECT ID */
                     if (isset($_GET['project'])) {
                         $projectId = $_GET['project'];
-                        $task->setProjectId($projectId); 
+                        $task->setProjectId($projectId);
+                        // current user
+                        $task->setUserId($id);  
                         $task->showTasksFromProject(); 
                     } else {
                         echo "Select a project to see the tasks."; 

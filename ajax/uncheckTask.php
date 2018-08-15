@@ -18,13 +18,13 @@ if(!empty($_POST)){
     // select from database 
     $task = new Task();
     $task->setTaskId($value); 
-    $task->setUserId($userId);
+    $task->setUserId($userId); 
      
     try {
-        $task->taskIsDone();
+        $task->taskToDo();
         // feedback
         $response['status'] = 'success'; 
-        $response['output'] = 'DONE';  
+        $response['output'] = 'TO DO';  
     } catch (Exception $e) {
         $error = $e->getMessage(); 
     }

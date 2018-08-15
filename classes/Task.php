@@ -110,11 +110,20 @@ class Task extends Database {
                 // check status of task 
                 // to do 
                 // if not started -> class orange, else ... 
-
-
                 // show tasks
                 while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+
                     $userid = $result['userId'];
+
+                    // current user
+                    $currentUser = $this->getUserId(); 
+                    if ($currentUser != $userid){
+                        $checkbox = '<input class="checkbox" disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                    } else {
+                        $checkbox = '<input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                    }
+
+
     
                     // select username from user where id = :userId
                     $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
@@ -129,10 +138,9 @@ class Task extends Database {
                         $deadline = $result['deadline'];
                     }
 
-                    
-
                     // check status
                     if ($result['taskStatus'] != "DONE") {
+                        // TO DO
                         echo '<li class="list-group-item">
                                 <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
                                 <div class="media">
@@ -140,18 +148,19 @@ class Task extends Database {
                                     <div class="media-body">
                                         <div class="media-text">
                                             <h5>'. $result['title'] . '
-                                            <p class="status orange">' . $result['taskStatus'] . '</p> 
+                                            <p class="status orange"  id="id' . $result['id'] . '">' . $result['taskStatus'] . '</p> 
                                             <p class="deadline">' . $deadline . '</h5>
                                         </div>
                                         <div class="media-input">
                                             <p>' . $r['username'] . '</p>
-                                            <input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">
+                                            '. $checkbox . '
                                         </div>
                                     </div>
                                 </div>
                             <hr>
                         </li>';
                     } else {
+                        // DONE
                         echo '<li class="list-group-item">
                                 <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
                                 <div class="media">
@@ -159,21 +168,18 @@ class Task extends Database {
                                     <div class="media-body">
                                         <div class="media-text">
                                             <h5>'. $result['title'] . '
-                                            <p class="status orange">' . $result['taskStatus'] . '</p> 
+                                            <p class="status orange" id="' . $result['id'] . '">' . $result['taskStatus'] . '</p> 
                                             <p class="deadline">' . $deadline . '</h5>
                                         </div>
                                         <div class="media-input">
                                             <p>' . $r['username'] . '</p>
-                                            <input class="checkbox" type="checkbox" id="check" checked data-value="' . $result['id'] . '">
+                                            '. $checkbox . '
                                         </div>
                                     </div>
                                 </div>
                             <hr>
                         </li>';
                     }
-
-    
-                    
                 }
             }
     }
@@ -184,7 +190,17 @@ class Task extends Database {
         $query = $this->connection()->prepare("UPDATE task SET taskStatus = :taskStatus WHERE id = :id AND userId = :user"); 
             $query->bindParam(':id', $this->taskId);
             $query->bindParam(':taskStatus', $status);
-            $query->bindParam(':user', $this->getUserId()); 
+            $query->bindParam(':user', $this->userId); 
+            $query->execute(); 
+    }
+
+    public function taskToDo(){
+        $status = "TO DO";
+
+        $query = $this->connection()->prepare("UPDATE task SET taskStatus = :taskStatus WHERE id = :id AND userId = :user"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->bindParam(':taskStatus', $status);
+            $query->bindParam(':user', $this->userId); 
             $query->execute(); 
     }
 
