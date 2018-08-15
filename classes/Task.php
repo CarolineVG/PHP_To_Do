@@ -149,16 +149,15 @@ class Task extends Database {
                     </li>';
                 }
             }
-            
-            
     }
 
     public function taskIsDone(){
         $status = "DONE";
-        
-        $query = $this->connection()->prepare("UPDATE task SET taskStatus = :taskStatus WHERE id = :id"); 
+
+        $query = $this->connection()->prepare("UPDATE task SET taskStatus = :taskStatus WHERE id = :id AND userId = :user"); 
             $query->bindParam(':id', $this->taskId);
             $query->bindParam(':taskStatus', $status);
+            $query->bindParam(':user', $this->getUserId()); 
             $query->execute(); 
     }
 
