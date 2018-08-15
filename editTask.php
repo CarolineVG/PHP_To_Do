@@ -31,7 +31,6 @@ if (!empty($_POST)){
     $workhours = $_POST['workhours'];    
     $startdate = $_POST['startdate'];
     $deadline = $_POST['deadline'];
-    $taskstatus = $_POST['taskStatus'];
     $projectname = $_POST['projectname'];
     echo $projectname; 
 
@@ -50,7 +49,6 @@ if (!empty($_POST)){
                 $task->setProjectId($projectid); 
                 $task->setDeadline($deadline); 
                 $task->setUserId($userId); 
-                $task->setTaskStatus($taskstatus); 
 
                     try {
                         $task->editTask(); 

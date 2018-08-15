@@ -73,16 +73,18 @@ $('#check').on('click',function (e) {
         .done(function(res) { 
             if(res.status == "success") {
                 // change status to DONE
-                // get id from div status
+                // change color to green
                 var showid = $('#id' + taskId).attr('id');
                 $('#'+showid).html(res.output); 
+                $('#'+showid).addClass("green");
+                // set checkbox on checked
+                $('#check').prop('checked', true); 
+
             } 
         })
         .fail(function(err){
             console.log(err.status); 
         });
-
-        //e.preventDefault();
     } else {
         // unchecked
         console.log("unchecked"); 
@@ -99,7 +101,10 @@ $('#check').on('click',function (e) {
                 console.log(res.output); 
                 // get id from div status
                 var showid = $('#id' + taskId).attr('id');
+                console.log(showid); 
                 $('#'+showid).html(res.output); 
+                $('#'+showid).removeClass("green");
+                $('#'+showid).addClass("orange");
             } 
         })
         .fail(function(err){

@@ -107,23 +107,34 @@ class Task extends Database {
                 echo "This project doesn't have a task yet. "; 
 
             } else {
-                // check status of task 
-                // to do 
-                // if not started -> class orange, else ... 
-                // show tasks
                 while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
 
                     $userid = $result['userId'];
 
                     // current user
                     $currentUser = $this->getUserId(); 
+
                     if ($currentUser != $userid){
-                        $checkbox = '<input class="checkbox" disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        // different user
+                        // check status
+                        if ($result['taskStatus'] != "DONE") {
+                            // to do
+                            $checkbox = '<input class="checkbox" disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        } else {
+                            // done
+                            $checkbox = '<input class="checkbox" checked disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        }
                     } else {
-                        $checkbox = '<input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        // current user
+                        // check status
+                        if ($result['taskStatus'] != "DONE") {
+                            // to do
+                            $checkbox = '<input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        } else {
+                            // done
+                            $checkbox = '<input class="checkbox" checked type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                        }
                     }
-
-
     
                     // select username from user where id = :userId
                     $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
@@ -140,7 +151,7 @@ class Task extends Database {
 
                     // check status
                     if ($result['taskStatus'] != "DONE") {
-                        // TO DO
+                        // TO DO - ORANGE
                         echo '<li class="list-group-item">
                                 <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
                                 <div class="media">
@@ -160,7 +171,7 @@ class Task extends Database {
                             <hr>
                         </li>';
                     } else {
-                        // DONE
+                        // DONE - GREEN
                         echo '<li class="list-group-item">
                                 <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
                                 <div class="media">
@@ -168,7 +179,7 @@ class Task extends Database {
                                     <div class="media-body">
                                         <div class="media-text">
                                             <h5>'. $result['title'] . '
-                                            <p class="status orange" id="' . $result['id'] . '">' . $result['taskStatus'] . '</p> 
+                                            <p class="status green" id="id' . $result['id'] . '">' . $result['taskStatus'] . '</p> 
                                             <p class="deadline">' . $deadline . '</h5>
                                         </div>
                                         <div class="media-input">
@@ -576,11 +587,6 @@ class Task extends Database {
             </div>
 
             <div class="form-group">
-                Status
-                <input class="form-control" type="text" name="taskStatus" id="taskStatus" value="'.$result['taskStatus'].'">
-            </div>
-
-            <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" name="submit">Edit Task</button>
             </div>';
         }
@@ -597,19 +603,17 @@ class Task extends Database {
         $workhours = $this->getWorkhours(); 
         $deadline = $this->getDeadline(); 
         $startDate = $this->getStartDate(); 
-        $status = $this->getTaskStatus(); 
         $projectId = $this->getProjectId();
         $user = $this->getUserId();
         
        try {
-            $query = $this->connection()->prepare("UPDATE task SET title=:title,userId=:userid, projectId=:projectid,startDate=:startdate,deadline=:deadline,taskStatus=:taskstatus,workhours=:workhours WHERE id =:id"); 
+            $query = $this->connection()->prepare("UPDATE task SET title=:title,userId=:userid, projectId=:projectid,startDate=:startdate,deadline=:deadline,workhours=:workhours WHERE id =:id"); 
             $query->bindParam(':id', $id); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
             $query->bindParam(':projectid', $projectId);
             $query->bindParam(':startdate', $startDate);
             $query->bindParam(':deadline', $deadline);
-            $query->bindParam(':taskstatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute();
 

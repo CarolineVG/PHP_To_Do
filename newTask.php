@@ -46,7 +46,7 @@ if (!empty($_POST)){
                 // today
                 $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
                 $today = date("Y-m-d");
-                $task->setTaskStatus("NOT STARTED");
+                $task->setTaskStatus("TO DO");
                 $task->setStartDate($today);
 
                 if (!empty($deadline)){ 
