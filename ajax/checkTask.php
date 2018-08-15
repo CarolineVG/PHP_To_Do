@@ -18,6 +18,7 @@ if(!empty($_POST)){
     // select from database 
     $task = new Task();
     $task->setTaskId($value); 
+    $task->setUserId($userId); 
      
     try {
         $task->taskIsDone();

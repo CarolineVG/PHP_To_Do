@@ -128,25 +128,52 @@ class Task extends Database {
                     } else {
                         $deadline = $result['deadline'];
                     }
-    
-                    echo '<li class="list-group-item">
-                            <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
-                            <div class="media">
-                                <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
-                                <div class="media-body">
-                                    <div class="media-text">
-                                        <h5>'. $result['title'] . '
-                                        <p class="status orange">' . $result['taskStatus'] . '</p> 
-                                        <p class="deadline">' . $deadline . '</h5>
-                                    </div>
-                                    <div class="media-input">
-                                        <p>' . $r['username'] . '</p>
-                                        <input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">
+
+                    
+
+                    // check status
+                    if ($result['taskStatus'] != "DONE") {
+                        echo '<li class="list-group-item">
+                                <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
+                                <div class="media">
+                                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                                    <div class="media-body">
+                                        <div class="media-text">
+                                            <h5>'. $result['title'] . '
+                                            <p class="status orange">' . $result['taskStatus'] . '</p> 
+                                            <p class="deadline">' . $deadline . '</h5>
+                                        </div>
+                                        <div class="media-input">
+                                            <p>' . $r['username'] . '</p>
+                                            <input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <hr>
-                    </li>';
+                            <hr>
+                        </li>';
+                    } else {
+                        echo '<li class="list-group-item">
+                                <a class="clickdetail" href="taskDetail.php?task=' . $result['id'] . '" data-id="'. $result['id'] . '">
+                                <div class="media">
+                                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                                    <div class="media-body">
+                                        <div class="media-text">
+                                            <h5>'. $result['title'] . '
+                                            <p class="status orange">' . $result['taskStatus'] . '</p> 
+                                            <p class="deadline">' . $deadline . '</h5>
+                                        </div>
+                                        <div class="media-input">
+                                            <p>' . $r['username'] . '</p>
+                                            <input class="checkbox" type="checkbox" id="check" checked data-value="' . $result['id'] . '">
+                                        </div>
+                                    </div>
+                                </div>
+                            <hr>
+                        </li>';
+                    }
+
+    
+                    
                 }
             }
     }
