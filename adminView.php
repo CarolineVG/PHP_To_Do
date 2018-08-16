@@ -4,6 +4,7 @@ include_once("classes/Database.php");
 include_once("classes/Project.php"); 
 include_once("classes/User.php"); 
 include_once("classes/Task.php"); 
+include_once("classes/Admin.php"); 
 
 // only show this page when user is logged in
 session_start(); 
@@ -87,6 +88,16 @@ include_once("header.php");
                         </div>
                     </div>
                 </div>
+
+                <h1>Admins</h1>
+                <li class="list-group-item">
+                    <!-- show all admins -->
+                    <?php 
+                        $admin = new Admin();
+                        $admin->setUsername($_SESSION['username']);
+                        $admin->showAllAdmins(); 
+                    ?> 
+                </li>
             </div>
         </div>
     </div>

@@ -4,13 +4,6 @@ include_once("Database.php");
 
 class Admin extends Database {
 
-    /** setters */
-    public function setAdmin(){
-        $this->admin = 1; 
-        return $this;
-    }
-
-    
     /** variables */
     private $username; 
     private $education;
@@ -59,6 +52,68 @@ class Admin extends Database {
             print_r($e->getMessage);
         }
 
+    }
+
+    public function showAllAdmins(){
+
+        $query = $this->connection()->prepare('SELECT * FROM `admin`');
+        $query->execute(); 
+
+        while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+            $username = $result['username'];
+            // user picture
+            $q = $this->connection()->prepare("SELECT * FROM user WHERE username = :username"); 
+            $q->bindParam(':username', $username);
+            $q->execute(); 
+
+            while ($r = $q->fetch(PDO::FETCH_ASSOC)){
+                if ($result['username'] == $this->getUsername()){
+                    // cant delete your own
+                    echo ' <div class="media">
+                            <img src="' . $r['picture'] . '">
+                            <div class="media-body">
+                                <div class="media-text">
+                                    <h5>' . $result['username'] . '</h5>
+                                    <a class="disabled" disabled href="deleteAdmin.php?admin=' . $result['id'] . '">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <hr>';
+                } else {
+                    echo ' <div class="media">
+                            <img src="' . $r['picture'] . '">
+                            <div class="media-body">
+                                <div class="media-text">
+                                    <h5>' . $result['username'] . '</h5>
+                                    <a href="deleteAdmin.php?admin=' . $result['id'] . '">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <hr>';
+                }
+
+
+                
+            }
+        }
+
+
+
+    }
+
+    public function deleteAdmin(){
+        // get admin id
+        $id = $this->getAdminId(); 
+
+        echo $id; 
+
+        $query = $this->connection()->prepare('DELETE FROM `admin` WHERE id = :id');
+        $query->bindParam(':id', $id);
+        $query->execute(); 
     }
 
 }
