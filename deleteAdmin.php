@@ -2,6 +2,7 @@
 /** INCLUDES */
 include_once("classes/Database.php"); 
 include_once("classes/Admin.php");  
+include_once("classes/User.php");  
 
 /** SESSION */
 session_start();
@@ -13,6 +14,10 @@ session_start();
     /** delete admin */
     $admin = new Admin(); 
     $admin->setAdminId($id); 
+
+    // delete user
+    $user = new User; 
+    $user->setAdminId($id);
 
     try {
         $admin->deleteAdmin();

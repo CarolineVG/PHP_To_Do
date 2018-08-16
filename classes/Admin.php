@@ -109,11 +109,27 @@ class Admin extends Database {
         // get admin id
         $id = $this->getAdminId(); 
 
-        echo $id; 
-
+        // delete admin
         $query = $this->connection()->prepare('DELETE FROM `admin` WHERE id = :id');
         $query->bindParam(':id', $id);
         $query->execute(); 
+
+        // delete user
+        $q = $this->connection()->prepare('DELETE FROM `user` WHERE adminId = :adminId');
+        $q->bindParam(':adminId', $id);
+        $q->execute(); 
+
+    }
+
+    public function getAdminIdFromUsername(){
+        $username = $this->getUsername(); 
+
+        $q = $this->connection()->prepare("SELECT * FROM `admin` WHERE username = :username"); 
+        $q->bindParam(':username', $username);
+        $q->execute(); 
+        $r = $q->fetch(PDO::FETCH_ASSOC);
+
+        return $r['id'];
     }
 
 }

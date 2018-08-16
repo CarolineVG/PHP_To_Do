@@ -11,7 +11,8 @@ class User extends Database {
     private $hash; 
     private $userId; 
     private $image; 
-    protected $admin; 
+    private $admin; 
+    private $adminId; 
 
     /** getters */
     public function getUsername(){
@@ -53,6 +54,11 @@ class User extends Database {
     public function getAdmin(){
         echo $this->admin; 
         return 'admin: ' . $this->admin; 
+    }
+
+    public function getAdminId(){
+        echo $this->adminId; 
+        return $this->adminId; 
     }
 
     /** setters */
@@ -98,6 +104,11 @@ class User extends Database {
 
     public function setAdmin($admin){
         $this->admin = $admin;
+        return $this; 
+    }
+    
+    public function setAdminId($adminId){
+        $this->adminId = $adminId;
         return $this; 
     }
 
@@ -169,13 +180,14 @@ class User extends Database {
     function register(){
         try {
             //echo "register"; 
-            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture, isAdmin) VALUES (:username, :education, :email, :pass, :picture, :isAdmin)");
+            $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture, isAdmin, adminId) VALUES (:username, :education, :email, :pass, :picture, :isAdmin, :adminId)");
             $query->bindParam(':username', $this->username);
             $query->bindParam(':education', $this->education);
             $query->bindParam(':email', $this->mail);
             $query->bindParam(':pass', $this->hash);
             $query->bindParam(':picture', $this->image);
             $query->bindParam(':isAdmin', $this->admin); 
+            $query->bindParam(':adminId', $this->adminId); 
 
             $query->execute(); 
 

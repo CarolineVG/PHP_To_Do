@@ -51,6 +51,8 @@ if (!empty($_POST)){
                 // make new user 
                 $user = new User;
                 $user->setAdmin($adminValue); 
+
+                $user->setAdminId(0); 
     
                 // assign values to user
                 $user->setUsername($username);
