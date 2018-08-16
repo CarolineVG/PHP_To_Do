@@ -26,7 +26,7 @@ if (!empty($_POST)){
         $defaultImage = "uploads/user.png"; 
 
         // check if admin 
-        /*if (isset($_POST['admin'])){
+        if (isset($_POST['admin'])){
             
             // make new admin
             $admin = new Admin; 
@@ -41,11 +41,7 @@ if (!empty($_POST)){
             
             $adminValue = 1;
 
-        } else {
-            $adminValue = 0;
-        }*/
-
-        $adminValue = 0;
+        }
         
             try {
                 // make new user 
@@ -76,7 +72,7 @@ if (!empty($_POST)){
                                 
                     // register
                     $user->register();
-                    header('Location: login.php'); 
+                    header('Location: adminView.php'); 
     
                 } catch (Exception $e){
                     // show error
@@ -97,7 +93,7 @@ if (!empty($_POST)){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Register Admin</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="fonts/font-awesome.min.css">
@@ -133,9 +129,9 @@ if (!empty($_POST)){
             <div class="form-group">
                 <input class="form-control" type="password" name="password2" placeholder="Repeat Password">
             </div>
-           <!-- <div class="form-group">
-                <label><input type="checkbox" name = "admin"> Register as Admin</label>
-            </div> -->
+           <div class="form-group">
+                <label><input type="checkbox" checked name = "admin"> Register as Admin</label>
+            </div>
 
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit" name="submit">Create Account</button>

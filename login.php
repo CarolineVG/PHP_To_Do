@@ -26,9 +26,6 @@ if (!empty($_POST)){
         } catch (Exception $e) {
             $error = $e->getMessage(); 
         }
-    
-    
-
 }
 
 /** header */

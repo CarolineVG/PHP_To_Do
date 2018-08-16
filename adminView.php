@@ -73,7 +73,7 @@ include_once("header.php");
             <!-- right -->
             <div class="col-md-3">
                 <div class="menu">
-                    <a class="btn" href="register.php">Add Admin</a>
+                    <a class="btn" href="registerAdmin.php">Add Admin</a>
                     <div class="icons">
                         <i class="fa fa-bell"></i>
                         <div class="dropleft show">
