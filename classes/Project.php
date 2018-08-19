@@ -99,14 +99,19 @@ class Project extends Database {
             $query = $this->connection()->prepare("SELECT * FROM project WHERE creator = :creator"); 
             $query->bindParam(':creator', $this->userId);
             $query->execute(); 
-            
-            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo '<div class="card-project">
-                <i class="fas fa-book"></i>
-                <a href="index.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '"><h5>' . $result['title'] . '</h5></a>
-                <a href="deleteProject.php?project=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
-            }
 
+            // show message if no projects yet
+            if($query->rowCount() == 0){
+                // no tasks
+                echo '<p class="empty">There are no projects yet, please add a new project.</p>'; 
+            } else {
+                while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<div class="card-project">
+                    <i class="fas fa-book"></i>
+                    <a href="index.php?project=' . $result['id'] . '" data-id="'. $result['id'] . '"><h5>' . $result['title'] . '</h5></a>
+                    <a href="deleteProject.php?project=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
+                }
+            } 
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }

@@ -746,3 +746,7 @@ hr {
   .error-message p {
       margin-bottom: 0px; 
   }
+
+  .empty {
+      padding-left: 20px; 
+  }
