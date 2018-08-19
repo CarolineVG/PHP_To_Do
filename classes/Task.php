@@ -97,7 +97,7 @@ class Task extends Database {
 
     /** functions */
     public function showTasksFromProject(){
-            $query = $this->connection()->prepare("SELECT * FROM task WHERE projectId = :id"); 
+            $query = $this->connection()->prepare("SELECT * FROM task WHERE projectId = :id ORDER BY deadline ASC"); 
             $query->bindParam(':id', $this->projectId);
             $query->execute(); 
 
