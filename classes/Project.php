@@ -102,8 +102,7 @@ class Project extends Database {
 
             // show message if no projects yet
             if($query->rowCount() == 0){
-                // no tasks
-                echo '<p class="empty">There are no projects yet, please add a new project.</p>'; 
+                echo '<p class="empty">There are no projects yet.</p>'; 
             } else {
                 while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
                     echo '<div class="card-project">
@@ -123,22 +122,27 @@ class Project extends Database {
             $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
-            
-            while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                $id = $result['projectId'];
-                // project id to project name 
-                $q = $this->connection()->prepare("SELECT * FROM project WHERE id = :id"); 
-                $q->bindParam(':id', $id);
-                $q->execute(); 
-                while ($r = $q->fetch(PDO::FETCH_ASSOC)){
-                    // only show projects with different admin id 
-                    if ($r['creator'] != $this->userId){
-                        echo '<div class="card-project">
-                        <i class="fas fa-book"></i>
-                        <a href="index.php?project=' . $r['id'] . '" data-id="'. $r['id'] . '"><h5>' . $r['title'] . '</h5></a>
-                        <a class="disabled" href="deleteProject.php?project=' . $r['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
-                    }
-                } 
+
+             // show message if no projects yet
+             if($query->rowCount() == 0){
+                echo '<p class="empty">You haven\'t joined a project yet.</p>'; 
+            } else {
+                while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+                    $id = $result['projectId'];
+                    // project id to project name 
+                    $q = $this->connection()->prepare("SELECT * FROM project WHERE id = :id"); 
+                    $q->bindParam(':id', $id);
+                    $q->execute(); 
+                    while ($r = $q->fetch(PDO::FETCH_ASSOC)){
+                        // only show projects with different admin id 
+                        if ($r['creator'] != $this->userId){
+                            echo '<div class="card-project">
+                            <i class="fas fa-book"></i>
+                            <a href="index.php?project=' . $r['id'] . '" data-id="'. $r['id'] . '"><h5>' . $r['title'] . '</h5></a>
+                            <a class="disabled" href="deleteProject.php?project=' . $r['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
+                        }
+                    } 
+                }
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);
