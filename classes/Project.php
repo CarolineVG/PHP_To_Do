@@ -151,7 +151,7 @@ class Project extends Database {
 
     public function showProjectsInDropdown(){
         try {
-            $query = $this->connection()->prepare("SELECT * FROM projectuser WHERE userId = :userId"); 
+            $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
             

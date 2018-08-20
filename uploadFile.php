@@ -18,46 +18,47 @@ $taskId = $_GET['task'];
 
 
 if (isset($_POST['submit'])){
-    echo "ok"; 
-    $file = $_FILES['uploadfile'];
-    print_r($file); 
 
-    //name
-    $fileName = $_FILES['uploadfile']['name'];
+    // check if file is not empty
+    if (!empty($_FILES['uploadfile'])){
+        $file = $_FILES['uploadfile'];
 
-    // get extension after . 
-    $fileExtension = explode('.', $fileName); 
-    $fileExt = strtolower(end($fileExtension));
+        //name
+        $fileName = $_FILES['uploadfile']['name'];
 
-    // only allow pdf, word and excel 
-    $docs = array('pdf', 'docx', 'xlsx');
+        // get extension after . 
+        $fileExtension = explode('.', $fileName); 
+        $fileExt = strtolower(end($fileExtension));
 
-    // check if file is pdf word or excel
-    if (in_array($fileExt, $docs)){
-        // check size - max 1mb 
-        if ($_FILES['uploadfile']['size'] < 1000000000){
+        // only allow pdf, word and excel 
+        $docs = array('pdf', 'docx', 'xlsx');
 
-            // file location
-            $fileLocation = 'uploads/' . $fileName; 
+        // check if file is pdf word or excel
+        if (in_array($fileExt, $docs)){
+            // check size - max 1mb 
+            if ($_FILES['uploadfile']['size'] < 1000000000){
 
-            // move file from tmp to uploads
-            move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fileLocation);     
+                // file location
+                $fileLocation = 'uploads/' . $fileName; 
 
-            // update database 
-            $task = new Task();
-            $task->setTaskId($taskId); 
-            $task->setDocument($fileLocation); 
-            $task->uploadFile(); 
+                // move file from tmp to uploads
+                move_uploaded_file($_FILES['uploadfile']['tmp_name'], $fileLocation);     
 
-            header("Location: taskDetail.php?task=" . $taskId . ".php"); 
+                // update database 
+                $task = new Task();
+                $task->setTaskId($taskId); 
+                $task->setDocument($fileLocation); 
+                $task->uploadFile(); 
 
+                header("Location: taskDetail.php?task=" . $taskId . ".php"); 
+
+            } else {
+                //echo "file size is max 1mb";
+            }
         } else {
-            echo "file size is max 1mb";
+            //echo "file is not a pdf, word or excel"; 
         }
-    } else {
-        echo "file is not a pdf, word or excel"; 
     }
-
 }
 
 ?>
