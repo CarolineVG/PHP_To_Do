@@ -178,7 +178,10 @@ class Project extends Database {
             $query->execute(); 
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
-                echo '<option value=' . $result['id'] . '>' . $result['title'] . '</option>';
+                // only show projects with different creator 
+                if ($result['creator'] != $this->userId){ 
+                    echo '<option value=' . $result['id'] . '>' . $result['title'] . '</option>';
+                }
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);

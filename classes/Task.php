@@ -223,7 +223,7 @@ class Task extends Database {
 
         // check if not too high
         if ($this->workhours > 300) {
-            throw new Exception("You're never gonna work that long!");
+            throw new Exception("You're never going to work that long!");
         }
     }   
 
@@ -300,16 +300,29 @@ class Task extends Database {
     }
 
     public function showTaskFromId(){
+        
+        $currentUser = $this->getUserId(); 
+
         try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute(); 
 
         while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+
+            $outputDelete=''; 
+
+            if ($currentUser != $result['userId']){
+                // can't delete this task
+                $outputDelete = '<a class="disabled" disabled href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>';
+            } else {
+                $outputDelete = '<a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>';
+            }
+
             $userid = $result['userId'];
 
              // select username from user where id = :userId
-             $q = $this->connection()->prepare("SELECT username, picture FROM user WHERE id = :userid"); 
+             $q = $this->connection()->prepare("SELECT * FROM user WHERE id = :userid"); 
              $q->bindParam(':userid', $userid);
              $q->execute(); 
              $r = $q->fetch(PDO::FETCH_ASSOC); 
@@ -334,36 +347,34 @@ class Task extends Database {
                 }
             }
 
-            // check color of status 
-
-        echo '<div class="task_wrapper" id="' . $result["id"] . '">
-            <div class="task_img">
-                <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+            echo '<div class="task_wrapper" id="' . $result["id"] . '">
+                <div class="task_img">
+                    <img src="' . $r['picture'] . '" alt="'. $r['picture'] .'">
+                </div>
+                <div class="task_title">
+                    <h5>' . $result['title'] . '</h5>
+                </div>
+                <div class="task_status">
+                    <h5 class="orange">' . $result["taskStatus"] . '</h5>
+                </div>
+                <div class="task_deadline">
+                    <h5 class="deadline">' . $output . '</h5>
+                </div>
+                <div class="task_icons">
+                    <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
+                    ' . $outputDelete . '
+                    <input class="checkbox" type="checkbox">
+                </div>
+                <div class="task_user">
+                    <p>' . $r['username'] . '</p>
+                </div>
+                <div class="task_document">
+                    <i class="fas fa-paperclip"></i>
+                    <a href="' . $result['document'] . '"> ' . $result['document'] . '</a>
+                </div>
             </div>
-            <div class="task_title">
-                <h5>' . $result['title'] . '</h5>
-            </div>
-            <div class="task_status">
-                <h5 class="orange">' . $result["taskStatus"] . '</h5>
-            </div>
-            <div class="task_deadline">
-                <h5 class="deadline">' . $output . '</h5>
-            </div>
-            <div class="task_icons">
-                <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
-                <a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>
-                <input class="checkbox" type="checkbox">
-            </div>
-            <div class="task_user">
-                <p>' . $r['username'] . '</p>
-            </div>
-            <div class="task_document">
-                <i class="fas fa-paperclip"></i>
-                <a href="' . $result['document'] . '"> ' . $result['document'] . '</a>
-            </div>
-        </div>
-        <hr>
-        <p>Comments:</p>';
+            <hr>
+            <p>Comments:</p>';
         }
 
         } catch (PDOException $e) {
@@ -533,6 +544,19 @@ class Task extends Database {
         } catch (PDOException $e) {
             print_r($e->getMessage);
         }
+    }
+
+    public function checkUserDeleteTask(){
+        $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id AND userId = :userId"); 
+            $query->bindParam(':id', $this->taskId);
+            $query->bindParam(':userId', $this->userId);
+            $query->execute();
+
+            // no results - userid don't match
+            if($query->rowCount() == 0){
+                //echo "nope"; 
+                throw new Exception("You can't delete this task because this isn't your task!");
+            }
     }
 
     public function deleteTasksByProjectId(){

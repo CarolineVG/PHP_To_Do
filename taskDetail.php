@@ -14,6 +14,11 @@ include_once("classes/Comment.php");
 /** SESSION */
 session_start(); 
 
+// get user id
+$user = new User(); 
+$user->setUsername($_SESSION['username']);
+$userId = $user->getUserId();
+
 // get task id 
 $taskId = $_GET['task'];
 
@@ -28,6 +33,8 @@ include_once("header.php");
 // show task
 $task = new Task();
 $task->setTaskId($taskId); 
+$task->setUserId($userId); 
+
 $task->showTaskFromId(); 
 
 // show comments

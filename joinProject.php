@@ -42,6 +42,7 @@ include_once("header.php");
                             <?php
                             // show projects
                             $project = new Project();
+                            $project->setUserId($id); 
                             $project->showAllProjectsInDropdown();
                             ?>
                         </select>
