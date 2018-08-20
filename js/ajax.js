@@ -61,10 +61,12 @@ $("#submitfilter").on("click", function(e){
 });
 
 // task checked
-$('#check').on('click',function (e) {
-    if ($('#check').is(':checked')) {
+$('.check').on('click',function (e) {
+
+    console.log('ok'); 
+    if ($((this)).is(':checked')) {
         // checked
-        var taskId = $("#check").attr('data-value');
+        var taskId = $(this).attr('data-value');
         $.ajax({
             method: "POST",
             url: "ajax/checkTask.php",
@@ -78,7 +80,7 @@ $('#check').on('click',function (e) {
                 $('#'+showid).html(res.output); 
                 $('#'+showid).addClass("green");
                 // set checkbox on checked
-                $('#check').prop('checked', true); 
+                $(this).prop('checked', true); 
 
             } 
         })
@@ -89,7 +91,7 @@ $('#check').on('click',function (e) {
         // unchecked
         console.log("unchecked"); 
 
-        var taskId = $("#check").attr('data-value');
+        var taskId = $(this).attr('data-value');
         $.ajax({
             method: "POST",
             url: "ajax/uncheckTask.php",

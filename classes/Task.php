@@ -119,20 +119,20 @@ class Task extends Database {
                         // check status
                         if ($result['taskStatus'] != "DONE") {
                             // to do
-                            $checkbox = '<input class="checkbox" disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                            $checkbox = '<input class="checkbox check" disabled type="checkbox" data-value="' . $result['id'] . '">';
                         } else {
                             // done
-                            $checkbox = '<input class="checkbox" checked disabled type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                            $checkbox = '<input class="checkbox check" checked disabled type="checkbox" data-value="' . $result['id'] . '">';
                         }
                     } else {
                         // current user
                         // check status
                         if ($result['taskStatus'] != "DONE") {
                             // to do
-                            $checkbox = '<input class="checkbox" type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                            $checkbox = '<input class="checkbox check" type="checkbox" data-value="' . $result['id'] . '">';
                         } else {
                             // done
-                            $checkbox = '<input class="checkbox" checked type="checkbox" id="check" data-value="' . $result['id'] . '">';
+                            $checkbox = '<input class="checkbox check" checked type="checkbox" data-value="' . $result['id'] . '">';
                         }
                     }
     
