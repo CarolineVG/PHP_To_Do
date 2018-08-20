@@ -137,10 +137,6 @@ include_once("header.php");
                         </div>
                     </div>
                 </form>
-
-                <li class="list-group-item filter-wrapper">
-                    <?php include_once("deadlines.php"); ?>
-                </li>
             </div>
         </div>
     </div>

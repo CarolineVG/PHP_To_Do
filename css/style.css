@@ -760,7 +760,7 @@ hr {
     grid-template-rows: repeat(100, 1fr);
     grid-column-gap: 5px;
     height: 50vh;
-    width: 35vw;
+    width: 50vw;
     padding: 5px 10px;
   }
 
@@ -789,26 +789,3 @@ hr {
     grid-row-start: 1; /* start on top */
   }
   
-  .thuesday {
-    grid-row-start: 30; /* start after 30px */
-  }
-
-  .wednesday {
-    grid-row-start: 0; /* start on bottom */
-  }
-
-  .thursday {
-    grid-row-start: 0; /* start on bottom */
-  }
-
-  .friday {
-    grid-row-start: 0; /* start on bottom */
-  }
-
-  .saturday {
-    grid-row-start: 0; /* start on bottom */
-  }
-
-  .sunday {
-    grid-row-start: 0; /* start on bottom */
-  }

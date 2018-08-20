@@ -405,7 +405,7 @@ class Task extends Database {
                 $y = $z->fetch(PDO::FETCH_ASSOC);
 
                 // check deadline
-                if (!$result['deadline'] == "0000-00-00"){
+                if ($result['deadline'] != "0000-00-00"){
                     // only show when deadline is within 7 days
                 $endDate = $result['deadline'];
                 $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
@@ -443,6 +443,50 @@ class Task extends Database {
             print_r($e->getMessage);
         }
     
+    }
+
+    public function showChartInfo(){
+        $query = $this->connection()->prepare("SELECT * FROM task ORDER BY deadline");             
+            $query->execute(); 
+            
+            
+            while ($result = $query->fetch(PDO::FETCH_ASSOC)){
+
+                // check deadline
+                if ($result['deadline'] != "0000-00-00"){
+                    // only show when deadline is within 7 days
+                    $endDate = $result['deadline'];
+                    $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+                    $today = date("Y-m-d");      
+                    $date1=date_create($today);
+                    $date2=date_create($endDate);
+
+                    $interval = date_diff($date1, $date2);
+
+                    // check if interval is + 
+                    if (!$interval->format('%r')){
+                        // check if interval < 7
+                        if($interval->format('%a') < 7){
+                            // show days left
+                            $output = $interval->format('%a') . ' days left'; 
+
+                            $strDay = strtotime($result['deadline']);
+                            $day = date("Y-m-d", $strDay); 
+                             
+                            $dayName = date("l", $strDay);  
+                            echo '<div class="bar day1">' . $day . $dayName . '</div>';
+                        }
+                    }
+                }
+
+                /*echo $result['title'] . ' ';
+                
+                echo $result['deadline'] . ' ';
+                
+                echo $result['workhours'] . ' ';
+
+                echo "--------"; */
+            }
     }
 
     public function showMyDeadlines(){
