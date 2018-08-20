@@ -751,6 +751,19 @@ hr {
       padding-left: 20px; 
   }
 
+  /* color scheme deadlines */
+  .greenWork {
+      background-color: var(--green);
+  }
+
+  .orangeWork {
+    background-color: var(--orange); 
+}
+
+.redWork {
+    background-color: var(--red); 
+}
+
 
   /* bar chart */
   

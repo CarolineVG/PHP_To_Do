@@ -407,37 +407,47 @@ class Task extends Database {
                 // check deadline
                 if ($result['deadline'] != "0000-00-00"){
                     // only show when deadline is within 7 days
-                $endDate = $result['deadline'];
-                $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-                $today = date("Y-m-d");      
-                $date1=date_create($today);
-                $date2=date_create($endDate);
-                
-                $interval = date_diff($date1, $date2);
+                    $endDate = $result['deadline'];
+                    $today = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+                    $today = date("Y-m-d");      
+                    $date1=date_create($today);
+                    $date2=date_create($endDate);
+                    
+                    $interval = date_diff($date1, $date2);
 
-                // check if interval is + 
-                if (!$interval->format('%r')){
-                    // check if interval < 7
-                    if($interval->format('%a') < 7){
-                        // show days left
-                        $output = $interval->format('%a') . ' days left'; 
-                        
-                        echo '<li class="list-group-item">
-                        <div class="media">
-                            <i class="fas fa-book"></i>
-                            <div class="mediabody">
-                                <h5>'. $r['title'] . ' <span>' . $result['workhours'] . ' hours</span>
-                                </h5> <p>' . $result['deadline'] . ' ' . $output . '</p>
-                                <p>' . $result['title'] . '</p>
-                            </div>
-                        </div>
-                    </li>';
+                    // check if interval is + 
+                    if (!$interval->format('%r')){
+                        // check if interval < 7
+                        if($interval->format('%a') < 7){
+
+                            // color scheme 
+                            if ($result['workhours'] <= 5) {
+                                // green
+                                $color = '<p class="greenWork">' . $result['workhours'] . ' hours</p>';
+
+                            } else if ($result['workhours'] <= 10){
+                                // orange
+                                $color = '<p class="orangeWork">' . $result['workhours'] . ' hours</p>';
+
+                            } else {
+                                // red
+                                $color = '<p class="redWork">' . $result['workhours'] . ' hours</p>';
+
+                            }
+
+                            echo 
+                            '<div class="li"> ' . $result['deadline'] . '
+                                <div class="media">
+                                    <div class="mediabody">
+                                        <h5>'. $r['title'] . ': <span>' . $result['title'] . '</span></h5> ' . 
+                                       $color . '
+                                    </div>
+                                </div>
+                            </div>';
+
+                        }
                     }
-                }
-                }
-
-                
-                
+                }                
             }
         } catch (PDOException $e) {
             print_r($e->getMessage);
