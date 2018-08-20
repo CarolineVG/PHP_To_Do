@@ -313,10 +313,12 @@ class Task extends Database {
             $outputDelete=''; 
 
             if ($currentUser != $result['userId']){
-                // can't delete this task
+                // can't delete / edit this task
+                $outputEdit = '<a class="disabled" disabled href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
                 $outputDelete = '<a class="disabled" disabled href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>';
             } else {
                 $outputDelete = '<a href="deleteTask.php?post=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a>';
+                $outputEdit = '<a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>';
             }
 
             $userid = $result['userId'];
@@ -360,9 +362,9 @@ class Task extends Database {
                 <div class="task_deadline">
                     <h5 class="deadline">' . $output . '</h5>
                 </div>
-                <div class="task_icons">
-                    <a href="editTask.php?post=' . $result['id'] . '"><i class="fas fa-pencil-alt"></i></a>
-                    ' . $outputDelete . '
+                <div class="task_icons">' 
+                     . $outputEdit
+                     . $outputDelete . '
                     <input class="checkbox" type="checkbox">
                 </div>
                 <div class="task_user">

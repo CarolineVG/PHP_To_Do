@@ -125,7 +125,7 @@ include_once("header.php");
                         <select class="form-control" id="projects" name="projects">
                             <option>Choose your project </option>
                             <?php
-                            // show projects
+                            // show own projects 
                             $project = new Project();
                             $userId = $user->getUserIdByName($_SESSION['username']);
                             $project->setUserId($userId); 
