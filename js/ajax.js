@@ -14,9 +14,10 @@ $("#submitcomment").on("click", function(e){
             if(res.status == "success") {
                 // show new comment
                 var output = res.output;
-                
-                console.log("toegevoegd"); 
-                $(".allreactions").append(output);
+
+                //console.log("toegevoegd"); 
+
+                $(".allreactions").append(output).hide().fadeIn(1000);
                 $("#message").val("");
             } 
         })

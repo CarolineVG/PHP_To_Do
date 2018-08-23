@@ -14,7 +14,8 @@ $user = new User();
 $userId = $user->getUserIdByName($_SESSION['username']);
 
 if(!empty($_POST)){
-    $value = $_POST['comment'];
+    $value = htmlspecialchars($_POST['comment']);
+    
     $taskId = $_POST['taskid'];
 
     // add to database 
