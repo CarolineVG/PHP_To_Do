@@ -49,9 +49,10 @@ $("#submitfilter").on("click", function(e){
                 console.log("success"); 
                 var output = res.output;
 
-                console.log(output); 
+                //console.log(output); 
                  
                 $(".projectDropdown").append(output);
+                $(".media-filter").hide().fadeIn(1000);
             } 
         })
         .fail(function(err){
