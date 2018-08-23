@@ -80,10 +80,9 @@ $('.check').on('click',function (e) {
                 // change color to green
                 var showid = $('#id' + taskId).attr('id');
                 $('#'+showid).html(res.output); 
-                $('#'+showid).addClass("green");
+                $('#'+showid).addClass("green").hide().fadeIn(1000);
                 // set checkbox on checked
                 $(this).prop('checked', true); 
-
             } 
         })
         .fail(function(err){
@@ -108,7 +107,7 @@ $('.check').on('click',function (e) {
                 console.log(showid); 
                 $('#'+showid).html(res.output); 
                 $('#'+showid).removeClass("green");
-                $('#'+showid).addClass("orange");
+                $('#'+showid).addClass("orange").hide().fadeIn(1000);;
             } 
         })
         .fail(function(err){
