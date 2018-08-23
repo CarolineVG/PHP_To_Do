@@ -423,24 +423,24 @@ class Task extends Database {
                             // color scheme 
                             if ($result['workhours'] <= 5) {
                                 // green
-                                $color = '<p class="greenWork">' . $result['workhours'] . ' hours</p>';
+                                $color = ' <i class="fas fa-book greenWork"></i>';
 
                             } else if ($result['workhours'] <= 10){
                                 // orange
-                                $color = '<p class="orangeWork">' . $result['workhours'] . ' hours</p>';
+                                $color = ' <i class="fas fa-book orangeWork"></i>';
 
                             } else {
                                 // red
-                                $color = '<p class="redWork">' . $result['workhours'] . ' hours</p>';
+                                $color = ' <i class="fas fa-book redWork"></i>';
 
                             }
 
                             echo 
                             '<div class="li"> ' . $result['deadline'] . '
-                                <div class="media">
+                                <div class="media"> ' . $color . '
                                     <div class="mediabody">
-                                        <h5>'. $r['title'] . ': <span>' . $result['title'] . '</span></h5> ' . 
-                                       $color . '
+                                        <h5>'. $r['title'] . ': <span>' . $result['title'] . '</span></h5>
+                                        <p class="greenWork">' . $result['workhours'] .' hours</p> 
                                     </div>
                                 </div>
                             </div>';

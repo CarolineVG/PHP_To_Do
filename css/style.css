@@ -753,16 +753,16 @@ hr {
 
   /* color scheme deadlines */
   .greenWork {
-      background-color: var(--green);
+      color: var(--green);
   }
 
   .orangeWork {
-    background-color: var(--orange); 
-}
+    color: var(--orange); 
+    }
 
-.redWork {
-    background-color: var(--red); 
-}
+    .redWork {
+       color: var(--red); 
+    }
 
 
   /* bar chart */
