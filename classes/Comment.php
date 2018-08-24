@@ -67,7 +67,6 @@ class Comment extends Database {
     }
 
     public function showCommentsFromTask(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM comment WHERE taskId = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute(); 
@@ -93,9 +92,6 @@ class Comment extends Database {
                 }
             
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showNewComment(){
@@ -132,41 +128,27 @@ class Comment extends Database {
         $taskId = $this->getTaskId(); 
         $userId = $this->getUserId(); 
         $projectId = $this->getProjectId();
-
-       try {
             $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId, projectId) VALUES (:reaction, :taskid, :userid, :projectId);"); 
             $query->bindParam(':reaction', $reaction);
             $query->bindParam(':taskid', $taskId);
             $query->bindParam(':userid', $userId);
             $query->bindParam(':projectId', $projectId);
             $query->execute(); 
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function deleteCommentfromTaskId(){
         // delete comment from task
-        try {
             $query = $this->connection()->prepare("DELETE FROM comment WHERE taskId = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function deleteCommentfromProjectId(){
         $projectId = $this->getProjectId(); 
         // delete comment from project
-        try {
             $query = $this->connection()->prepare("DELETE FROM comment WHERE projectId = :id"); 
             $query->bindParam(':id', $projectId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function test(){
@@ -175,17 +157,12 @@ class Comment extends Database {
         $userId = $this->getUserId(); 
         $projectId = 1;
         
-       try {
             $query = $this->connection()->prepare("INSERT INTO comment(reaction, taskId, userId, projectId) VALUES (:reaction, :taskid, :userid, :projectId);"); 
             $query->bindParam(':reaction', $reaction);
             $query->bindParam(':taskid', $taskId);
             $query->bindParam(':userid', $userId);
             $query->bindParam(':projectId', $projectId);
             $query->execute(); 
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
 }

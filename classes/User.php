@@ -178,7 +178,6 @@ class User extends Database {
     }
 
     function register(){
-        try {
             //echo "register"; 
             $query = $this->connection()->prepare("INSERT INTO user(username, education, email, pass, picture, isAdmin, adminId) VALUES (:username, :education, :email, :pass, :picture, :isAdmin, :adminId)");
             $query->bindParam(':username', $this->username);
@@ -190,10 +189,6 @@ class User extends Database {
             $query->bindParam(':adminId', $this->adminId); 
 
             $query->execute(); 
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     function hashPassword(){
@@ -203,7 +198,6 @@ class User extends Database {
     }
 
     function checkRegister(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM user WHERE username = :username and email = :email"); 
             $query->bindParam(':username', $username);
             $query->bindParam(':email', $mail);
@@ -216,9 +210,6 @@ class User extends Database {
                     throw new Exception("Email already exists, please choose another one.");
                 }
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     function getUserIdByName($username){

@@ -51,31 +51,23 @@ class Project extends Database {
     public function saveToDatabase(){
         $title = $this->getTitle();
         $creator = $this->getCreator(); 
-        try {
+        
             $query = $this->connection()->prepare("INSERT INTO project(title, creator)VALUES(:title, :creator)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':creator', $creator);
             $query->execute(); 
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function getProjectIdFromDatabase(){
         $title = $this->getTitle(); 
 
         // save to table projectUser
-        try {
             $query = $this->connection()->prepare("SELECT * FROM project WHERE title = :title"); 
             $query->bindParam(':title', $title);
             $query->execute(); 
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
             return $result['id'];
-            
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function saveToProjectUser(){
@@ -83,19 +75,14 @@ class Project extends Database {
         $creator = $this->getCreator(); 
 
         // save to table projectUser
-        try {
             $query = $this->connection()->prepare("INSERT INTO projectuser (projectId, userId) VALUES(:projectId, :userId);"); 
             $query->bindParam(':projectId', $projectId);
             $query->bindParam(':userId', $creator);
             $query->execute(); 
             //echo "ok"; 
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showProjects(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM project WHERE creator = :creator"); 
             $query->bindParam(':creator', $this->userId);
             $query->execute(); 
@@ -111,13 +98,9 @@ class Project extends Database {
                     <a href="deleteProject.php?project=' . $result['id'] . '"><i class="fas fa-trash-alt"></i></a></div>';
                 }
             } 
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showJoinedProjects(){
-        try {
             // select distinct -> show value only once
             $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
@@ -144,13 +127,9 @@ class Project extends Database {
                     } 
                 }
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showProjectsInDropdown(){
-        try {
             $query = $this->connection()->prepare("SELECT DISTINCT(projectId) FROM projectuser WHERE userId = :userId"); 
             $query->bindParam(':userId', $this->userId);
             $query->execute(); 
@@ -167,13 +146,9 @@ class Project extends Database {
                     echo '<option value=' . $r['id'] . '>' . $r['title'] . '</option>';
                 }
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showAllProjectsInDropdown(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM project");
             $query->execute(); 
             
@@ -183,29 +158,18 @@ class Project extends Database {
                     echo '<option value=' . $result['id'] . '>' . $result['title'] . '</option>';
                 }
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function deleteProject(){
         // delete in table project
-        try {
             $query = $this->connection()->prepare("DELETE FROM project WHERE id = :id"); 
             $query->bindParam(':id', $this->projectId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
 
         // delete in table projectUser
-        try {
             $query = $this->connection()->prepare("DELETE FROM projectuser WHERE projectId = :projectId"); 
             $query->bindParam(':projectId', $this->projectId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function getProjectIdByName(){
@@ -219,15 +183,11 @@ class Project extends Database {
     public function joinProject(){
         $project = $this->getProjectId();
         $user = $this->getUserId(); 
-        try {
+        
             $query = $this->connection()->prepare("INSERT INTO projectuser (projectId, userId)VALUES(:projectId, :userId)"); 
             $query->bindParam(':projectId', $project);
             $query->bindParam(':userId', $user);
             $query->execute(); 
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 }
 

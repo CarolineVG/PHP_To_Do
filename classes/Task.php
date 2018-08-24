@@ -260,7 +260,7 @@ class Task extends Database {
         $user = $this->getUserId(); 
         echo $workhours; 
         
-       try {
+        
             $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, deadline, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :deadline, :taskStatus, :workhours)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
@@ -270,10 +270,6 @@ class Task extends Database {
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute();
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function addNewTaskWithoutDeadline(){
@@ -284,7 +280,6 @@ class Task extends Database {
         $projectId = $this->getProjectId();
         $user = $this->getUserId(); 
         
-       try {
             $query = $this->connection()->prepare("INSERT INTO task(title, userId, projectId, startDate, taskStatus, workhours) VALUES (:title, :userid, :projectid, :startdate, :taskStatus, :workhours)"); 
             $query->bindParam(':title', $title);
             $query->bindParam(':userid', $user);
@@ -293,17 +288,12 @@ class Task extends Database {
             $query->bindParam(':taskStatus', $status);
             $query->bindParam(':workhours', $workhours);
             $query->execute();
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showTaskFromId(){
         
         $currentUser = $this->getUserId(); 
 
-        try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute(); 
@@ -378,14 +368,9 @@ class Task extends Database {
             <hr>
             <p>Comments:</p>';
         }
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showWeeklyDeadlines(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM task ORDER BY deadline");             
             $query->execute(); 
             
@@ -449,9 +434,6 @@ class Task extends Database {
                     }
                 }                
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     
     }
 
@@ -488,19 +470,10 @@ class Task extends Database {
                         }
                     }
                 }
-
-                /*echo $result['title'] . ' ';
-                
-                echo $result['deadline'] . ' ';
-                
-                echo $result['workhours'] . ' ';
-
-                echo "--------"; */
             }
     }
 
     public function showMyDeadlines(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid");             
             $query->bindParam(':userid', $this->userId);
             $query->execute(); 
@@ -540,13 +513,10 @@ class Task extends Database {
             </li>';
                 
             }
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function filterMyDeadlines(){
-        try {
+        
             $query = $this->connection()->prepare("SELECT * FROM task WHERE userId = :userid AND projectId = :projectid");             
             $query->bindParam(':userid', $this->userId);
             $query->bindParam(':projectid', $this->projectId);
@@ -586,20 +556,14 @@ class Task extends Database {
                     </div>
                 </div>';
                 
-            }}
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
+            }
         }
     }
     
     public function deleteTask(){
-        try {
             $query = $this->connection()->prepare("DELETE FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function checkUserDeleteTask(){
@@ -616,17 +580,12 @@ class Task extends Database {
     }
 
     public function deleteTasksByProjectId(){
-        try {
             $query = $this->connection()->prepare("DELETE FROM task WHERE projectId = :id"); 
             $query->bindParam(':id', $this->projectId);
             $query->execute();
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function showEditTask(){
-        try {
             $query = $this->connection()->prepare("SELECT * FROM task WHERE id = :id"); 
             $query->bindParam(':id', $this->taskId);
             $query->execute(); 
@@ -671,10 +630,6 @@ class Task extends Database {
             </div>';
         }
 
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
-
     }
     
     public function editTask(){
@@ -686,7 +641,6 @@ class Task extends Database {
         $projectId = $this->getProjectId();
         $user = $this->getUserId();
         
-       try {
             $query = $this->connection()->prepare("UPDATE task SET title=:title,userId=:userid, projectId=:projectid,startDate=:startdate,deadline=:deadline,workhours=:workhours WHERE id =:id"); 
             $query->bindParam(':id', $id); 
             $query->bindParam(':title', $title);
@@ -696,28 +650,15 @@ class Task extends Database {
             $query->bindParam(':deadline', $deadline);
             $query->bindParam(':workhours', $workhours);
             $query->execute();
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
     }
 
     public function uploadFile(){
         $id = $this->getTaskId();
         $document = $this->getDocument();  
-        
-       try {
             $query = $this->connection()->prepare("UPDATE task SET document=:document WHERE id =:id"); 
             $query->bindParam(':id', $id); 
             $query->bindParam(':document', $document); 
             $query->execute();
-
-            
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
-
-            
     }
 
     public function checkIfTaskExists(){

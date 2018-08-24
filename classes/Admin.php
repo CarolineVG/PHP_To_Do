@@ -40,17 +40,12 @@ class Admin extends Database {
     
     /** functions */
     public function saveAdmin(){
-        try {
             $query = $this->connection()->prepare('INSERT INTO `admin`(`username`, `education`) VALUES (:username, :education)');
             
             $query->bindParam(':username', $this->username);
             $query->bindParam(':education', $this->education);
 
-            $query->execute(); 
-
-        } catch (PDOException $e) {
-            print_r($e->getMessage);
-        }
+            $query->execute();
 
     }
 
@@ -94,15 +89,9 @@ class Admin extends Database {
                             </div>
                         </div>
                     <hr>';
-                }
-
-
-                
+                }                
             }
         }
-
-
-
     }
 
     public function deleteAdmin(){
