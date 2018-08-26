@@ -533,6 +533,14 @@ class Task extends Database {
             } else {
             
             while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                // check deadline
+                if ($result['deadline'] == "0000-00-00"){
+                    $deadline = 'No Deadline';
+                } else {
+                    $deadline = $result['deadline'];
+                }
+
                 $projectid = $result['projectId'];
 
                 // select projectid
@@ -550,7 +558,7 @@ class Task extends Database {
                 return '<div class="media media-filter">
                 <img src="' . $y['picture'] . '" alt="'. $y['picture'] .'">
                     <div class="mediabody">
-                        <h5>'. $r['title'] . ' <span>' . $result['deadline'] . '</span>
+                        <h5>'. $r['title'] . ' <span>' . $deadline . '</span>
                         </h5> 
                         <p>' . $result['title'] . '</p>
                     </div>
